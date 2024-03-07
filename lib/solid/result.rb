@@ -9,6 +9,8 @@ module Solid
     TYPE_AND_VALUE = %i[type value].freeze
 
     def deconstruct_keys(keys)
+      return value if keys.none? { |key| TYPE_AND_VALUE.include?(key) }
+
       TYPE_AND_VALUE.each_with_object({}) do |key, hash|
         hash[key] = send(key) if keys.include?(key)
       end

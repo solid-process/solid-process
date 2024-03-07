@@ -11,15 +11,14 @@ if RUBY_VERSION <= "3.1"
   exit! 1
 end
 
-task default: %i[bcdd_result_transitions]
+task default: %i[solid_result]
 
 task :config do
   require_relative "config"
 end
 
-desc "creates an account and an owner user through BCDD::Result"
-task bcdd_result_transitions: %i[config] do
-  input = {
+def input
+  {
     uuid: SecureRandom.uuid,
     owner: {
       name: "\tJohn     Doe \n",
@@ -28,11 +27,40 @@ task bcdd_result_transitions: %i[config] do
       password_confirmation: "123123123"
     }
   }
+end
 
+desc "Do pattern matching in Solid::Result"
+task solid_result: %i[config] do
   case Account::OwnerCreation.call(input)
-  in Solid::Result(value: {user:, account:})
+  in Solid::Result(user:, account:)
     puts "Account and owner user created: #{account.uuid} and #{user.uuid}"
   in Solid::Result(type:, value:)
     puts "Account creation failed: #{type} - #{value}"
   end
+
+  # Different ways to match
+  #
+  # in Solid::Result(value: {user:, account:})
+  # in Solid::Result(type:, value: {user:, account:})
+  # in Solid::Result(type: :account_owner_created, value: {user:, account:})
+end
+
+desc "Do pattern matching in Solid::Success and Solid::Failure"
+task solid_success_and_failure: %i[config] do
+  case Account::OwnerCreation.call(input)
+  in Solid::Success(user:, account:)
+    puts "Account and owner user created: #{account.uuid} and #{user.uuid}"
+  in Solid::Failure(type:, value:)
+    puts "Account creation failed: #{type} - #{value}"
+  end
+
+  # Different ways to match
+  #
+  # in Solid::Success(value: {user:, account:})
+  # in Solid::Success(type:, value: {user:, account:})
+  # in Solid::Success(type: :account_owner_created, value: {user:, account:})
+  #
+  # in Solid::Failure(input:)
+  # in Solid::Failure(value: {input:})
+  # in Solid::Failure(type: :invalid_input, value: {input:})
 end
