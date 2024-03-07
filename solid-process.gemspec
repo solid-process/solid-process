@@ -27,8 +27,8 @@ Gem::Specification.new do |spec|
       (File.expand_path(f) == __FILE__) ||
         f.start_with?(*%w[
           .git .github appveyor
-          bin/ test/ spec/ features/ coverage/
-          Gemfile
+          bin/ test/ spec/ features/ coverage/ gemfiles/
+          Gemfile Appraisals
           .rubocop.yml .standard.yml
         ])
     end
@@ -40,6 +40,8 @@ Gem::Specification.new do |spec|
   # Uncomment to register a new dependency of your gem
   spec.add_dependency "bcdd-result", "0.13.0"
   spec.add_dependency "activemodel", ">= 6.0", "< 8.0"
+
+  spec.add_development_dependency "appraisal", "~> 2.5"
 
   # For more information and examples about making a new gem, check out our
   # guide at: https://bundler.io/guides/creating_gem.html

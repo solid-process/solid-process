@@ -9,6 +9,10 @@ Rake::TestTask.new(:test) do |t|
   t.test_files = FileList.new("test/**/*_test.rb")
 end
 
+require "appraisal/task"
+
+Appraisal::Task.new
+
 require "standard/rake"
 
 task default: %i[test standard]
