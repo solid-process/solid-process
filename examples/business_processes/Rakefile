@@ -1,0 +1,38 @@
+# frozen_string_literal: true
+
+require "bundler/setup"
+
+Bundler.require(:default)
+
+require "standard/rake"
+
+if RUBY_VERSION <= "3.1"
+  puts "This example requires Ruby 3.1 or higher."
+  exit! 1
+end
+
+task default: %i[bcdd_result_transitions]
+
+task :config do
+  require_relative "config"
+end
+
+desc "creates an account and an owner user through BCDD::Result"
+task bcdd_result_transitions: %i[config] do
+  input = {
+    uuid: SecureRandom.uuid,
+    owner: {
+      name: "\tJohn     Doe \n",
+      email: "   JOHN.doe@email.com",
+      password: "123123123",
+      password_confirmation: "123123123"
+    }
+  }
+
+  case Account::OwnerCreation.call(input)
+  in Solid::Result(value: {user:, account:})
+    puts "Account and owner user created: #{account.uuid} and #{user.uuid}"
+  in Solid::Result(type:, value:)
+    puts "Account creation failed: #{type} - #{value}"
+  end
+end

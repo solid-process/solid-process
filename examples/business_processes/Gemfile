@@ -1,0 +1,12 @@
+# frozen_string_literal: true
+
+source "https://rubygems.org"
+
+gem "sqlite3", "~> 1.7"
+gem "bcrypt", "~> 3.1.20"
+gem "activerecord", "~> 7.1", ">= 7.1.3", require: "active_record"
+gem "type_validator"
+gem "solid-process", path: "../../"
+
+gem "rake", "~> 13.0", require: false
+gem "standard", "~> 1.34", require: false
