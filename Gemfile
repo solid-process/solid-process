@@ -6,7 +6,10 @@ source "https://rubygems.org"
 gemspec
 
 gem "rake", "~> 13.0"
+gem "standard", "~> 1.34"
 
-gem "minitest", "~> 5.16"
+group :test do
+  gem "minitest", "~> 5.16"
 
-gem "standard", "~> 1.34", group: [:development, :test]
+  gem "simplecov", "~> 0.22.0", require: false
+end
