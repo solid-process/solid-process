@@ -10,17 +10,8 @@ module Solid
   class Process
     require "solid/process/version"
     require "solid/process/error"
+    require "solid/process/input"
     require "solid/process/active_record"
-
-    class Input
-      def self.inherited(subclass)
-        super
-        subclass.include ::ActiveModel::API
-        subclass.include ::ActiveModel::Attributes
-        subclass.include ::ActiveModel::Dirty
-        subclass.include ::ActiveModel::Validations::Callbacks
-      end
-    end
 
     class << self
       def input=(klass)
