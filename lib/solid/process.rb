@@ -9,9 +9,8 @@ module Solid
 
   class Process
     require "solid/process/version"
+    require "solid/process/error"
     require "solid/process/active_record"
-
-    Error = ::Class.new(::StandardError)
 
     class Input
       def self.inherited(subclass)
