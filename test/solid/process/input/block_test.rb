@@ -5,7 +5,7 @@ require "test_helper"
 class Solid::Process::InputBlockTest < ActiveSupport::TestCase
   Person = Struct.new(:uuid, :name, :email)
 
-  class CreatePerson < Solid::Process
+  class PersonCreation < Solid::Process
     input do
       attribute :uuid, :string, default: -> { SecureRandom.uuid }
       attribute :name, :string
@@ -29,9 +29,9 @@ class Solid::Process::InputBlockTest < ActiveSupport::TestCase
   end
 
   test "the process input" do
-    assert_same CreatePerson::Input, CreatePerson.input
+    assert_same PersonCreation::Input, PersonCreation.input
 
-    input = CreatePerson::Input.new(
+    input = PersonCreation::Input.new(
       name: "  John Doe\t",
       email: " joHn.dOE@example.COM "
     )
@@ -46,7 +46,7 @@ class Solid::Process::InputBlockTest < ActiveSupport::TestCase
   test "the process calling" do
     uuid = SecureRandom.uuid
 
-    result = CreatePerson.call(
+    result = PersonCreation.call(
       uuid: uuid,
       name: "  John Doe\t",
       email: " joHn.dOE@example.COM "

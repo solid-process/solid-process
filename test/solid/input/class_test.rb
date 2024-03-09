@@ -2,8 +2,8 @@
 
 require "test_helper"
 
-class Solid::Process::InputClassTest < ActiveSupport::TestCase
-  class InputWithDefaults < Solid::Process::Input
+class Solid::InputClassTest < ActiveSupport::TestCase
+  class InputWithDefaults < Solid::Input
     attribute :uuid, :string, default: -> { SecureRandom.uuid }
   end
 
@@ -17,7 +17,7 @@ class Solid::Process::InputClassTest < ActiveSupport::TestCase
     assert_equal uuid, input2.uuid
   end
 
-  class InputWithNormalization < Solid::Process::Input
+  class InputWithNormalization < Solid::Input
     attribute :uuid, :string
 
     before_validation do |input|
@@ -34,7 +34,7 @@ class Solid::Process::InputClassTest < ActiveSupport::TestCase
     assert_equal uuid, input.uuid
   end
 
-  class InputWithValidation < Solid::Process::Input
+  class InputWithValidation < Solid::Input
     attribute :uuid, :string
 
     validates :uuid, presence: true, format: {with: TestUtils::UUID_REGEX}
@@ -58,7 +58,7 @@ class Solid::Process::InputClassTest < ActiveSupport::TestCase
 
     ancestors = input_class.ancestors
 
-    assert_includes ancestors, Solid::Process::Input
+    assert_includes ancestors, Solid::Input
 
     if ActiveModel.const_defined?(:Api, false)
       assert_includes ancestors, ActiveModel::Api
@@ -69,7 +69,7 @@ class Solid::Process::InputClassTest < ActiveSupport::TestCase
     if ActiveModel.const_defined?(:Access, false)
       assert_includes ancestors, ActiveModel::Access
     else
-      assert_includes ancestors, Solid::Process::Input::Access
+      assert_includes ancestors, Solid::Input::Access
     end
 
     assert_includes ancestors, ActiveModel::Attributes

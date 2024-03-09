@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-Bundler.require(:default, :test)
-
 require "simplecov"
 
 SimpleCov.start do
@@ -9,6 +7,8 @@ SimpleCov.start do
 
   add_filter "_test.rb"
 end
+
+Bundler.require(:default, :test)
 
 $LOAD_PATH.unshift File.expand_path("../lib", __dir__)
 

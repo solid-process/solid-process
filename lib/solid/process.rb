@@ -5,20 +5,20 @@ require "active_model"
 require "bcdd/result"
 
 module Solid
+  require "solid/input"
   require "solid/result"
 
   class Process
     require "solid/process/version"
     require "solid/process/error"
-    require "solid/process/input"
     require "solid/process/active_record"
 
     class << self
       def input=(klass)
-        const_defined?(:Input, false) and raise ArgumentError, "Attributes class already defined"
+        const_defined?(:Input, false) and raise Error, "#{const_get(:Input, false)} class already defined"
 
-        unless klass.is_a?(::Class) && klass < Input
-          raise ArgumentError, "must be a Solid::Process::Input subclass"
+        unless klass.is_a?(::Class) && klass < ::Solid::Input
+          raise ArgumentError, "#{klass.inspect} must be a #{::Solid::Input} subclass"
         end
 
         const_set(:Input, klass)
@@ -26,6 +26,8 @@ module Solid
 
       def input(&block)
         return const_get(:Input, false) if const_defined?(:Input, false)
+
+        block.nil? and raise Error, "#{self}::Input is undefined. Use #{self}.input { ... } to define it."
 
         klass = ::Class.new(Input)
         klass.class_eval(&block)
@@ -37,7 +39,7 @@ module Solid
         subclass.include ::BCDD::Result::Context.mixin(config: {addon: {continue: true}})
       end
 
-      def call(arg)
+      def call(arg = {})
         new(input.new(arg)).call!
       end
     end
