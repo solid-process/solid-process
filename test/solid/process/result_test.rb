@@ -7,13 +7,20 @@ class Solid::Process::ResultTest < ActiveSupport::TestCase
     ::User.delete_all
   end
 
+  def user_creation
+    [
+      -> { UserCreation.call(_1) },
+      -> { UserCreation.new.call(_1) }
+    ].sample
+  end
+
   test "success" do
     input = {name: "\tJohn     Doe \n", email: "   JOHN.doe@email.com", password: "123123123"}
 
     result = assert_difference(
       -> { User.count } => 1
     ) do
-      UserCreation.call(input)
+      user_creation.call(input)
     end
 
     assert_kind_of Solid::Result, result
@@ -37,7 +44,7 @@ class Solid::Process::ResultTest < ActiveSupport::TestCase
     result = assert_no_difference(
       -> { User.count }
     ) do
-      UserCreation.call(input)
+      user_creation.call(input)
     end
 
     assert_kind_of Solid::Result, result
@@ -58,12 +65,12 @@ class Solid::Process::ResultTest < ActiveSupport::TestCase
   test "failure (email_already_taken)" do
     input = {name: "John Doe", email: "john.doe@email.com", password: "123123123"}
 
-    UserCreation.call(input)
+    user_creation.call(input)
 
     result = assert_no_difference(
       -> { User.count }
     ) do
-      UserCreation.call(input)
+      user_creation.call(input)
     end
 
     assert result.failure?(:email_already_taken)

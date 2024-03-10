@@ -2,7 +2,7 @@
 
 require "test_helper"
 
-class Solid::Process::SubclassTest < ActiveSupport::TestCase
+class Solid::Process::InheritanceTest < ActiveSupport::TestCase
   class Foo < Solid::Process
     input do
       attribute :bar, :string

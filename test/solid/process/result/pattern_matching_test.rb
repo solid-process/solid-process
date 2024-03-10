@@ -7,13 +7,20 @@ class Solid::Process::ResultPatterMatchingTest < ActiveSupport::TestCase
     ::User.delete_all
   end
 
+  def user_creation
+    [
+      -> { UserCreation.call(_1) },
+      -> { UserCreation.new.call(_1) }
+    ].sample
+  end
+
   test "success" do
     input = {name: "\tJohn     Doe \n", email: "   JOHN.doe@email.com", password: "123123123"}
 
     result = assert_difference(
       -> { User.count } => 1
     ) do
-      UserCreation.call(input)
+      user_creation.call(input)
     end
 
     # --- Solid::Success ---

@@ -9,9 +9,9 @@ class UserCreation < Solid::Process
     attribute :executed_at, :time, default: -> { ::Time.current }
 
     before_validation do |input|
-      input.uuid = input.uuid.strip.downcase
-      input.name = input.name.strip.gsub(/\s+/, " ")
-      input.email = input.email.strip.downcase
+      input.uuid = input.uuid&.strip&.downcase
+      input.name = input.name&.strip&.gsub(/\s+/, " ")
+      input.email = input.email&.strip&.downcase
     end
 
     validates :name, presence: true
