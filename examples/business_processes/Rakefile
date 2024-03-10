@@ -18,7 +18,12 @@ task :config do
 end
 
 def input
-  {
+
+end
+
+desc "Do pattern matching in Solid::Result"
+task solid_result: %i[config] do
+  input =   {
     uuid: SecureRandom.uuid,
     owner: {
       name: "\tJohn     Doe \n",
@@ -27,10 +32,7 @@ def input
       password_confirmation: "123123123"
     }
   }
-end
 
-desc "Do pattern matching in Solid::Result"
-task solid_result: %i[config] do
   case Account::OwnerCreation.call(input)
   in Solid::Result(user:, account:)
     puts "Account and owner user created: #{account.uuid} and #{user.uuid}"
@@ -47,6 +49,16 @@ end
 
 desc "Do pattern matching in Solid::Success and Solid::Failure"
 task solid_success_and_failure: %i[config] do
+  input =   {
+    uuid: SecureRandom.uuid,
+    owner: {
+      name: "\tJohn     Doe \n",
+      email: "   JOHN.doe@email.com",
+      password: "123123123",
+      password_confirmation: "123123123"
+    }
+  }
+
   case Account::OwnerCreation.call(input)
   in Solid::Success(user:, account:)
     puts "Account and owner user created: #{account.uuid} and #{user.uuid}"

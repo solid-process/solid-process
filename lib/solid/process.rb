@@ -63,7 +63,7 @@ module Solid
     end
 
     def call(attributes)
-      raise Error, "must be implemented in a subclass"
+      raise Error, "#{self.class}#call must be implemented."
     end
   end
 end

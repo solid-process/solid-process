@@ -1,5 +1,10 @@
 # frozen_string_literal: true
 
+begin
+  require "active_record"
+rescue LoadError
+end
+
 module Solid
   class Process
     private
