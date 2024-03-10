@@ -1,8 +1,24 @@
 # Solid::Process
 
-TODO: Delete this and the text below, and describe your gem
+<p align="center">
+  <a href="https://codeclimate.com/github/serradura/solid-process/maintainability"><img src="https://api.codeclimate.com/v1/badges/643a53e99bb591321c9f/maintainability" /></a>
+  <a href="https://codeclimate.com/github/serradura/solid-process/test_coverage"><img src="https://api.codeclimate.com/v1/badges/643a53e99bb591321c9f/test_coverage" /></a>
+  <img src="https://img.shields.io/badge/Ruby%20%3E%3D%202.7%2C%20%3C%3D%20Head-ruby.svg?colorA=444&colorB=333" alt="Ruby">
+  <img src="https://img.shields.io/badge/Rails%20%3E%3D%206.0%2C%20%3C%3D%20Edge-rails.svg?colorA=444&colorB=333" alt="Rails">
+</p>
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/solid/process`. To experiment with that code, run `bin/console` for an interactive prompt.
+## Required Ruby and Rails
+
+This library is tested against:
+
+| Ruby / Rails | 6.0 | 6.1 | 7.0 | 7.1 | Edge |
+|--------------|-----|-----|-----|-----|------|
+| 2.7          | ✅  | ✅  | ✅  | ✅   |      |
+| 3.0          | ✅  | ✅  | ✅  | ✅   |      |
+| 3.1          | ✅  | ✅  | ✅  | ✅   | ✅   |
+| 3.2          | ✅  | ✅  | ✅  | ✅   | ✅   |
+| 3.3          | ✅  | ✅  | ✅  | ✅   | ✅   |
+| head         |    |    |    | ✅   | ✅   |
 
 ## Installation
 
