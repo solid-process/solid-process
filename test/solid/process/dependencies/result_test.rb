@@ -2,20 +2,21 @@
 
 require "test_helper"
 
-class Solid::Process::ResultTest < ActiveSupport::TestCase
+class Solid::Process::DependenciesResultTest < ActiveSupport::TestCase
   def setup
     ::User.delete_all
   end
 
   def user_creation
     [
-      -> { UserCreation.call(_1) },
-      -> { UserCreation.new.call(_1) }
+      -> { CreateUser.call(_1) },
+      -> { CreateUser.new(repository: User).call(_1) },
+      -> { CreateUser.new(CreateUser::Dependencies.new(repository: User)).call(_1) }
     ].sample
   end
 
   def map_input(data)
-    [data, UserCreation::Input.new(data)].sample
+    [data, CreateUser::Input.new(data)].sample
   end
 
   test "success" do
@@ -41,7 +42,7 @@ class Solid::Process::ResultTest < ActiveSupport::TestCase
   end
 
   test "failure (invalid_input)" do
-    input = map_input(name: "     ", email: "John", password: "123123")
+    input = map_input(name: nil, email: nil, password: nil)
 
     result = assert_no_difference(-> { User.count }) { user_creation.call(input) }
 
@@ -54,7 +55,7 @@ class Solid::Process::ResultTest < ActiveSupport::TestCase
     input = result.value[:input]
 
     assert_kind_of Solid::Input, input
-    assert_instance_of UserCreation::Input, input
+    assert_instance_of CreateUser::Input, input
 
     input.errors.added? :name, :blank
     input.errors.added? :email, :invalid

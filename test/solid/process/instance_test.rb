@@ -91,6 +91,41 @@ class Solid::Process::ResultTest < ActiveSupport::TestCase
     assert_predicate user_creation2, :output?
   end
 
+  test "#dependencies" do
+    user_creation1 = UserCreation.new
+
+    assert_nil(user_creation1.dependencies)
+    assert_nil(user_creation1.deps)
+
+    # ---
+
+    user_creation2 = CreateUser.new
+
+    assert_same(User, user_creation2.dependencies.repository)
+    assert_same(user_creation2.dependencies, user_creation2.deps)
+
+    # ---
+
+    user_creation3 = CreateUser.new(repository: ::Object)
+
+    assert_same(::Object, user_creation3.dependencies.repository)
+    assert_same(user_creation3.dependencies, user_creation3.deps)
+  end
+
+  test "#dependencies?" do
+    user_creation1 = UserCreation.new
+
+    refute_predicate user_creation1, :dependencies?
+    refute_predicate user_creation1, :deps?
+
+    # ---
+
+    user_creation2 = CreateUser.new
+
+    assert_predicate user_creation2, :dependencies?
+    assert_predicate user_creation2, :deps?
+  end
+
   test "#call when the output is already set" do
     user_creation = UserCreation.new
 

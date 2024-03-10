@@ -4,6 +4,14 @@ class Solid::Process
   require_relative "caller"
 
   module ClassMethods
+    def inherited(subclass)
+      subclass.prepend(Caller)
+    end
+
+    def call(arg = nil)
+      new.call(arg)
+    end
+
     def input=(klass)
       const_defined?(:Input, false) and raise Error, "#{const_get(:Input, false)} class already defined"
 
@@ -25,12 +33,25 @@ class Solid::Process
       self.input = klass
     end
 
-    def inherited(subclass)
-      subclass.prepend(Caller)
+    def dependencies=(klass)
+      const_defined?(:Dependencies, false) and raise Error, "#{const_get(:Dependencies, false)} class already defined"
+
+      unless klass.is_a?(::Class) && klass < ::Solid::Input
+        raise ArgumentError, "#{klass.inspect} must be a #{::Solid::Input} subclass"
+      end
+
+      const_set(:Dependencies, klass)
     end
 
-    def call(arg = {})
-      new.call(arg)
+    def dependencies(&block)
+      return const_get(:Dependencies, false) if const_defined?(:Dependencies, false)
+
+      return if block.nil?
+
+      klass = ::Class.new(::Solid::Input)
+      klass.class_eval(&block)
+
+      self.dependencies = klass
     end
   end
 end

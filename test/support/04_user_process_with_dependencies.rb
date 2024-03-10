@@ -1,6 +1,10 @@
 # frozen_string_literal: true
 
-class UserCreation < Solid::Process
+class CreateUser < Solid::Process
+  dependencies do
+    attribute :repository, default: ::User
+  end
+
   input do
     attribute :uuid, :string, default: -> { ::SecureRandom.uuid }
     attribute :name, :string
@@ -32,11 +36,11 @@ class UserCreation < Solid::Process
   private
 
   def validate_email_has_not_been_taken(email:, **)
-    ::User.exists?(email: email) ? Failure(:email_already_taken) : Continue()
+    dependencies.repository.exists?(email: email) ? Failure(:email_already_taken) : Continue()
   end
 
   def create_user(uuid:, name:, email:, password:, executed_at:)
-    user = ::User.create!(
+    user = dependencies.repository.create!(
       uuid: uuid,
       name: name,
       email: email,

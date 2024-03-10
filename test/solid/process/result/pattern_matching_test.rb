@@ -37,6 +37,16 @@ class Solid::Process::ResultPatterMatchingTest < ActiveSupport::TestCase
     end
 
     case result
+    in Solid::Success(type: type)
+      assert_equal(:user_created, type)
+    end
+
+    case result
+    in Solid::Success(value: {user: user})
+      assert_match(TestUtils::UUID_REGEX, user.uuid)
+    end
+
+    case result
     in Solid::Success(user: user)
       assert_match(TestUtils::UUID_REGEX, user.uuid)
     end
@@ -51,6 +61,16 @@ class Solid::Process::ResultPatterMatchingTest < ActiveSupport::TestCase
     case result
     in Solid::Result(type: type, value: {user: user})
       assert_equal(:user_created, type)
+      assert_match(TestUtils::UUID_REGEX, user.uuid)
+    end
+
+    case result
+    in Solid::Result(type: type)
+      assert_equal(:user_created, type)
+    end
+
+    case result
+    in Solid::Result(value: {user: user})
       assert_match(TestUtils::UUID_REGEX, user.uuid)
     end
 
@@ -85,6 +105,17 @@ class Solid::Process::ResultPatterMatchingTest < ActiveSupport::TestCase
     end
 
     case result
+    in Solid::Failure(type: type)
+      assert_equal(:invalid_input, type)
+    end
+
+    case result
+    in Solid::Failure(value: {input: input})
+      assert_kind_of Solid::Input, input
+      assert_instance_of UserCreation::Input, input
+    end
+
+    case result
     in Solid::Failure(input: input)
       assert_kind_of Solid::Input, input
       assert_instance_of UserCreation::Input, input
@@ -101,6 +132,17 @@ class Solid::Process::ResultPatterMatchingTest < ActiveSupport::TestCase
     case result
     in Solid::Result(type: type, value: {input: input})
       assert_equal(:invalid_input, type)
+      assert_kind_of Solid::Input, input
+      assert_instance_of UserCreation::Input, input
+    end
+
+    case result
+    in Solid::Result(type: type)
+      assert_equal(:invalid_input, type)
+    end
+
+    case result
+    in Solid::Result(value: {input: input})
       assert_kind_of Solid::Input, input
       assert_instance_of UserCreation::Input, input
     end
