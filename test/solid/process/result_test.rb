@@ -28,7 +28,10 @@ class Solid::Process::ResultTest < ActiveSupport::TestCase
     assert_kind_of Solid::Result, result
     assert_kind_of Solid::Success, result
 
+    assert result.is?(:user_created)
+    assert result.type?(:user_created)
     assert result.success?(:user_created)
+
     assert_equal [:user], result.value.keys
 
     user = result.value.fetch(:user)
@@ -48,6 +51,8 @@ class Solid::Process::ResultTest < ActiveSupport::TestCase
     assert_kind_of Solid::Result, result
     assert_kind_of Solid::Failure, result
 
+    assert result.is?(:invalid_input)
+    assert result.type?(:invalid_input)
     assert result.failure?(:invalid_input)
     assert_equal [:input], result.value.keys
 
@@ -67,6 +72,8 @@ class Solid::Process::ResultTest < ActiveSupport::TestCase
 
     result = assert_no_difference(-> { User.count }) { user_creation.call(input) }
 
+    assert result.is?(:email_already_taken)
+    assert result.type?(:email_already_taken)
     assert result.failure?(:email_already_taken)
   end
 end

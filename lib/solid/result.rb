@@ -15,6 +15,14 @@ module Solid
         hash[key] = send(key) if keys.include?(key)
       end
     end
+
+    def is?(arg)
+      type == arg
+    end
+
+    def type?(arg)
+      type == arg
+    end
   end
 
   module Success
