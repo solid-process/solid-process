@@ -18,6 +18,10 @@ class Solid::Process
             super(input.attributes.deep_symbolize_keys)
           end
       end
+
+      output.success? ? run_callbacks(:success) : run_callbacks(:failure)
+
+      output
     end
   end
 end

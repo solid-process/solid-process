@@ -10,8 +10,7 @@ class Solid::Process::DependenciesResultTest < ActiveSupport::TestCase
   def user_creation
     [
       -> { CreateUser.call(_1) },
-      -> { CreateUser.new(repository: User).call(_1) },
-      -> { CreateUser.new(CreateUser::Dependencies.new(repository: User)).call(_1) }
+      -> { CreateUser.new.call(_1) }
     ].sample
   end
 
@@ -24,7 +23,9 @@ class Solid::Process::DependenciesResultTest < ActiveSupport::TestCase
 
     input = map_input(name: "\tJohn     Doe \n", email: "   JOHN.doe@email.com", password: password)
 
-    result = assert_difference(-> { User.count } => 1) { user_creation.call(input) }
+    result = assert_difference(-> { User.count } => 1) do
+      CreateUser.new(repository: User).call(input)
+    end
 
     assert_kind_of Solid::Result, result
     assert_kind_of Solid::Success, result
@@ -72,7 +73,9 @@ class Solid::Process::DependenciesResultTest < ActiveSupport::TestCase
 
     user_creation.call(input)
 
-    result = assert_no_difference(-> { User.count }) { user_creation.call(input) }
+    result = assert_no_difference(-> { User.count }) do
+      CreateUser.new(CreateUser::Dependencies.new(repository: User)).call(input)
+    end
 
     assert result.is?(:email_already_taken)
     assert result.type?(:email_already_taken)

@@ -27,4 +27,8 @@ class Solid::Input
     subclass.include ::ActiveModel::Dirty
     subclass.include ::ActiveModel::Validations::Callbacks
   end
+
+  def inspect
+    "#<#{self.class.name} #{attributes.map { |k, v| "#{k}=#{v.inspect}" }.join(" ")}>"
+  end
 end

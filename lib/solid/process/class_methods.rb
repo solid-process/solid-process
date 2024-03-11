@@ -1,17 +1,7 @@
 # frozen_string_literal: true
 
 class Solid::Process
-  require_relative "caller"
-
   module ClassMethods
-    def inherited(subclass)
-      subclass.prepend(Caller)
-    end
-
-    def call(arg = nil)
-      new.call(arg)
-    end
-
     def input=(klass)
       const_defined?(:Input, false) and raise Error, "#{const_get(:Input, false)} class already defined"
 

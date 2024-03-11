@@ -11,12 +11,22 @@ module Solid
   class Process
     require "solid/process/version"
     require "solid/process/error"
+    require "solid/process/caller"
     require "solid/process/class_methods"
     require "solid/process/active_record"
 
     extend ClassMethods
 
     include ::BCDD::Result::Context.mixin(config: {addon: {continue: true}})
+
+    def self.inherited(subclass)
+      subclass.prepend(Caller)
+      subclass.include(Result::Callbacks)
+    end
+
+    def self.call(arg = nil)
+      new.call(arg)
+    end
 
     attr_accessor :input, :output, :dependencies
 
@@ -40,6 +50,10 @@ module Solid
 
     def call(_arg = nil)
       raise Error, "#{self.class}#call must be implemented."
+    end
+
+    def inspect
+      "#<#{self.class.name} dependencies=#{dependencies.inspect} input=#{input.inspect} output=#{output.inspect}>"
     end
 
     alias_method :deps, :dependencies

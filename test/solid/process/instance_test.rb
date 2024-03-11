@@ -141,4 +141,10 @@ class Solid::Process::ResultTest < ActiveSupport::TestCase
       err.message
     )
   end
+
+  test "#inspect" do
+    user_creation = UserCreation.new
+
+    assert_equal("#<UserCreation dependencies=nil input=nil output=nil>", user_creation.inspect)
+  end
 end

@@ -2,6 +2,8 @@
 
 module Solid
   module Result
+    require_relative "result/callbacks"
+
     def deconstruct
       [type, value]
     end
