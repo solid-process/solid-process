@@ -2,6 +2,10 @@
 
 class User
   class Creation < Solid::Process
+    deps do
+      attribute :token_creation, default: ::User::Token::Creation
+    end
+
     input do
       attribute :uuid, :string, default: -> { ::SecureRandom.uuid }
       attribute :name, :string
@@ -47,9 +51,11 @@ class User
     end
 
     def create_user_token(user:, **)
-      Token::Creation.call(user: user).handle do |on|
-        on.success { |output| Continue(token: output[:token]) }
-        on.failure { raise "Token creation failed" }
+      case deps.token_creation.call(user: user)
+      in Solid::Success(token:)
+        Continue(token:)
+      in Solid::Failure
+        raise "Token creation failed"
       end
     end
   end

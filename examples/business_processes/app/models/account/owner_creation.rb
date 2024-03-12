@@ -2,6 +2,10 @@
 
 class Account
   class OwnerCreation < Solid::Process
+    deps do
+      attribute :user_creation, default: ::User::Creation
+    end
+
     input do
       attribute :uuid, :string, default: -> { ::SecureRandom.uuid }
       attribute :owner
@@ -11,7 +15,7 @@ class Account
       end
 
       validates :uuid, presence: true, format: {with: /\A[0-9a-f]{8}-([0-9a-f]{4}-){3}[0-9a-f]{12}\z/i}
-      validates :owner, presence: true, type: ::Hash
+      validates :owner, presence: true
     end
 
     def call(attributes)
@@ -26,16 +30,18 @@ class Account
     private
 
     def create_owner(owner:, **)
-      ::User::Creation.call(owner).handle do |on|
-        on.success { |output| Continue(user: output[:user], user_token: output[:token]) }
-        on.failure { |output| Failure(:invalid_owner, **output) }
+      case deps.user_creation.call(owner)
+      in Solid::Success(user:, token:)
+        Continue(user:, user_token: token)
+      in Solid::Failure(type:, value:)
+        Failure(:invalid_owner, **{type => value})
       end
     end
 
     def create_account(uuid:, **)
       account = ::Account.create(uuid:)
 
-      account.persisted? ? Continue(account:) : Failure(:invalid_record, **account.errors.messages)
+      account.persisted? ? Continue(account:) : Failure(:invalid_account, account:)
     end
 
     def link_owner_to_account(account:, user:, **)

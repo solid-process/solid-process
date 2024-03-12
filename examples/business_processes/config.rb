@@ -9,6 +9,6 @@ require "app/models/account/member"
 require "app/models/user"
 require "app/models/user/token"
 
-require "app/models/account/owner_creation"
 require "app/models/user/token/creation"
 require "app/models/user/creation"
+require "app/models/account/owner_creation"

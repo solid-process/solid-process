@@ -11,19 +11,15 @@ if RUBY_VERSION <= "3.1"
   exit! 1
 end
 
-task default: %i[solid_result]
-
 task :config do
   require_relative "config"
 end
 
-def input
-
-end
+task default: %i[solid_result]
 
 desc "Do pattern matching in Solid::Result"
 task solid_result: %i[config] do
-  input =   {
+  input = {
     uuid: SecureRandom.uuid,
     owner: {
       name: "\tJohn     Doe \n",
@@ -47,9 +43,35 @@ task solid_result: %i[config] do
   # in Solid::Result(type: :account_owner_created, value: {user:, account:})
 end
 
+desc "Do pattern matching in Solid::Output"
+task solid_output: %i[config] do
+  input = {
+    uuid: SecureRandom.uuid,
+    owner: {
+      name: "\tJohn     Doe \n",
+      email: "   JOHN.doe@email.com",
+      password: "123123123",
+      password_confirmation: "123123123"
+    }
+  }
+
+  case Account::OwnerCreation.call(input)
+  in Solid::Output(user:, account:)
+    puts "Account and owner user created: #{account.uuid} and #{user.uuid}"
+  in Solid::Output(type:, value:)
+    puts "Account creation failed: #{type} - #{value}"
+  end
+
+  # Different ways to match
+  #
+  # in Solid::Output(value: {user:, account:})
+  # in Solid::Output(type:, value: {user:, account:})
+  # in Solid::Output(type: :account_owner_created, value: {user:, account:})
+end
+
 desc "Do pattern matching in Solid::Success and Solid::Failure"
 task solid_success_and_failure: %i[config] do
-  input =   {
+  input = {
     uuid: SecureRandom.uuid,
     owner: {
       name: "\tJohn     Doe \n",
