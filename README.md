@@ -1,13 +1,15 @@
-# Solid::Process
-
 <p align="center">
-  <a href="https://codeclimate.com/github/serradura/solid-process/maintainability"><img src="https://api.codeclimate.com/v1/badges/643a53e99bb591321c9f/maintainability" /></a>
-  <a href="https://codeclimate.com/github/serradura/solid-process/test_coverage"><img src="https://api.codeclimate.com/v1/badges/643a53e99bb591321c9f/test_coverage" /></a>
-  <img src="https://img.shields.io/badge/Ruby%20%3E%3D%202.7%2C%20%3C%3D%20Head-ruby.svg?colorA=444&colorB=333" alt="Ruby">
-  <img src="https://img.shields.io/badge/Rails%20%3E%3D%206.0%2C%20%3C%3D%20Edge-rails.svg?colorA=444&colorB=333" alt="Rails">
+  <h1 align="center" id="-solidprocess">🚄 Solid::Process</h1>
+  <p align="center"><i>Ruby on Rails + Business Processes</i></p>
+  <p align="center">
+    <a href="https://codeclimate.com/github/serradura/solid-process/maintainability"><img src="https://api.codeclimate.com/v1/badges/643a53e99bb591321c9f/maintainability" /></a>
+    <a href="https://codeclimate.com/github/serradura/solid-process/test_coverage"><img src="https://api.codeclimate.com/v1/badges/643a53e99bb591321c9f/test_coverage" /></a>
+    <img src="https://img.shields.io/badge/Ruby%20%3E%3D%202.7%2C%20%3C%3D%20Head-ruby.svg?colorA=444&colorB=333" alt="Ruby">
+    <img src="https://img.shields.io/badge/Rails%20%3E%3D%206.0%2C%20%3C%3D%20Edge-rails.svg?colorA=444&colorB=333" alt="Rails">
+  </p>
 </p>
 
-## Required Ruby and Rails
+## Supported Ruby and Rails
 
 This library is tested against:
 
@@ -18,19 +20,27 @@ This library is tested against:
 | 3.1          | ✅  | ✅  | ✅  | ✅   | ✅   |
 | 3.2          | ✅  | ✅  | ✅  | ✅   | ✅   |
 | 3.3          | ✅  | ✅  | ✅  | ✅   | ✅   |
-| head         |    |    |    | ✅   | ✅   |
+| Head         |    |    |    | ✅   | ✅   |
 
 ## Installation
 
-TODO: Replace `UPDATE_WITH_YOUR_GEM_NAME_IMMEDIATELY_AFTER_RELEASE_TO_RUBYGEMS_ORG` with your gem name right after releasing it to RubyGems.org. Please do not do it earlier due to security reasons. Alternatively, replace this section with instructions to install your gem from git if you don't plan to release to RubyGems.org.
+Add this line to your application's Gemfile:
 
-Install the gem and add to the application's Gemfile by executing:
+```ruby
+gem 'solid-process'
+```
 
-    $ bundle add UPDATE_WITH_YOUR_GEM_NAME_IMMEDIATELY_AFTER_RELEASE_TO_RUBYGEMS_ORG
+And then execute:
 
-If bundler is not being used to manage dependencies, install the gem by executing:
+```bash
+$ bundle install
+```
 
-    $ gem install UPDATE_WITH_YOUR_GEM_NAME_IMMEDIATELY_AFTER_RELEASE_TO_RUBYGEMS_ORG
+Or install it yourself as:
+
+```bash
+$ gem install solid-process
+```
 
 ## Usage
 
