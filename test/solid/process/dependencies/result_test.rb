@@ -30,6 +30,8 @@ class Solid::Process::DependenciesResultTest < ActiveSupport::TestCase
     assert_kind_of Solid::Result, result
     assert_kind_of Solid::Success, result
 
+    assert_predicate result, :user_created?
+
     assert result.is?(:user_created)
     assert result.type?(:user_created)
     assert result.success?(:user_created)
@@ -52,6 +54,8 @@ class Solid::Process::DependenciesResultTest < ActiveSupport::TestCase
 
     assert_kind_of Solid::Result, result
     assert_kind_of Solid::Failure, result
+
+    assert_predicate result, :invalid_input?
 
     assert result.is?(:invalid_input)
     assert result.type?(:invalid_input)
@@ -76,6 +80,8 @@ class Solid::Process::DependenciesResultTest < ActiveSupport::TestCase
     result = assert_no_difference(-> { User.count }) do
       CreateUser.new(CreateUser::Dependencies.new(repository: User)).call(input)
     end
+
+    assert_predicate result, :email_already_taken?
 
     assert result.is?(:email_already_taken)
     assert result.type?(:email_already_taken)

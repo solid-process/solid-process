@@ -28,6 +28,8 @@ class Solid::Process::ResultTest < ActiveSupport::TestCase
     assert_kind_of Solid::Result, result
     assert_kind_of Solid::Success, result
 
+    assert_predicate result, :user_created?
+
     assert result.is?(:user_created)
     assert result.type?(:user_created)
     assert result.success?(:user_created)
@@ -51,6 +53,8 @@ class Solid::Process::ResultTest < ActiveSupport::TestCase
     assert_kind_of Solid::Result, result
     assert_kind_of Solid::Failure, result
 
+    assert_predicate result, :invalid_input?
+
     assert result.is?(:invalid_input)
     assert result.type?(:invalid_input)
     assert result.failure?(:invalid_input)
@@ -72,8 +76,26 @@ class Solid::Process::ResultTest < ActiveSupport::TestCase
 
     result = assert_no_difference(-> { User.count }) { user_creation.call(input) }
 
+    assert_predicate result, :email_already_taken?
+
     assert result.is?(:email_already_taken)
     assert result.type?(:email_already_taken)
     assert result.failure?(:email_already_taken)
+  end
+
+  test "#method_missing" do
+    result1 = UserCreation.call(name: nil, email: nil, password: nil)
+    result2 = UserCreation.call(name: "John Doe", email: "john.doe@email.com", password: "123123123")
+
+    assert_raises(NoMethodError) { result1.foo }
+    assert_raises(NoMethodError) { result2.foo }
+  end
+
+  test "#respond_to_missing?" do
+    result1 = UserCreation.call(name: nil, email: nil, password: nil)
+    result2 = UserCreation.call(name: "John Doe", email: "john.doe@email.com", password: "123123123")
+
+    refute result1.method(:foo?).call
+    refute result2.method(:bar?).call
   end
 end

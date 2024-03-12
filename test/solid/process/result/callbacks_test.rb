@@ -35,8 +35,12 @@ class Solid::Process::ResultCallbacksTest < ActiveSupport::TestCase
       callback_numbers << 2
     end
 
-    after_success if: -> { _1.output.is?(:user_created) } do
+    after_success if: :person_created? do
       callback_numbers << 3
+    end
+
+    after_success if: -> { _1.output.is?(:user_created) } do
+      callback_numbers << 4
     end
 
     after_failure do |process|
@@ -47,8 +51,12 @@ class Solid::Process::ResultCallbacksTest < ActiveSupport::TestCase
       callback_numbers << -2
     end
 
-    after_failure if: -> { _1.output.is?(:invalid_person) } do
+    after_failure if: :invalid_input? do
       callback_numbers << -3
+    end
+
+    after_failure if: -> { _1.output.is?(:invalid_person) } do
+      callback_numbers << -4
     end
 
     def call(attributes)
@@ -69,7 +77,7 @@ class Solid::Process::ResultCallbacksTest < ActiveSupport::TestCase
 
     assert result.is?(:person_created)
 
-    assert_equal [1, 2], person_creation.callback_numbers
+    assert_equal [1, 2, 3], person_creation.callback_numbers
   end
 
   test "after failure" do
@@ -83,6 +91,6 @@ class Solid::Process::ResultCallbacksTest < ActiveSupport::TestCase
 
     assert result.is?(:invalid_input)
 
-    assert_equal [-1, -2], person_creation.callback_numbers
+    assert_equal [-1, -2, -3], person_creation.callback_numbers
   end
 end

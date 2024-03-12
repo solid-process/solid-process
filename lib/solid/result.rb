@@ -18,12 +18,20 @@ module Solid
       end
     end
 
-    def is?(arg)
+    def type?(arg)
       type == arg
     end
 
-    def type?(arg)
-      type == arg
+    def is?(arg)
+      type?(arg.to_sym)
+    end
+
+    def method_missing(name, *args, &block)
+      name.end_with?("?") ? is?(name.to_s.chomp("?")) : super
+    end
+
+    def respond_to_missing?(name, include_private = false)
+      name.end_with?("?") || super
     end
   end
 

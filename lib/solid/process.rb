@@ -56,6 +56,14 @@ module Solid
       "#<#{self.class.name} dependencies=#{dependencies.inspect} input=#{input.inspect} output=#{output.inspect}>"
     end
 
+    def method_missing(name, *args, &block)
+      name.end_with?("?") ? output&.is?(name.to_s.chomp("?")) : super
+    end
+
+    def respond_to_missing?(name, include_private = false)
+      name.end_with?("?") || super
+    end
+
     alias_method :deps, :dependencies
     alias_method :deps?, :dependencies?
   end

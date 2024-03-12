@@ -2,7 +2,7 @@
 
 require "test_helper"
 
-class Solid::Process::ResultTest < ActiveSupport::TestCase
+class Solid::Process::ProcessInstanceTest < ActiveSupport::TestCase
   def setup
     ::User.delete_all
   end
@@ -146,5 +146,32 @@ class Solid::Process::ResultTest < ActiveSupport::TestCase
     user_creation = UserCreation.new
 
     assert_equal("#<UserCreation dependencies=nil input=nil output=nil>", user_creation.inspect)
+  end
+
+  test "#method_missing" do
+    user_creation1 = UserCreation.new
+
+    user_creation1.call(name: "John Doe", email: "john.doe@email.com", password: "123123123")
+
+    assert_predicate user_creation1, :user_created?
+
+    # ---
+
+    user_creation2 = UserCreation.new
+
+    user_creation2.call(uuid: "", name: nil, email: nil)
+
+    assert_predicate user_creation2, :invalid_input?
+
+    # ---
+
+    assert_raises(NoMethodError) { user_creation1.foo }
+    assert_raises(NoMethodError) { user_creation2.foo }
+  end
+
+  test "#respond_to_missing?" do
+    user_creation1 = UserCreation.new
+
+    refute user_creation1.method(:foo?).call
   end
 end
