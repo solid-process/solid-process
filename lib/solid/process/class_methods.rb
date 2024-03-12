@@ -43,5 +43,8 @@ class Solid::Process
 
       self.dependencies = klass
     end
+
+    alias_method :deps, :dependencies
+    alias_method :deps=, :dependencies=
   end
 end
