@@ -21,7 +21,9 @@ class Solid::Process
           end
       end
 
-      output.success? ? run_callbacks(:success) : run_callbacks(:failure)
+      run_callbacks(:success) if output.success?
+      run_callbacks(:failure) if output.failure?
+      run_callbacks(:output)
 
       output
     end

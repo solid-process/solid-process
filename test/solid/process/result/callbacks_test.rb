@@ -24,39 +24,87 @@ class Solid::Process::ResultCallbacksTest < ActiveSupport::TestCase
     def initialize(...)
       super(...)
 
-      @callback_numbers = []
+      @callback_numbers = Hash.new { |hash, key| hash[key] = [] }
     end
 
     after_success do |process|
-      callback_numbers << 1
+      callback_numbers[:after_success] << 1
     end
 
     after_success if: -> { output.is?(:person_created) } do
-      callback_numbers << 2
+      callback_numbers[:after_success] << 2
     end
 
     after_success if: :person_created? do
-      callback_numbers << 3
+      callback_numbers[:after_success] << 3
     end
 
-    after_success if: -> { _1.output.is?(:user_created) } do
-      callback_numbers << 4
+    after_success if: :user_created? do
+      callback_numbers[:after_success] << 4
+    end
+
+    after_output if: -> { output.is?(:person_created) } do
+      callback_numbers[:after_output] << 5
+    end
+
+    after_output if: :person_created? do
+      callback_numbers[:after_output] << 6
+    end
+
+    after_output if: :user_created? do
+      callback_numbers[:after_output] << 7
+    end
+
+    after_result if: -> { result.is?(:person_created) } do
+      callback_numbers[:after_result] << 8
+    end
+
+    after_result if: :person_created? do
+      callback_numbers[:after_result] << 9
+    end
+
+    after_result if: :user_created? do
+      callback_numbers[:after_result] << 10
     end
 
     after_failure do |process|
-      callback_numbers << -1
+      callback_numbers[:after_failure] << -1
     end
 
     after_failure if: -> { output.is?(:invalid_input) } do
-      callback_numbers << -2
+      callback_numbers[:after_failure] << -2
     end
 
     after_failure if: :invalid_input? do
-      callback_numbers << -3
+      callback_numbers[:after_failure] << -3
     end
 
-    after_failure if: -> { _1.output.is?(:invalid_person) } do
-      callback_numbers << -4
+    after_failure if: :invalid_person? do
+      callback_numbers[:after_failure] << -4
+    end
+
+    after_output if: -> { output.is?(:invalid_input) } do
+      callback_numbers[:after_output] << -5
+    end
+
+    after_output if: :invalid_input? do
+      callback_numbers[:after_output] << -6
+    end
+
+    after_output if: :invalid_person? do
+      callback_numbers[:after_output] << -7
+    end
+
+    after_result if: -> { result.is?(:invalid_input) } do
+      callback_numbers[:after_result] << -8
+    end
+
+    after_result if: :invalid_input? do
+      callback_numbers[:after_result] << -9
+    end
+
+    after_result if: :invalid_person? do
+      callback_numbers[:after_result] << -10
     end
 
     def call(attributes)
@@ -77,7 +125,14 @@ class Solid::Process::ResultCallbacksTest < ActiveSupport::TestCase
 
     assert result.is?(:person_created)
 
-    assert_equal [1, 2, 3], person_creation.callback_numbers
+    assert_equal(
+      {
+        after_success: [1, 2, 3],
+        after_output: [5, 6],
+        after_result: [8, 9]
+      },
+      person_creation.callback_numbers
+    )
   end
 
   test "after failure" do
@@ -91,6 +146,13 @@ class Solid::Process::ResultCallbacksTest < ActiveSupport::TestCase
 
     assert result.is?(:invalid_input)
 
-    assert_equal [-1, -2, -3], person_creation.callback_numbers
+    assert_equal(
+      {
+        after_failure: [-1, -2, -3],
+        after_output: [-5, -6],
+        after_result: [-8, -9]
+      },
+      person_creation.callback_numbers
+    )
   end
 end
