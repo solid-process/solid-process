@@ -45,4 +45,12 @@ module Solid
 
   ::BCDD::Result::Context::Success.prepend(Success)
   ::BCDD::Result::Context::Failure.prepend(Failure)
+
+  def self.Success(...)
+    ::BCDD::Result::Context::Success(...)
+  end
+
+  def self.Failure(...)
+    ::BCDD::Result::Context::Failure(...)
+  end
 end
