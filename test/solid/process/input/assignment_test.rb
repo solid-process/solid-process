@@ -70,7 +70,7 @@ class Solid::Process::InputAssignmentTest < ActiveSupport::TestCase
       end
     end
 
-    assert_equal "String must be a Solid::Input subclass", err.message
+    assert_equal "String must be a class that includes Solid::Model", err.message
   end
 
   test "the assignment after the class definition" do

@@ -4,7 +4,7 @@ require "test_helper"
 
 class Solid::Process::InputAccessTest < ActiveSupport::TestCase
   PersonStruct = Struct.new(:uuid, :name, :email, keyword_init: true)
-  PersonStruct.include(Solid::Input::Access)
+  PersonStruct.include(Solid::Model::Access)
 
   class PersonInput < Solid::Input
     attribute :uuid, :string

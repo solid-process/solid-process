@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class Solid::Input
+module Solid::Model
   # Implementation based on ActiveModel::Access
   # https://github.com/rails/rails/blob/7-1-stable/activemodel/lib/active_model/access.rb
   module Access

@@ -5,8 +5,8 @@ class Solid::Process
     def input=(klass)
       const_defined?(:Input, false) and raise Error, "#{const_get(:Input, false)} class already defined"
 
-      unless klass.is_a?(::Class) && klass < ::Solid::Input
-        raise ArgumentError, "#{klass.inspect} must be a #{::Solid::Input} subclass"
+      unless klass.is_a?(::Class) && klass < ::Solid::Model
+        raise ArgumentError, "#{klass.inspect} must be a class that includes #{::Solid::Model}"
       end
 
       const_set(:Input, klass)
@@ -26,8 +26,8 @@ class Solid::Process
     def dependencies=(klass)
       const_defined?(:Dependencies, false) and raise Error, "#{const_get(:Dependencies, false)} class already defined"
 
-      unless klass.is_a?(::Class) && klass < ::Solid::Input
-        raise ArgumentError, "#{klass.inspect} must be a #{::Solid::Input} subclass"
+      unless klass.is_a?(::Class) && klass < ::Solid::Model
+        raise ArgumentError, "#{klass.inspect} must be a class that includes #{::Solid::Model}"
       end
 
       const_set(:Dependencies, klass)

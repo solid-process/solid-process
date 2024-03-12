@@ -69,7 +69,7 @@ class Solid::InputClassTest < ActiveSupport::TestCase
     if ActiveModel.const_defined?(:Access, false)
       assert_includes ancestors, ActiveModel::Access
     else
-      assert_includes ancestors, Solid::Input::Access
+      assert_includes ancestors, Solid::Model::Access
     end
 
     assert_includes ancestors, ActiveModel::Attributes
