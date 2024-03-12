@@ -18,6 +18,27 @@ class Solid::Process::DependenciesResultTest < ActiveSupport::TestCase
     [data, CreateUser::Input.new(data)].sample
   end
 
+  test "failure (invalid_dependencies)" do
+    result = CreateUser.new(repository: Object).call(name: "John", email: "john@email.com", password: "321321321")
+
+    assert_kind_of Solid::Result, result
+    assert_kind_of Solid::Failure, result
+
+    assert_predicate result, :invalid_dependencies?
+
+    assert result.is?(:invalid_dependencies)
+    assert result.type?(:invalid_dependencies)
+    assert result.failure?(:invalid_dependencies)
+
+    assert_equal [:dependencies], result.value.keys
+
+    dependencies = result.value.fetch(:dependencies)
+
+    assert_kind_of CreateUser::Dependencies, dependencies
+
+    dependencies.errors.added? :repository, :invalid
+  end
+
   test "success" do
     password = "123123123"
 

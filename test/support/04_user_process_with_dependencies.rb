@@ -3,6 +3,13 @@
 class CreateUser < Solid::Process
   dependencies do
     attribute :repository, default: ::User
+
+    validate :repository_interface
+
+    def repository_interface
+      repository.respond_to?(:create!) or errors.add(:repository, message: "must respond to :create!")
+      repository.respond_to?(:exists?) or errors.add(:repository, message: "must respond to :exists?")
+    end
   end
 
   input do

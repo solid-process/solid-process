@@ -12,7 +12,9 @@ class Solid::Process
 
       ::BCDD::Result.transitions(name: self.class.name) do
         self.output =
-          if input.invalid?
+          if dependencies&.invalid?
+            Failure(:invalid_dependencies, dependencies: dependencies)
+          elsif input.invalid?
             Failure(:invalid_input, input: input)
           else
             super(input.attributes.deep_symbolize_keys)
