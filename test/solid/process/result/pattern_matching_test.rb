@@ -78,6 +78,34 @@ class Solid::Process::ResultPatterMatchingTest < ActiveSupport::TestCase
     in Solid::Result(user: user)
       assert_match(TestUtils::UUID_REGEX, user.uuid)
     end
+
+    # --- Solid::Output ---
+
+    case result
+    in Solid::Output[:user_created, {user: user}]
+      assert_match(TestUtils::UUID_REGEX, user.uuid)
+    end
+
+    case result
+    in Solid::Output(type: type, value: {user: user})
+      assert_equal(:user_created, type)
+      assert_match(TestUtils::UUID_REGEX, user.uuid)
+    end
+
+    case result
+    in Solid::Output(type: type)
+      assert_equal(:user_created, type)
+    end
+
+    case result
+    in Solid::Output(value: {user: user})
+      assert_match(TestUtils::UUID_REGEX, user.uuid)
+    end
+
+    case result
+    in Solid::Output(user: user)
+      assert_match(TestUtils::UUID_REGEX, user.uuid)
+    end
   end
 
   test "failure (invalid_input)" do
@@ -149,6 +177,38 @@ class Solid::Process::ResultPatterMatchingTest < ActiveSupport::TestCase
 
     case result
     in Solid::Result(input: input)
+      assert_kind_of Solid::Input, input
+      assert_instance_of UserCreation::Input, input
+    end
+
+    # --- Solid::Output ---
+
+    case result
+    in Solid::Output[:invalid_input, {input: input}]
+      assert_kind_of Solid::Input, input
+      assert_instance_of UserCreation::Input, input
+    end
+
+    case result
+    in Solid::Output(type: type, value: {input: input})
+      assert_equal(:invalid_input, type)
+      assert_kind_of Solid::Input, input
+      assert_instance_of UserCreation::Input, input
+    end
+
+    case result
+    in Solid::Output(type: type)
+      assert_equal(:invalid_input, type)
+    end
+
+    case result
+    in Solid::Output(value: {input: input})
+      assert_kind_of Solid::Input, input
+      assert_instance_of UserCreation::Input, input
+    end
+
+    case result
+    in Solid::Output(input: input)
       assert_kind_of Solid::Input, input
       assert_instance_of UserCreation::Input, input
     end

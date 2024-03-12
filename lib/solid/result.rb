@@ -35,6 +35,8 @@ module Solid
     end
   end
 
+  Output = Result
+
   module Success
     include ::Solid::Result
   end
