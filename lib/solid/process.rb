@@ -40,8 +40,8 @@ module Solid
       !input.nil?
     end
 
-    def output?
-      !output.nil?
+    def output?(type = nil)
+      type.nil? ? !output.nil? : !!output&.is?(type)
     end
 
     def dependencies?
@@ -66,5 +66,7 @@ module Solid
 
     alias_method :deps, :dependencies
     alias_method :deps?, :dependencies?
+    alias_method :result, :output
+    alias_method :result?, :output?
   end
 end

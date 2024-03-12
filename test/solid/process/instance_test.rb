@@ -55,40 +55,60 @@ class Solid::Process::ProcessInstanceTest < ActiveSupport::TestCase
     user_creation1 = UserCreation.new
 
     assert_nil user_creation1.output
+    assert_nil user_creation1.result
 
     result = user_creation1.call(name: "John Doe", email: "   JOHN.doe@email.com", password: "123123123")
 
     assert_same result, user_creation1.output
+    assert_same result, user_creation1.result
 
     # ---
 
     user_creation2 = UserCreation.new
 
     assert_nil user_creation2.output
+    assert_nil user_creation2.result
 
     result = user_creation2.call(uuid: "", name: nil, email: nil)
 
     assert_same result, user_creation2.output
+    assert_same result, user_creation2.result
   end
 
   test "#output?" do
     user_creation1 = UserCreation.new
 
     refute_predicate user_creation1, :output?
+    refute_predicate user_creation1, :result?
+
+    refute user_creation1.output?(:user_created)
+    refute user_creation1.result?(:user_created)
 
     user_creation1.call(name: "John Doe", email: "john.doe@email.com", password: "123123123")
 
     assert_predicate user_creation1, :output?
+    assert_predicate user_creation1, :result?
+
+    assert user_creation1.output?(:user_created)
+    assert user_creation1.result?(:user_created)
 
     # ---
 
     user_creation2 = UserCreation.new
 
     refute_predicate user_creation2, :output?
+    refute_predicate user_creation2, :result?
+
+    refute user_creation2.output?(:invalid_input)
+    refute user_creation2.result?(:invalid_input)
 
     user_creation2.call(uuid: "", name: nil, email: nil)
 
     assert_predicate user_creation2, :output?
+    assert_predicate user_creation2, :result?
+
+    assert user_creation2.output?(:invalid_input)
+    assert user_creation2.result?(:invalid_input)
   end
 
   test "#dependencies" do
