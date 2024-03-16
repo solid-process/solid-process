@@ -12,16 +12,17 @@ module Solid
     require "solid/process/version"
     require "solid/process/error"
     require "solid/process/caller"
+    require "solid/process/callbacks"
     require "solid/process/class_methods"
     require "solid/process/active_record"
 
     extend ClassMethods
 
-    include ::BCDD::Result::Context.mixin(config: {addon: {continue: true}})
+    include ::BCDD::Context.mixin(config: {addon: {continue: true}})
 
     def self.inherited(subclass)
       subclass.prepend(Caller)
-      subclass.include(Result::Callbacks)
+      subclass.include(Callbacks)
     end
 
     def self.call(arg = nil)

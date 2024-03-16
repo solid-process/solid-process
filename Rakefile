@@ -15,8 +15,10 @@ Appraisal::Task.new
 
 require "standard/rake"
 
-task :default do
+task :dev do
   exec "bundle exec appraisal rails-7-1 rake test"
 
   Rake::Task[:standard].invoke
 end
+
+task default: %i[test]

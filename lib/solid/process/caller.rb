@@ -10,7 +10,7 @@ class Solid::Process
 
       self.input = self.class.input.then { arg.instance_of?(_1) ? arg : _1.new(arg) }
 
-      ::BCDD::Result.transitions(name: self.class.name) do
+      ::BCDD::Result.event_logs(name: self.class.name) do
         self.output =
           if dependencies&.invalid?
             Failure(:invalid_dependencies, dependencies: dependencies)

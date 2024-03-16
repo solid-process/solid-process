@@ -2,7 +2,7 @@
 
 require "test_helper"
 
-class Solid::Process::ResultCallbacksTest < ActiveSupport::TestCase
+class Solid::Process::CallbacksTest < ActiveSupport::TestCase
   class PersonCreation < Solid::Process
     input do
       attribute :uuid, :string, default: -> { SecureRandom.uuid }

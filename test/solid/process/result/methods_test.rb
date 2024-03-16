@@ -6,7 +6,7 @@ class Solid::Process::ResultMethodsTest < ActiveSupport::TestCase
   test "Solid::Success() with type" do
     result = Solid::Success(:ok)
 
-    assert_instance_of(BCDD::Result::Context::Success, result)
+    assert_instance_of(BCDD::Context::Success, result)
     assert_kind_of(Solid::Success, result)
 
     assert result.success?(:ok)
@@ -17,7 +17,7 @@ class Solid::Process::ResultMethodsTest < ActiveSupport::TestCase
   test "Solid::Success() with type and value" do
     result = Solid::Success(:ok, one: 1)
 
-    assert_instance_of(BCDD::Result::Context::Success, result)
+    assert_instance_of(BCDD::Context::Success, result)
     assert_kind_of(Solid::Success, result)
 
     assert result.success?(:ok)
@@ -27,7 +27,7 @@ class Solid::Process::ResultMethodsTest < ActiveSupport::TestCase
   test "Solid::Failure() with type" do
     result = Solid::Failure(:err)
 
-    assert_instance_of(BCDD::Result::Context::Failure, result)
+    assert_instance_of(BCDD::Context::Failure, result)
     assert_kind_of(Solid::Failure, result)
 
     assert result.failure?(:err)
@@ -38,7 +38,7 @@ class Solid::Process::ResultMethodsTest < ActiveSupport::TestCase
   test "Solid::Failure() with type and value" do
     result = Solid::Failure(:err, zero: 0)
 
-    assert_instance_of(BCDD::Result::Context::Failure, result)
+    assert_instance_of(BCDD::Context::Failure, result)
     assert_kind_of(Solid::Failure, result)
 
     assert result.failure?(:err)

@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-module Solid::Result
+class Solid::Process
   module Callbacks
     def self.included(subclass)
       subclass.include ActiveSupport::Callbacks
