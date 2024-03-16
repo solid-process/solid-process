@@ -6,4 +6,8 @@ class Solid::Input
   def self.inherited(subclass)
     subclass.include(::Solid::Model)
   end
+
+  def self.[](...)
+    new(...)
+  end
 end
