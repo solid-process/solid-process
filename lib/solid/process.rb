@@ -18,23 +18,35 @@ module Solid
 
     extend ClassMethods
 
+    include Callbacks
     include ::BCDD::Context.mixin(config: {addon: {continue: true}})
 
     def self.inherited(subclass)
+      super
+
       subclass.prepend(Caller)
-      subclass.include(Callbacks)
     end
 
     def self.call(arg = nil)
       new.call(arg)
     end
 
-    attr_accessor :input, :output, :dependencies
-
-    private :input=, :output=, :dependencies=
+    attr_reader :output, :input, :dependencies
 
     def initialize(arg = nil)
-      self.dependencies = self.class.dependencies&.then { arg.instance_of?(_1) ? arg : _1.new(arg) }
+      self.dependencies = arg
+    end
+
+    def call(_arg = nil)
+      raise Error, "#{self.class}#call must be implemented."
+    end
+
+    def with(dependencies)
+      self.class.new(dependencies.with_indifferent_access.with_defaults(deps&.attributes))
+    end
+
+    def new(dependencies = {})
+      with(dependencies)
     end
 
     def input?
@@ -49,8 +61,12 @@ module Solid
       !dependencies.nil?
     end
 
-    def call(_arg = nil)
-      raise Error, "#{self.class}#call must be implemented."
+    def success?(type = nil)
+      !!output&.success?(type)
+    end
+
+    def failure?(type = nil)
+      !!output&.failure?(type)
     end
 
     def inspect
@@ -69,5 +85,32 @@ module Solid
     alias_method :deps?, :dependencies?
     alias_method :result, :output
     alias_method :result?, :output?
+
+    private
+
+    def dependencies=(arg)
+      raise Error, "The `#{self.class}#dependencies` is already set." unless dependencies.nil?
+
+      @dependencies = self.class.dependencies&.then { arg.instance_of?(_1) ? arg : _1.new(arg) }
+    end
+
+    def input=(arg)
+      raise Error, "The `#{self.class}#input` is already set." unless input.nil?
+
+      @input = self.class.input.then { arg.instance_of?(_1) ? arg : _1.new(arg) }
+    end
+
+    def output_already_set!
+      raise Error, "The `#{self.class}#output` is already set. " \
+                   "Use `.output` to access the result or create a new instance to call again."
+    end
+
+    def output=(result)
+      output_already_set! unless output.nil?
+
+      raise Error, "The result #{result.inspect} must be a BCDD::Context." unless result.is_a?(::BCDD::Context)
+
+      @output = result
+    end
   end
 end

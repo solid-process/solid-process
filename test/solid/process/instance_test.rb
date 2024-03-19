@@ -7,6 +7,54 @@ class Solid::Process::ProcessInstanceTest < ActiveSupport::TestCase
     ::User.delete_all
   end
 
+  test "#call when the output is already set" do
+    user_creation = UserCreation.new
+
+    user_creation.call(name: nil, email: nil)
+
+    err = assert_raises(Solid::Process::Error) do
+      user_creation.call(name: nil, email: nil)
+    end
+
+    assert_equal(
+      "The `UserCreation#output` is already set. " \
+      "Use `.output` to access the result or create a new instance to call again.",
+      err.message
+    )
+  end
+
+  test "#new" do
+    user_creation = UserCreation.new
+
+    user_creation.call(name: nil, email: nil)
+
+    assert_raises(Solid::Process::Error) { user_creation.call(name: nil, email: nil) }
+
+    new_user_creation = user_creation.new
+
+    assert new_user_creation.call(name: nil, email: nil).failure?(:invalid_input)
+
+    assert_difference(-> { User.count } => 1) do
+      new_user_creation.new.call(name: "Foo", email: "foo@foo.com", password: "123123123")
+    end
+
+    # ---
+
+    create_user = CreateUser.new
+
+    create_user.call(name: nil, email: nil)
+
+    assert_raises(Solid::Process::Error) { create_user.call(name: nil, email: nil) }
+
+    new_create_user = create_user.new(repository: ::Object)
+
+    assert new_create_user.call(name: nil, email: nil).failure?(:invalid_dependencies)
+
+    assert_difference(-> { User.count } => 1) do
+      create_user.new.call(name: "Bar", email: "bar@bar.com", password: "123123123")
+    end
+  end
+
   test "#input" do
     user_creation1 = UserCreation.new
 
@@ -146,20 +194,32 @@ class Solid::Process::ProcessInstanceTest < ActiveSupport::TestCase
     assert_predicate user_creation2, :deps?
   end
 
-  test "#call when the output is already set" do
+  test "#success?" do
     user_creation = UserCreation.new
 
-    user_creation.call(name: nil, email: nil)
+    refute_predicate user_creation, :success?
+    refute user_creation.success?(:user_created)
+    refute user_creation.success?(:person_created)
 
-    err = assert_raises(Solid::Process::Error) do
-      user_creation.call(name: nil, email: nil)
-    end
+    user_creation.call(name: "John Doe", email: "   JOHN.doe@email.com", password: "123123123")
 
-    assert_equal(
-      "UserCreation#call already called. " \
-      "Use UserCreation#output to access the result or create a new instance to call again.",
-      err.message
-    )
+    assert_predicate user_creation, :success?
+    assert user_creation.success?(:user_created)
+    refute user_creation.success?(:person_created)
+  end
+
+  test "#failure?" do
+    user_creation = UserCreation.new
+
+    refute_predicate user_creation, :failure?
+    refute user_creation.failure?(:invalid_input)
+    refute user_creation.failure?(:invalid_output)
+
+    user_creation.call(uuid: "", name: nil, email: nil)
+
+    assert_predicate user_creation, :failure?
+    assert user_creation.failure?(:invalid_input)
+    refute user_creation.failure?(:invalid_output)
   end
 
   test "#inspect" do
@@ -193,5 +253,83 @@ class Solid::Process::ProcessInstanceTest < ActiveSupport::TestCase
     user_creation1 = UserCreation.new
 
     refute user_creation1.method(:foo?).call
+  end
+
+  test "#dependencies=" do
+    create_user = CreateUser.allocate
+
+    assert_nil create_user.dependencies
+
+    assert_raises(NoMethodError) do
+      create_user.dependencies = {repository: ::User}
+    end
+
+    create_user.send(:dependencies=, {repository: ::User})
+
+    assert_predicate create_user, :dependencies?
+
+    assert_same(::User, create_user.dependencies.repository)
+
+    err = assert_raises(Solid::Process::Error) do
+      create_user.send(:dependencies=, {repository: ::User})
+    end
+
+    assert_equal("The `CreateUser#dependencies` is already set.", err.message)
+  end
+
+  test "#input=" do
+    user_creation = UserCreation.new
+
+    assert_nil user_creation.input
+
+    assert_raises(NoMethodError) do
+      user_creation.input = {name: "John Doe", email: "john@email.com"}
+    end
+
+    user_creation.send(:input=, {name: "John Doe", email: "john@email.com"})
+
+    assert_predicate user_creation, :input?
+
+    assert_equal("John Doe", user_creation.input.name)
+    assert_equal("john@email.com", user_creation.input.email)
+
+    err = assert_raises(Solid::Process::Error) do
+      user_creation.send(:input=, {name: "John Doe", email: "john@email.com"})
+    end
+
+    assert_equal("The `UserCreation#input` is already set.", err.message)
+  end
+
+  test "#output=" do
+    user_creation = UserCreation.new
+
+    assert_nil user_creation.output
+
+    assert_raises(NoMethodError) do
+      user_creation.output = Solid::Success(:user_created, user: ::User.new)
+    end
+
+    err1 = assert_raises(Solid::Process::Error) do
+      user_creation.send(:output=, 1)
+    end
+
+    assert_equal("The result 1 must be a BCDD::Context.", err1.message)
+
+    user_creation.send(:output=, Solid::Success(:user_created, user: ::User.new))
+
+    assert_predicate user_creation, :output?
+
+    assert user_creation.output?(:user_created)
+    assert_instance_of ::User, user_creation.output.value[:user]
+
+    err2 = assert_raises(Solid::Process::Error) do
+      user_creation.send(:output=, Solid::Success(:user_created, user: ::User.new))
+    end
+
+    assert_equal(
+      "The `UserCreation#output` is already set. " \
+      "Use `.output` to access the result or create a new instance to call again.",
+      err2.message
+    )
   end
 end
