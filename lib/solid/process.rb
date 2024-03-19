@@ -19,6 +19,7 @@ module Solid
     extend ClassMethods
 
     include Callbacks
+    include ::ActiveSupport::Rescuable
     include ::BCDD::Context.mixin(config: {addon: {continue: true}})
 
     def self.inherited(subclass)
@@ -111,6 +112,18 @@ module Solid
       raise Error, "The result #{result.inspect} must be a BCDD::Context." unless result.is_a?(::BCDD::Context)
 
       @output = result
+    end
+
+    def Success!(...)
+      return self.output = Success(...) if output.nil?
+
+      raise Error, "`Success!()` cannot be called because the `#{self.class}#output` is already set."
+    end
+
+    def Failure!(...)
+      return self.output = Failure(...) if output.nil?
+
+      raise Error, "`Failure!()` cannot be called because the `#{self.class}#output` is already set."
     end
   end
 end

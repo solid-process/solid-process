@@ -2,7 +2,7 @@
 
 require "test_helper"
 
-class Solid::Process::CallbacksTest < ActiveSupport::TestCase
+class Solid::Process::CallbacksAfterTest < ActiveSupport::TestCase
   class PersonCreation < Solid::Process
     input do
       attribute :uuid, :string, default: -> { SecureRandom.uuid }
@@ -43,30 +43,6 @@ class Solid::Process::CallbacksTest < ActiveSupport::TestCase
       callback_numbers[:after_success] << 4
     end
 
-    after_output if: -> { output.is?(:person_created) } do
-      callback_numbers[:after_output] << 5
-    end
-
-    after_output if: :person_created? do
-      callback_numbers[:after_output] << 6
-    end
-
-    after_output if: :user_created? do
-      callback_numbers[:after_output] << 7
-    end
-
-    after_result if: -> { result.is?(:person_created) } do
-      callback_numbers[:after_result] << 8
-    end
-
-    after_result if: :person_created? do
-      callback_numbers[:after_result] << 9
-    end
-
-    after_result if: :user_created? do
-      callback_numbers[:after_result] << 10
-    end
-
     after_failure do |process|
       callback_numbers[:after_failure] << -1
     end
@@ -83,28 +59,16 @@ class Solid::Process::CallbacksTest < ActiveSupport::TestCase
       callback_numbers[:after_failure] << -4
     end
 
-    after_output if: -> { output.is?(:invalid_input) } do
-      callback_numbers[:after_output] << -5
+    after_call do
+      callback_numbers[:after_call] << 0.0
     end
 
-    after_output if: :invalid_input? do
-      callback_numbers[:after_output] << -6
+    after_call if: :success? do
+      callback_numbers[:after_call] << 0.1
     end
 
-    after_output if: :invalid_person? do
-      callback_numbers[:after_output] << -7
-    end
-
-    after_result if: -> { result.is?(:invalid_input) } do
-      callback_numbers[:after_result] << -8
-    end
-
-    after_result if: :invalid_input? do
-      callback_numbers[:after_result] << -9
-    end
-
-    after_result if: :invalid_person? do
-      callback_numbers[:after_result] << -10
+    after_call if: :failure? do
+      callback_numbers[:after_call] << -0.1
     end
 
     def call(attributes)
@@ -127,9 +91,8 @@ class Solid::Process::CallbacksTest < ActiveSupport::TestCase
 
     assert_equal(
       {
-        after_success: [1, 2, 3],
-        after_output: [5, 6],
-        after_result: [8, 9]
+        after_call: [0.1, 0.0],
+        after_success: [3, 2, 1]
       },
       person_creation.callback_numbers
     )
@@ -148,9 +111,8 @@ class Solid::Process::CallbacksTest < ActiveSupport::TestCase
 
     assert_equal(
       {
-        after_failure: [-1, -2, -3],
-        after_output: [-5, -6],
-        after_result: [-8, -9]
+        after_call: [-0.1, 0.0],
+        after_failure: [-3, -2, -1]
       },
       person_creation.callback_numbers
     )

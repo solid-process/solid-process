@@ -5,37 +5,31 @@ class Solid::Process
     def self.included(subclass)
       subclass.include ActiveSupport::Callbacks
 
-      subclass.define_callbacks(:success, :failure, :output)
+      subclass.define_callbacks(:call, :success, :failure)
 
       subclass.extend ClassMethods
     end
 
     module ClassMethods
-      def after_success(*args, &block)
-        options = args.extract_options!
-        options = options.dup
-        options[:prepend] = true
-
-        set_callback(:success, :after, *args, options, &block)
+      def before_call(*filters, &block)
+        set_callback(:call, :before, *filters, &block)
       end
 
-      def after_failure(*args, &block)
-        options = args.extract_options!
-        options = options.dup
-        options[:prepend] = true
-
-        set_callback(:failure, :after, *args, options, &block)
+      def around_call(*filters, &block)
+        set_callback(:call, :around, *filters, &block)
       end
 
-      def after_output(*args, &block)
-        options = args.extract_options!
-        options = options.dup
-        options[:prepend] = true
-
-        set_callback(:output, :after, *args, options, &block)
+      def after_call(*filters, &block)
+        set_callback(:call, :after, *filters, &block)
       end
 
-      alias_method :after_result, :after_output
+      def after_success(*filters, &block)
+        set_callback(:success, :after, *filters, &block)
+      end
+
+      def after_failure(*filters, &block)
+        set_callback(:failure, :after, *filters, &block)
+      end
     end
   end
 end
