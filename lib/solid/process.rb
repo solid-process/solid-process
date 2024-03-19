@@ -11,6 +11,7 @@ module Solid
   class Process
     require "solid/process/version"
     require "solid/process/error"
+    require "solid/process/config"
     require "solid/process/caller"
     require "solid/process/callbacks"
     require "solid/process/class_methods"
@@ -30,6 +31,16 @@ module Solid
 
     def self.call(arg = nil)
       new.call(arg)
+    end
+
+    def self.configuration(&block)
+      yield config
+
+      config.freeze
+    end
+
+    def self.config
+      Config.instance
     end
 
     attr_reader :output, :input, :dependencies

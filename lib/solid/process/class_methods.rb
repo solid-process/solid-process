@@ -5,11 +5,7 @@ class Solid::Process
     def input=(klass)
       const_defined?(:Input, false) and raise Error, "#{const_get(:Input, false)} class already defined"
 
-      unless klass.is_a?(::Class) && klass < ::Solid::Model
-        raise ArgumentError, "#{klass.inspect} must be a class that includes #{::Solid::Model}"
-      end
-
-      const_set(:Input, klass)
+      const_set(:Input, Config::SolidModel[klass])
     end
 
     def input(&block)
@@ -17,7 +13,7 @@ class Solid::Process
 
       block.nil? and raise Error, "#{self}::Input is undefined. Use #{self}.input { ... } to define it."
 
-      klass = ::Class.new(::Solid::Input)
+      klass = ::Class.new(Config.instance.input_class)
       klass.class_eval(&block)
 
       self.input = klass
@@ -26,11 +22,7 @@ class Solid::Process
     def dependencies=(klass)
       const_defined?(:Dependencies, false) and raise Error, "#{const_get(:Dependencies, false)} class already defined"
 
-      unless klass.is_a?(::Class) && klass < ::Solid::Model
-        raise ArgumentError, "#{klass.inspect} must be a class that includes #{::Solid::Model}"
-      end
-
-      const_set(:Dependencies, klass)
+      const_set(:Dependencies, Config::SolidModel[klass])
     end
 
     def dependencies(&block)
@@ -38,7 +30,7 @@ class Solid::Process
 
       return if block.nil?
 
-      klass = ::Class.new(::Solid::Input)
+      klass = ::Class.new(Config.instance.dependencies_class)
       klass.class_eval(&block)
 
       self.dependencies = klass
