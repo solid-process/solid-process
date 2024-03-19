@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
-module Solid::Model
-  require_relative "model/access"
+require_relative "model/access"
 
+module Solid::Model
   extend ::ActiveSupport::Concern
 
   included do
@@ -12,6 +12,16 @@ module Solid::Model
     include ::ActiveModel::Attributes
     include ::ActiveModel::Dirty
     include ::ActiveModel::Validations::Callbacks
+  end
+
+  module ClassMethods
+    def [](...)
+      new(...)
+    end
+
+    def inherited(subclass)
+      subclass.include(::Solid::Model)
+    end
   end
 
   def inspect
