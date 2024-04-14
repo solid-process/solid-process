@@ -9,7 +9,7 @@ class Solid::Process
       self.input = arg
 
       run_callbacks(:call) do
-        ::BCDD::Result.event_logs(name: self.class.name) do
+        ::Solid::Result.event_logs(name: self.class.name) do
           self.output =
             if dependencies&.invalid?
               Failure(:invalid_dependencies, dependencies: dependencies)

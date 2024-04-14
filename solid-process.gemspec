@@ -8,8 +8,8 @@ Gem::Specification.new do |spec|
   spec.authors = ["Rodrigo Serradura"]
   spec.email = ["rodrigo.serradura@gmail.com"]
 
-  spec.summary = "Ruby on Rails + Business Processes"
-  spec.description = "Ruby on Rails + Business Processes"
+  spec.summary = "Write self-documenting and self-observable business processes in Ruby/Rails."
+  spec.description = "Write self-documenting and self-observable business processes in Ruby/Rails."
   spec.homepage = "https://github.com/serradura/solid-process"
   spec.license = "MIT"
   spec.required_ruby_version = ">= 2.7.0"
@@ -38,7 +38,7 @@ Gem::Specification.new do |spec|
   spec.require_paths = ["lib"]
 
   # Uncomment to register a new dependency of your gem
-  spec.add_dependency "bcdd-result", "~> 1.0"
+  spec.add_dependency "solid-result", "~> 2.0"
   spec.add_dependency "activemodel", ">= 6.0", "< 8.0"
 
   spec.add_development_dependency "appraisal", "~> 2.5"

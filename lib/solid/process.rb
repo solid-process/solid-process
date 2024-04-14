@@ -2,11 +2,18 @@
 
 require "active_support/all"
 require "active_model"
-require "bcdd/result"
+require "solid/result"
 
 module Solid
   require "solid/input"
-  require "solid/result"
+
+  def self.Success(...)
+    ::Solid::Output::Success(...)
+  end
+
+  def self.Failure(...)
+    ::Solid::Output::Failure(...)
+  end
 
   class Process
     require "solid/process/version"
@@ -21,7 +28,7 @@ module Solid
 
     include Callbacks
     include ::ActiveSupport::Rescuable
-    include ::BCDD::Context.mixin(config: {addon: {continue: true}})
+    include ::Solid::Output.mixin(config: {addon: {continue: true}})
 
     def self.inherited(subclass)
       super
@@ -120,7 +127,7 @@ module Solid
     def output=(result)
       output_already_set! unless output.nil?
 
-      raise Error, "The result #{result.inspect} must be a BCDD::Context." unless result.is_a?(::BCDD::Context)
+      raise Error, "The result #{result.inspect} must be a Solid::Output." unless result.is_a?(::Solid::Output)
 
       @output = result
     end
