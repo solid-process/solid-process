@@ -313,7 +313,7 @@ class Solid::Process::ProcessInstanceTest < ActiveSupport::TestCase
       user_creation.send(:output=, 1)
     end
 
-    assert_equal("The result 1 must be a BCDD::Context.", err1.message)
+    assert_equal("The result 1 must be a Solid::Output.", err1.message)
 
     user_creation.send(:output=, Solid::Success(:user_created, user: ::User.new))
 

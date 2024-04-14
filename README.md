@@ -1,9 +1,9 @@
 <p align="center">
   <h1 align="center" id="-solidprocess">🚄 Solid::Process</h1>
-  <p align="center"><i>Ruby on Rails + Business Processes</i></p>
+  <p align="center"><i>Write self-documenting and self-observable business processes in Ruby/Rails.</i></p>
   <p align="center">
-    <a href="https://codeclimate.com/github/serradura/solid-process/maintainability"><img src="https://api.codeclimate.com/v1/badges/643a53e99bb591321c9f/maintainability" /></a>
-    <a href="https://codeclimate.com/github/serradura/solid-process/test_coverage"><img src="https://api.codeclimate.com/v1/badges/643a53e99bb591321c9f/test_coverage" /></a>
+    <a href="https://codeclimate.com/github/solid-process/solid-process/maintainability"><img src="https://api.codeclimate.com/v1/badges/643a53e99bb591321c9f/maintainability" /></a>
+    <a href="https://codeclimate.com/github/solid-process/solid-process/test_coverage"><img src="https://api.codeclimate.com/v1/badges/643a53e99bb591321c9f/test_coverage" /></a>
     <img src="https://img.shields.io/badge/Ruby%20%3E%3D%202.7%2C%20%3C%3D%20Head-ruby.svg?colorA=444&colorB=333" alt="Ruby">
     <img src="https://img.shields.io/badge/Rails%20%3E%3D%206.0%2C%20%3C%3D%20Edge-rails.svg?colorA=444&colorB=333" alt="Rails">
   </p>
@@ -54,7 +54,7 @@ To install this gem onto your local machine, run `bundle exec rake install`. To 
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/serradura/solid-process. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [code of conduct](https://github.com/serradura/solid-process/blob/master/CODE_OF_CONDUCT.md).
+Bug reports and pull requests are welcome on GitHub at https://github.com/solid-process/solid-process. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [code of conduct](https://github.com/solid-process/solid-process/blob/main/CODE_OF_CONDUCT.md).
 
 ## License
 
@@ -62,4 +62,4 @@ The gem is available as open source under the terms of the [MIT License](https:/
 
 ## Code of Conduct
 
-Everyone interacting in the Solid::Process project's codebases, issue trackers, chat rooms and mailing lists is expected to follow the [code of conduct](https://github.com/serradura/solid-process/blob/master/CODE_OF_CONDUCT.md).
+Everyone interacting in the Solid::Process project's codebases, issue trackers, chat rooms and mailing lists is expected to follow the [code of conduct](https://github.com/solid-process/solid-process/blob/main/CODE_OF_CONDUCT.md).
