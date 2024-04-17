@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class UserCreation < Solid::Process
+class UserCreationWithoutDeps < Solid::Process
   input do
     attribute :uuid, :string, default: -> { ::SecureRandom.uuid }
     attribute :name, :string

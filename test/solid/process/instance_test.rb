@@ -8,7 +8,7 @@ class Solid::Process::ProcessInstanceTest < ActiveSupport::TestCase
   end
 
   test "#call when the output is already set" do
-    user_creation = UserCreation.new
+    user_creation = UserCreationWithoutDeps.new
 
     user_creation.call(name: nil, email: nil)
 
@@ -17,14 +17,14 @@ class Solid::Process::ProcessInstanceTest < ActiveSupport::TestCase
     end
 
     assert_equal(
-      "The `UserCreation#output` is already set. " \
+      "The `UserCreationWithoutDeps#output` is already set. " \
       "Use `.output` to access the result or create a new instance to call again.",
       err.message
     )
   end
 
   test "#new" do
-    user_creation = UserCreation.new
+    user_creation = UserCreationWithoutDeps.new
 
     user_creation.call(name: nil, email: nil)
 
@@ -40,7 +40,7 @@ class Solid::Process::ProcessInstanceTest < ActiveSupport::TestCase
 
     # ---
 
-    create_user = CreateUser.new
+    create_user = UserCreationWithDeps.new
 
     create_user.call(name: nil, email: nil)
 
@@ -56,7 +56,7 @@ class Solid::Process::ProcessInstanceTest < ActiveSupport::TestCase
   end
 
   test "#input" do
-    user_creation1 = UserCreation.new
+    user_creation1 = UserCreationWithoutDeps.new
 
     assert_nil user_creation1.input
 
@@ -68,7 +68,7 @@ class Solid::Process::ProcessInstanceTest < ActiveSupport::TestCase
 
     # ---
 
-    user_creation2 = UserCreation.new
+    user_creation2 = UserCreationWithoutDeps.new
 
     assert_nil user_creation2.input
 
@@ -80,7 +80,7 @@ class Solid::Process::ProcessInstanceTest < ActiveSupport::TestCase
   end
 
   test "#input?" do
-    user_creation1 = UserCreation.new
+    user_creation1 = UserCreationWithoutDeps.new
 
     refute_predicate user_creation1, :input?
 
@@ -90,7 +90,7 @@ class Solid::Process::ProcessInstanceTest < ActiveSupport::TestCase
 
     # ---
 
-    user_creation2 = UserCreation.new
+    user_creation2 = UserCreationWithoutDeps.new
 
     refute_predicate user_creation2, :input?
 
@@ -100,7 +100,7 @@ class Solid::Process::ProcessInstanceTest < ActiveSupport::TestCase
   end
 
   test "#output" do
-    user_creation1 = UserCreation.new
+    user_creation1 = UserCreationWithoutDeps.new
 
     assert_nil user_creation1.output
     assert_nil user_creation1.result
@@ -112,7 +112,7 @@ class Solid::Process::ProcessInstanceTest < ActiveSupport::TestCase
 
     # ---
 
-    user_creation2 = UserCreation.new
+    user_creation2 = UserCreationWithoutDeps.new
 
     assert_nil user_creation2.output
     assert_nil user_creation2.result
@@ -124,7 +124,7 @@ class Solid::Process::ProcessInstanceTest < ActiveSupport::TestCase
   end
 
   test "#output?" do
-    user_creation1 = UserCreation.new
+    user_creation1 = UserCreationWithoutDeps.new
 
     refute_predicate user_creation1, :output?
     refute_predicate user_creation1, :result?
@@ -142,7 +142,7 @@ class Solid::Process::ProcessInstanceTest < ActiveSupport::TestCase
 
     # ---
 
-    user_creation2 = UserCreation.new
+    user_creation2 = UserCreationWithoutDeps.new
 
     refute_predicate user_creation2, :output?
     refute_predicate user_creation2, :result?
@@ -160,42 +160,42 @@ class Solid::Process::ProcessInstanceTest < ActiveSupport::TestCase
   end
 
   test "#dependencies" do
-    user_creation1 = UserCreation.new
+    user_creation1 = UserCreationWithoutDeps.new
 
     assert_nil(user_creation1.dependencies)
     assert_nil(user_creation1.deps)
 
     # ---
 
-    user_creation2 = CreateUser.new
+    user_creation2 = UserCreationWithDeps.new
 
     assert_same(User, user_creation2.dependencies.repository)
     assert_same(user_creation2.dependencies, user_creation2.deps)
 
     # ---
 
-    user_creation3 = CreateUser.new(repository: ::Object)
+    user_creation3 = UserCreationWithDeps.new(repository: ::Object)
 
     assert_same(::Object, user_creation3.dependencies.repository)
     assert_same(user_creation3.dependencies, user_creation3.deps)
   end
 
   test "#dependencies?" do
-    user_creation1 = UserCreation.new
+    user_creation1 = UserCreationWithoutDeps.new
 
     refute_predicate user_creation1, :dependencies?
     refute_predicate user_creation1, :deps?
 
     # ---
 
-    user_creation2 = CreateUser.new
+    user_creation2 = UserCreationWithDeps.new
 
     assert_predicate user_creation2, :dependencies?
     assert_predicate user_creation2, :deps?
   end
 
   test "#success?" do
-    user_creation = UserCreation.new
+    user_creation = UserCreationWithoutDeps.new
 
     refute_predicate user_creation, :success?
     refute user_creation.success?(:user_created)
@@ -209,7 +209,7 @@ class Solid::Process::ProcessInstanceTest < ActiveSupport::TestCase
   end
 
   test "#failure?" do
-    user_creation = UserCreation.new
+    user_creation = UserCreationWithoutDeps.new
 
     refute_predicate user_creation, :failure?
     refute user_creation.failure?(:invalid_input)
@@ -223,13 +223,13 @@ class Solid::Process::ProcessInstanceTest < ActiveSupport::TestCase
   end
 
   test "#inspect" do
-    user_creation = UserCreation.new
+    user_creation = UserCreationWithoutDeps.new
 
-    assert_equal("#<UserCreation dependencies=nil input=nil output=nil>", user_creation.inspect)
+    assert_equal("#<UserCreationWithoutDeps dependencies=nil input=nil output=nil>", user_creation.inspect)
   end
 
   test "#method_missing" do
-    user_creation1 = UserCreation.new
+    user_creation1 = UserCreationWithoutDeps.new
 
     user_creation1.call(name: "John Doe", email: "john.doe@email.com", password: "123123123")
 
@@ -237,7 +237,7 @@ class Solid::Process::ProcessInstanceTest < ActiveSupport::TestCase
 
     # ---
 
-    user_creation2 = UserCreation.new
+    user_creation2 = UserCreationWithoutDeps.new
 
     user_creation2.call(uuid: "", name: nil, email: nil)
 
@@ -250,13 +250,13 @@ class Solid::Process::ProcessInstanceTest < ActiveSupport::TestCase
   end
 
   test "#respond_to_missing?" do
-    user_creation1 = UserCreation.new
+    user_creation1 = UserCreationWithoutDeps.new
 
     refute user_creation1.method(:foo?).call
   end
 
   test "#dependencies=" do
-    create_user = CreateUser.allocate
+    create_user = UserCreationWithDeps.allocate
 
     assert_nil create_user.dependencies
 
@@ -274,11 +274,11 @@ class Solid::Process::ProcessInstanceTest < ActiveSupport::TestCase
       create_user.send(:dependencies=, {repository: ::User})
     end
 
-    assert_equal("The `CreateUser#dependencies` is already set.", err.message)
+    assert_equal("The `UserCreationWithDeps#dependencies` is already set.", err.message)
   end
 
   test "#input=" do
-    user_creation = UserCreation.new
+    user_creation = UserCreationWithoutDeps.new
 
     assert_nil user_creation.input
 
@@ -297,11 +297,11 @@ class Solid::Process::ProcessInstanceTest < ActiveSupport::TestCase
       user_creation.send(:input=, {name: "John Doe", email: "john@email.com"})
     end
 
-    assert_equal("The `UserCreation#input` is already set.", err.message)
+    assert_equal("The `UserCreationWithoutDeps#input` is already set.", err.message)
   end
 
   test "#output=" do
-    user_creation = UserCreation.new
+    user_creation = UserCreationWithoutDeps.new
 
     assert_nil user_creation.output
 
@@ -327,7 +327,7 @@ class Solid::Process::ProcessInstanceTest < ActiveSupport::TestCase
     end
 
     assert_equal(
-      "The `UserCreation#output` is already set. " \
+      "The `UserCreationWithoutDeps#output` is already set. " \
       "Use `.output` to access the result or create a new instance to call again.",
       err2.message
     )

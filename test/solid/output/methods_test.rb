@@ -2,7 +2,7 @@
 
 require "test_helper"
 
-class Solid::Process::ResultMethodsTest < ActiveSupport::TestCase
+class Solid::Process::OutputMethodsTest < ActiveSupport::TestCase
   test "Solid::Success() with type" do
     result = Solid::Success(:ok)
 

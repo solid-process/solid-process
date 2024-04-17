@@ -2,15 +2,15 @@
 
 require "test_helper"
 
-class Solid::Process::ResultPatterMatchingTest < ActiveSupport::TestCase
+class Solid::Process::OutputPatterMatchingTest < ActiveSupport::TestCase
   def setup
     ::User.delete_all
   end
 
   def user_creation
     [
-      -> { UserCreation.call(_1) },
-      -> { UserCreation.new.call(_1) }
+      -> { UserCreationWithoutDeps.call(_1) },
+      -> { UserCreationWithoutDeps.new.call(_1) }
     ].sample
   end
 
@@ -114,7 +114,7 @@ class Solid::Process::ResultPatterMatchingTest < ActiveSupport::TestCase
     result = assert_no_difference(
       -> { User.count }
     ) do
-      UserCreation.call(input)
+      UserCreationWithoutDeps.call(input)
     end
 
     # --- Solid::Failure ---
@@ -122,14 +122,14 @@ class Solid::Process::ResultPatterMatchingTest < ActiveSupport::TestCase
     case result
     in Solid::Failure[:invalid_input, {input: input}]
       assert_kind_of Solid::Input, input
-      assert_instance_of UserCreation::Input, input
+      assert_instance_of UserCreationWithoutDeps::Input, input
     end
 
     case result
     in Solid::Failure(type: type, value: {input: input})
       assert_equal(:invalid_input, type)
       assert_kind_of Solid::Input, input
-      assert_instance_of UserCreation::Input, input
+      assert_instance_of UserCreationWithoutDeps::Input, input
     end
 
     case result
@@ -140,13 +140,13 @@ class Solid::Process::ResultPatterMatchingTest < ActiveSupport::TestCase
     case result
     in Solid::Failure(value: {input: input})
       assert_kind_of Solid::Input, input
-      assert_instance_of UserCreation::Input, input
+      assert_instance_of UserCreationWithoutDeps::Input, input
     end
 
     case result
     in Solid::Failure(input: input)
       assert_kind_of Solid::Input, input
-      assert_instance_of UserCreation::Input, input
+      assert_instance_of UserCreationWithoutDeps::Input, input
     end
 
     # --- Solid::Result ---
@@ -154,14 +154,14 @@ class Solid::Process::ResultPatterMatchingTest < ActiveSupport::TestCase
     case result
     in Solid::Result[:invalid_input, {input: input}]
       assert_kind_of Solid::Input, input
-      assert_instance_of UserCreation::Input, input
+      assert_instance_of UserCreationWithoutDeps::Input, input
     end
 
     case result
     in Solid::Result(type: type, value: {input: input})
       assert_equal(:invalid_input, type)
       assert_kind_of Solid::Input, input
-      assert_instance_of UserCreation::Input, input
+      assert_instance_of UserCreationWithoutDeps::Input, input
     end
 
     case result
@@ -172,13 +172,13 @@ class Solid::Process::ResultPatterMatchingTest < ActiveSupport::TestCase
     case result
     in Solid::Result(value: {input: input})
       assert_kind_of Solid::Input, input
-      assert_instance_of UserCreation::Input, input
+      assert_instance_of UserCreationWithoutDeps::Input, input
     end
 
     case result
     in Solid::Result(input: input)
       assert_kind_of Solid::Input, input
-      assert_instance_of UserCreation::Input, input
+      assert_instance_of UserCreationWithoutDeps::Input, input
     end
 
     # --- Solid::Output ---
@@ -186,14 +186,14 @@ class Solid::Process::ResultPatterMatchingTest < ActiveSupport::TestCase
     case result
     in Solid::Output[:invalid_input, {input: input}]
       assert_kind_of Solid::Input, input
-      assert_instance_of UserCreation::Input, input
+      assert_instance_of UserCreationWithoutDeps::Input, input
     end
 
     case result
     in Solid::Output(type: type, value: {input: input})
       assert_equal(:invalid_input, type)
       assert_kind_of Solid::Input, input
-      assert_instance_of UserCreation::Input, input
+      assert_instance_of UserCreationWithoutDeps::Input, input
     end
 
     case result
@@ -204,13 +204,13 @@ class Solid::Process::ResultPatterMatchingTest < ActiveSupport::TestCase
     case result
     in Solid::Output(value: {input: input})
       assert_kind_of Solid::Input, input
-      assert_instance_of UserCreation::Input, input
+      assert_instance_of UserCreationWithoutDeps::Input, input
     end
 
     case result
     in Solid::Output(input: input)
       assert_kind_of Solid::Input, input
-      assert_instance_of UserCreation::Input, input
+      assert_instance_of UserCreationWithoutDeps::Input, input
     end
   end
 end
