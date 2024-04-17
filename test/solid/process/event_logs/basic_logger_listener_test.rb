@@ -111,13 +111,13 @@ class Solid::Process::EventLogs::BasicLoggerListenerTest < ActiveSupport::TestCa
       "  Runtime breaker activated (USER_TOKEN_CREATION) (RuntimeBreaker::Interruption)",
       "",
       "Backtrace:",
-      /runtime_breaker.rb:16:in `try_to_interrupt'/,
-      /user_token_creation.rb:28:in `create_token_if_not_exists'/,
-      /user_token_creation.rb:15:in `call'/,
-      /user_creation.rb:61:in `create_user_token'/,
-      /user_creation.rb:30:in `call'/,
-      /account_owner_creation.rb:32:in `create_owner'/,
-      /account_owner_creation.rb:21:in `call'/
+      /runtime_breaker.rb:16:in .*try_to_interrupt'/,
+      /user_token_creation.rb:28:in .*create_token_if_not_exists'/,
+      /user_token_creation.rb:15:in .*call'/,
+      /user_creation.rb:61:in .*create_user_token'/,
+      /user_creation.rb:30:in .*call'/,
+      /account_owner_creation.rb:32:in .*create_owner'/,
+      /account_owner_creation.rb:21:in .*call'/
     ].each_with_index do |message, index|
       assert_match message, stdout_lines[index]
     end
