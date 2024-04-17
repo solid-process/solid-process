@@ -15,6 +15,7 @@ module Solid
     require "solid/process/callbacks"
     require "solid/process/class_methods"
     require "solid/process/active_record"
+    require "solid/process/backtrace_cleaner"
 
     extend ClassMethods
 
