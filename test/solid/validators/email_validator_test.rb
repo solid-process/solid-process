@@ -29,9 +29,9 @@ class Solid::EmailValidatorTest < ActiveSupport::TestCase
 
     refute_predicate input, :valid?
 
-    assert_equal ["is not an email"], input.errors[:email1]
-    assert_equal ["is not an email"], input.errors[:email2]
-    assert_equal ["is not an email"], input.errors[:email3]
+    assert_equal ["is invalid"], input.errors[:email1]
+    assert_equal ["is invalid"], input.errors[:email2]
+    assert_equal ["is invalid"], input.errors[:email3]
 
     input.email1 = nil
     input.email2 = nil
@@ -39,7 +39,7 @@ class Solid::EmailValidatorTest < ActiveSupport::TestCase
 
     refute_predicate input, :valid?
 
-    assert_equal ["is not an email"], input.errors[:email1]
+    assert_equal ["can't be blank"], input.errors[:email1]
     assert_empty input.errors[:email2]
     assert_empty input.errors[:email3]
 
@@ -49,8 +49,8 @@ class Solid::EmailValidatorTest < ActiveSupport::TestCase
 
     refute_predicate input, :valid?
 
-    assert_equal ["is not an email"], input.errors[:email1]
-    assert_equal ["is not an email"], input.errors[:email2]
+    assert_equal ["can't be blank"], input.errors[:email1]
+    assert_equal ["can't be blank"], input.errors[:email2]
     assert_empty input.errors[:email3]
 
     input.email1 = "foo@foo.com"
