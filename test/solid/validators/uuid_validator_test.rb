@@ -39,9 +39,9 @@ class Solid::UuidValidatorTest < ActiveSupport::TestCase
 
     refute_predicate input, :valid?
 
-    assert_equal ["is not a valid UUID (case sensitive)"], input.errors[:uuid1]
-    assert_equal ["is not a valid UUID (case sensitive)"], input.errors[:uuid2]
-    assert_equal ["is not a valid UUID (case sensitive)"], input.errors[:uuid3]
+    assert_equal ["is invalid"], input.errors[:uuid1]
+    assert_equal ["is invalid"], input.errors[:uuid2]
+    assert_equal ["is invalid"], input.errors[:uuid3]
 
     input.uuid1 = nil
     input.uuid2 = nil
@@ -49,7 +49,7 @@ class Solid::UuidValidatorTest < ActiveSupport::TestCase
 
     refute_predicate input, :valid?
 
-    assert_equal ["is not a valid UUID (case sensitive)"], input.errors[:uuid1]
+    assert_equal ["can't be blank"], input.errors[:uuid1]
     assert_empty input.errors[:uuid2]
     assert_empty input.errors[:uuid3]
 
@@ -59,8 +59,8 @@ class Solid::UuidValidatorTest < ActiveSupport::TestCase
 
     refute_predicate input, :valid?
 
-    assert_equal ["is not a valid UUID (case sensitive)"], input.errors[:uuid1]
-    assert_equal ["is not a valid UUID (case sensitive)"], input.errors[:uuid2]
+    assert_equal ["can't be blank"], input.errors[:uuid1]
+    assert_equal ["can't be blank"], input.errors[:uuid2]
     assert_empty input.errors[:uuid3]
 
     input.uuid1 = SecureRandom.uuid
@@ -90,9 +90,9 @@ class Solid::UuidValidatorTest < ActiveSupport::TestCase
 
     refute_predicate input, :valid?
 
-    assert_equal ["is not a valid UUID (case insensitive)"], input.errors[:uuid1]
-    assert_equal ["is not a valid UUID (case insensitive)"], input.errors[:uuid2]
-    assert_equal ["is not a valid UUID (case insensitive)"], input.errors[:uuid3]
+    assert_equal ["is invalid"], input.errors[:uuid1]
+    assert_equal ["is invalid"], input.errors[:uuid2]
+    assert_equal ["is invalid"], input.errors[:uuid3]
 
     input.uuid1 = nil
     input.uuid2 = nil
@@ -100,7 +100,7 @@ class Solid::UuidValidatorTest < ActiveSupport::TestCase
 
     refute_predicate input, :valid?
 
-    assert_equal ["is not a valid UUID (case insensitive)"], input.errors[:uuid1]
+    assert_equal ["can't be blank"], input.errors[:uuid1]
     assert_empty input.errors[:uuid2]
     assert_empty input.errors[:uuid3]
 
@@ -110,8 +110,8 @@ class Solid::UuidValidatorTest < ActiveSupport::TestCase
 
     refute_predicate input, :valid?
 
-    assert_equal ["is not a valid UUID (case insensitive)"], input.errors[:uuid1]
-    assert_equal ["is not a valid UUID (case insensitive)"], input.errors[:uuid2]
+    assert_equal ["can't be blank"], input.errors[:uuid1]
+    assert_equal ["can't be blank"], input.errors[:uuid2]
     assert_empty input.errors[:uuid3]
 
     input.uuid1 = SecureRandom.uuid
