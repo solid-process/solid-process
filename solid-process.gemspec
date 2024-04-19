@@ -8,8 +8,8 @@ Gem::Specification.new do |spec|
   spec.authors = ["Rodrigo Serradura"]
   spec.email = ["rodrigo.serradura@gmail.com"]
 
-  spec.summary = "Write self-documenting and self-observable business processes in Ruby/Rails."
-  spec.description = "Write self-documenting and self-observable business processes in Ruby/Rails."
+  spec.summary = "Write business logic for Ruby/Rails that scales."
+  spec.description = "Write business logic for Ruby/Rails that scales."
   spec.homepage = "https://github.com/serradura/solid-process"
   spec.license = "MIT"
   spec.required_ruby_version = ">= 2.7.0"
