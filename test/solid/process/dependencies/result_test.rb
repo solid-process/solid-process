@@ -9,17 +9,17 @@ class Solid::Process::DependenciesResultTest < ActiveSupport::TestCase
 
   def user_creation
     [
-      -> { CreateUser.call(_1) },
-      -> { CreateUser.new.call(_1) }
+      -> { UserCreationWithDeps.call(_1) },
+      -> { UserCreationWithDeps.new.call(_1) }
     ].sample
   end
 
   def map_input(data)
-    [data, CreateUser::Input.new(data)].sample
+    [data, UserCreationWithDeps::Input.new(data)].sample
   end
 
   test "failure (invalid_dependencies)" do
-    result = CreateUser.new(repository: Object).call(name: "John", email: "john@email.com", password: "321321321")
+    result = UserCreationWithDeps.new(repository: Object).call(name: "John", email: "john@email.com", password: "321321321")
 
     assert_kind_of Solid::Result, result
     assert_kind_of Solid::Failure, result
@@ -34,7 +34,7 @@ class Solid::Process::DependenciesResultTest < ActiveSupport::TestCase
 
     dependencies = result.value.fetch(:dependencies)
 
-    assert_kind_of CreateUser::Dependencies, dependencies
+    assert_kind_of UserCreationWithDeps::Dependencies, dependencies
 
     dependencies.errors.added? :repository, :invalid
   end
@@ -45,7 +45,7 @@ class Solid::Process::DependenciesResultTest < ActiveSupport::TestCase
     input = map_input(name: "\tJohn     Doe \n", email: "   JOHN.doe@email.com", password: password)
 
     result = assert_difference(-> { User.count } => 1) do
-      CreateUser.new(repository: User).call(input)
+      UserCreationWithDeps.new(repository: User).call(input)
     end
 
     assert_kind_of Solid::Result, result
@@ -87,7 +87,7 @@ class Solid::Process::DependenciesResultTest < ActiveSupport::TestCase
     input = result.value[:input]
 
     assert_kind_of Solid::Input, input
-    assert_instance_of CreateUser::Input, input
+    assert_instance_of UserCreationWithDeps::Input, input
 
     input.errors.added? :name, :blank
     input.errors.added? :email, :invalid
@@ -99,7 +99,7 @@ class Solid::Process::DependenciesResultTest < ActiveSupport::TestCase
     user_creation.call(input)
 
     result = assert_no_difference(-> { User.count }) do
-      CreateUser.new(CreateUser::Dependencies.new(repository: User)).call(input)
+      UserCreationWithDeps.new(UserCreationWithDeps::Dependencies.new(repository: User)).call(input)
     end
 
     assert_predicate result, :email_already_taken?

@@ -2,18 +2,10 @@
 
 require "active_support/all"
 require "active_model"
-require "solid/result"
 
 module Solid
-  require "solid/input"
-
-  def self.Success(...)
-    ::Solid::Output::Success(...)
-  end
-
-  def self.Failure(...)
-    ::Solid::Output::Failure(...)
-  end
+  require_relative "input"
+  require_relative "output"
 
   class Process
     require "solid/process/version"
@@ -23,6 +15,8 @@ module Solid
     require "solid/process/callbacks"
     require "solid/process/class_methods"
     require "solid/process/active_record"
+    require "solid/process/backtrace_cleaner"
+    require "solid/process/event_logs"
 
     extend ClassMethods
 

@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class CreateUser < Solid::Process
+class UserCreationWithDeps < Solid::Process
   dependencies do
     attribute :repository, default: ::User
 

@@ -1,13 +1,15 @@
 # frozen_string_literal: true
 
+require "solid/validators"
+
 class RespondToValidator < ActiveModel::EachValidator
-  def validate_each(obj, attribute, value)
+  def validate_each(model, attribute, value)
     with_option = Array.wrap(options[:with] || options[:in])
 
     return if with_option.all? { value.respond_to?(_1) }
 
-    expectation = with_option.map(&:inspect).join(" & ")
+    message = "does not respond to #{with_option.map(&:inspect).join(" & ")}"
 
-    obj.errors.add(attribute, (options[:message] || "does not respond to #{expectation}"))
+    Solid::Validators.add_error(model, attribute, message, options)
   end
 end

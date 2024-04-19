@@ -9,13 +9,13 @@ class Solid::Process::ResultTest < ActiveSupport::TestCase
 
   def user_creation
     [
-      -> { UserCreation.call(_1) },
-      -> { UserCreation.new.call(_1) }
+      -> { UserCreationWithoutDeps.call(_1) },
+      -> { UserCreationWithoutDeps.new.call(_1) }
     ].sample
   end
 
   def map_input(data)
-    [data, UserCreation::Input.new(data)].sample
+    [data, UserCreationWithoutDeps::Input.new(data)].sample
   end
 
   test "success" do
@@ -63,7 +63,7 @@ class Solid::Process::ResultTest < ActiveSupport::TestCase
     input = result.value[:input]
 
     assert_kind_of Solid::Input, input
-    assert_instance_of UserCreation::Input, input
+    assert_instance_of UserCreationWithoutDeps::Input, input
 
     input.errors.added? :name, :blank
     input.errors.added? :email, :invalid
@@ -84,16 +84,16 @@ class Solid::Process::ResultTest < ActiveSupport::TestCase
   end
 
   test "#method_missing" do
-    result1 = UserCreation.call(name: nil, email: nil, password: nil)
-    result2 = UserCreation.call(name: "John Doe", email: "john.doe@email.com", password: "123123123")
+    result1 = UserCreationWithoutDeps.call(name: nil, email: nil, password: nil)
+    result2 = UserCreationWithoutDeps.call(name: "John Doe", email: "john.doe@email.com", password: "123123123")
 
     assert_raises(NoMethodError) { result1.foo }
     assert_raises(NoMethodError) { result2.foo }
   end
 
   test "#respond_to_missing?" do
-    result1 = UserCreation.call(name: nil, email: nil, password: nil)
-    result2 = UserCreation.call(name: "John Doe", email: "john.doe@email.com", password: "123123123")
+    result1 = UserCreationWithoutDeps.call(name: nil, email: nil, password: nil)
+    result2 = UserCreationWithoutDeps.call(name: "John Doe", email: "john.doe@email.com", password: "123123123")
 
     refute result1.method(:foo?).call
     refute result2.method(:bar?).call

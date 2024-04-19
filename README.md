@@ -1,6 +1,6 @@
 <p align="center">
   <h1 align="center" id="-solidprocess">🚄 Solid::Process</h1>
-  <p align="center"><i>Write self-documenting and self-observable business processes in Ruby/Rails.</i></p>
+  <p align="center"><i>Write business logic for Ruby/Rails that scales.</i></p>
   <p align="center">
     <a href="https://codeclimate.com/github/solid-process/solid-process/maintainability"><img src="https://api.codeclimate.com/v1/badges/643a53e99bb591321c9f/maintainability" /></a>
     <a href="https://codeclimate.com/github/solid-process/solid-process/test_coverage"><img src="https://api.codeclimate.com/v1/badges/643a53e99bb591321c9f/test_coverage" /></a>
