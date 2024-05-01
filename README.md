@@ -22,6 +22,26 @@ This library is tested against:
 | 3.3          | ✅  | ✅  | ✅  | ✅   | ✅   |
 | Head         |    |    |    | ✅   | ✅   |
 
+## Introduction
+
+`solid-process` is a Ruby/Rails library designed to encapsulate business logic into manageable processes. It simplifies writing, testing, maintaining, and evolving your code, ensuring it remains clear and approachable as your application scales.
+
+**Key Objectives:**
+
+1. **Seamless Rails integration:** Designed to fully complement the Ruby on Rails framework, this library integrates smoothly without conflicting with existing Rails conventions and capabilities.
+
+2. **Support progressive mastery:** Offers an intuitive entry point for novices while providing robust, advanced features that cater to experienced developers.
+
+3. **Promote conceptual integrity and rapid onboarding:** By maintaining a consistent design philosophy, `solid-process` reduces the learning curve for new developers, allowing them to contribute more effectively and quickly.
+
+4. **Minimize technical debt:** Facilitate smoother transitions and updates as your application expands and your team size increases.
+
+5. **Enhanced observability:** Equipped with sophisticated instrumentation mechanisms, the library enables detailed logging and tracing without compromising clarity, even when processes are nested. This ensures the code is both easy to understand and to observe.
+
+### Examples
+
+Checkout the [solid-rails-app](https://github.com/solid-process/solid-rails-app) for a full example of how to use `solid-process` in a Rails application. Or take a look at the [examples](examples) folder in this repository.
+
 ## Installation
 
 Add this line to your application's Gemfile:
