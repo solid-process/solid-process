@@ -1,5 +1,5 @@
 <p align="center">
-  <h1 align="center" id="-solidprocess">🚄 Solid::Process</h1>
+  <h1 align="center" id="-solidprocess">⚛️ Solid::Process</h1>
   <p align="center"><i>Write business logic for Ruby/Rails that scales.</i></p>
   <p align="center">
     <a href="https://codeclimate.com/github/solid-process/solid-process/maintainability"><img src="https://api.codeclimate.com/v1/badges/643a53e99bb591321c9f/maintainability" /></a>
