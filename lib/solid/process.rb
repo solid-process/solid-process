@@ -34,10 +34,10 @@ module Solid
       new.call(arg)
     end
 
-    def self.configuration(&block)
+    def self.configuration(freeze: true, &block)
       yield config
 
-      config.freeze
+      config.tap { _1.freeze if freeze }
     end
 
     def self.config
