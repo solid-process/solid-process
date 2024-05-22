@@ -2,6 +2,8 @@
 
 ### Added
 
+- Add `Solid::Process.configuration(freeze: true)`.
+
 - Add `Solid::Process::EventLogs::BasicLoggerListener`.
 
 - Add `Solid::Process::BacktraceCleaner`.
@@ -10,9 +12,13 @@
 
 - Add `is_validator`, to check if the value satisfy the given predicate methods.
 
+- Add `after_initialize` callback to `Solid::Model`.
+
 ### Changed
 
 - Change `email_validator` and `uuid_validator` to use `I18n` messages.
+
+- Relax `ActiveModel` dependency to `>= 6.0`.
 
 ### Removed
 
