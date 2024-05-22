@@ -39,7 +39,7 @@ Gem::Specification.new do |spec|
 
   # Uncomment to register a new dependency of your gem
   spec.add_dependency "solid-result", "~> 2.0"
-  spec.add_dependency "activemodel", ">= 6.0", "< 8.0"
+  spec.add_dependency "activemodel", ">= 6.0"
 
   spec.add_development_dependency "appraisal", "~> 2.5"
 
