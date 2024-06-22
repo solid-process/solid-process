@@ -36,15 +36,17 @@ module Solid
       new.call(arg)
     end
 
+    def self.config
+      Config.instance
+    end
+
     def self.configuration(freeze: true, &block)
       yield config
 
       config.tap { _1.freeze if freeze }
     end
 
-    def self.config
-      Config.instance
-    end
+    singleton_class.alias_method :configure, :configuration
 
     attr_reader :output, :input, :dependencies
 

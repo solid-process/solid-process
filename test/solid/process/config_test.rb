@@ -31,6 +31,10 @@ class Solid::Process::ConfigTest < ActiveSupport::TestCase
     Solid::Process::Config.instance_variable_set(:@instance, original_config_instance)
   end
 
+  test ".cofigure" do
+    assert_equal Solid::Process.method(:configuration), Solid::Process.method(:configure)
+  end
+
   test ".config" do
     assert_instance_of Solid::Process::Config, Solid::Process.config
 

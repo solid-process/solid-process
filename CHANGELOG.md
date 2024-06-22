@@ -8,13 +8,17 @@
 
 - Add `Solid::Process::BacktraceCleaner`.
 
-- Add `id_validator`, to check if the value is a positive integer or a string that represents a positive integer.
+- Add `Solid::Process.configure` as an alias to `Solid::Process.configuration`.
 
-- Add `is_validator`, to check if the value satisfy the given predicate methods.
+- Add `Solid::Value` to allow defining a value object.
 
-- Add `after_initialize` callback to `Solid::Model`.
+- `Solid::Model`
+  - Add `after_initialize` callback.
+  - Add `#[]` to access instance attributes.
 
-- Add `Solid::Model#[]` to access attributes.
+- `solid/validators`
+  - Add `id_validator`, to check if the value is a positive integer or a string that represents a positive integer.
+  - Add `is_validator`, to check if the value satisfy the given predicate methods.
 
 ### Changed
 
