@@ -4,6 +4,7 @@ require "active_support/all"
 require "active_model"
 
 module Solid
+  require_relative "model"
   require_relative "input"
   require_relative "output"
 

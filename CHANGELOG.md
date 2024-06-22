@@ -14,6 +14,8 @@
 
 - Add `after_initialize` callback to `Solid::Model`.
 
+- Add `Solid::Model#[]` to access attributes.
+
 ### Changed
 
 - Change `email_validator` and `uuid_validator` to use `I18n` messages.
