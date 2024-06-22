@@ -5,6 +5,7 @@ require "active_model"
 
 module Solid
   require_relative "model"
+  require_relative "value"
   require_relative "input"
   require_relative "output"
 
