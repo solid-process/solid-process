@@ -22,6 +22,8 @@
 
 ### Changed
 
+- Replace the usage of `deep_symbolize_keys` with `symbolize_keys` to perform the call more efficiently.
+
 - Change `email_validator` and `uuid_validator` to use `I18n` messages.
 
 - Relax `ActiveModel` dependency to `>= 6.0`.
