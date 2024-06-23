@@ -16,7 +16,7 @@ class Solid::Process
             elsif input.invalid?
               Failure(:invalid_input, input: input)
             else
-              super(input.attributes.deep_symbolize_keys)
+              super(input.attributes.symbolize_keys)
             end
         rescue ::Exception => exception
           rescue_with_handler(exception) || raise

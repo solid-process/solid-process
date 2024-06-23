@@ -29,7 +29,7 @@ module Solid::Model
   end
 
   def initialize(...)
-    super(...)
+    super
 
     run_callbacks(:initialize)
   end
@@ -37,4 +37,6 @@ module Solid::Model
   def inspect
     "#<#{self.class.name} #{attributes.map { |k, v| "#{k}=#{v.inspect}" }.join(" ")}>"
   end
+
+  alias_method :[], :public_send
 end
