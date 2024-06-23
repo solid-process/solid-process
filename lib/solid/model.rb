@@ -29,7 +29,7 @@ module Solid::Model
   end
 
   def initialize(...)
-    super(...)
+    super
 
     run_callbacks(:initialize)
   end

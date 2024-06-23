@@ -22,7 +22,7 @@ class Solid::Process::CallbacksAfterTest < ActiveSupport::TestCase
     attr_reader :callback_numbers
 
     def initialize(...)
-      super(...)
+      super
 
       @callback_numbers = Hash.new { |hash, key| hash[key] = [] }
     end

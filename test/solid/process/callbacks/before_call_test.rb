@@ -20,7 +20,7 @@ class Solid::Process::CallbacksBeforeCallTest < ActiveSupport::TestCase
     attr_reader :callback_data
 
     def initialize(...)
-      super(...)
+      super
 
       @callback_data = {}
     end
