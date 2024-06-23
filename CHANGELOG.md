@@ -1,5 +1,7 @@
 ## [Unreleased]
 
+## [0.4.0] - 2024-06-23
+
 ### Added
 
 - Add `Solid::Process.configuration(freeze: true)`.
