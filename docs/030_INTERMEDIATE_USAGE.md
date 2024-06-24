@@ -1,3 +1,9 @@
+<small>
+
+`Previous` [Basic Usage](./020_BASIC_USAGE.md) | `Next` [Advanced Usage](./040_ADVANCED_USAGE.md)
+
+</small>
+
 # Intermediate Usage
 
 **Status:** 🟡 `in-progress`
