@@ -31,9 +31,9 @@ class UserCreationWithDeps < Solid::Process
     validates :password, presence: true
   end
 
-  def call(input)
+  def call(attributes)
     rollback_on_failure do
-      Given(input)
+      Given(attributes)
         .and_then(:validate_email_has_not_been_taken)
         .and_then(:create_user)
         .and_expose(:user_created, %i[user])
