@@ -94,3 +94,77 @@ class User::Registration < Solid::Process
   end
 end
 ```
+
+## Input Normalization
+
+### Using `before_validation` (all Rails versions)
+
+The example above uses `before_validation` to normalize the email attribute. This approach works on all supported Rails versions, but normalization only runs when `valid?` is called:
+
+```ruby
+input do
+  attribute :email, :string
+
+  before_validation do
+    self.email = email.downcase.strip
+  end
+end
+```
+
+### Using `normalizes` (Rails 8.1+)
+
+Rails 8.1 introduced `ActiveModel::Attributes::Normalization`, which provides a declarative way to normalize attributes. When available, `Solid::Model` automatically includes it.
+
+Unlike `before_validation`, `normalizes` applies on attribute assignment, so the value is normalized immediately:
+
+```ruby
+input do
+  attribute :email, :string
+
+  normalizes :email, with: -> { _1.strip.downcase }
+end
+```
+
+#### Normalize multiple attributes with the same rule
+
+```ruby
+input do
+  attribute :email, :string
+  attribute :username, :string
+
+  normalizes :email, :username, with: -> { _1.strip.downcase }
+end
+```
+
+#### Different normalizations per attribute
+
+```ruby
+input do
+  attribute :email, :string
+  attribute :phone, :string
+
+  normalizes :email, with: -> { _1.strip.downcase }
+  normalizes :phone, with: -> { _1.delete("^0-9").delete_prefix("1") }
+end
+```
+
+#### Apply normalization to `nil` values
+
+By default, `normalizes` skips `nil` values. Use `apply_to_nil: true` to change this:
+
+```ruby
+input do
+  attribute :phone, :string
+
+  normalizes :phone, with: -> { _1&.delete("^0-9") || "" }, apply_to_nil: true
+end
+```
+
+#### Normalize a value without instantiation
+
+Use `normalize_value_for` on the input class to normalize a value directly:
+
+```ruby
+UserRegistration.input.normalize_value_for(:email, " FOO@BAR.COM\n")
+# => "foo@bar.com"
+```

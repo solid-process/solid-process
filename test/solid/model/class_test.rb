@@ -78,8 +78,30 @@ class Solid::ModelClassTest < ActiveSupport::TestCase
       assert_includes ancestors, Solid::Model::Access
     end
 
+    if ActiveModel::Attributes.const_defined?(:Normalization, false)
+      assert_includes ancestors, ActiveModel::Attributes::Normalization
+    end
+
     assert_includes ancestors, ActiveModel::Attributes
     assert_includes ancestors, ActiveModel::Dirty
     assert_includes ancestors, ActiveModel::Validations::Callbacks
+  end
+
+  if ActiveModel::Attributes.const_defined?(:Normalization, false)
+    class ModelWithNormalizes
+      include Solid::Model
+
+      attribute :uuid, :string
+
+      normalizes :uuid, with: -> { _1.strip.downcase }
+    end
+
+    test "model with normalizes" do
+      uuid = SecureRandom.uuid
+
+      model = ModelWithNormalizes.new(uuid: " #{uuid.upcase}  ")
+
+      assert_equal uuid, model.uuid
+    end
   end
 end

@@ -20,6 +20,11 @@ module Solid::Model
     include ::ActiveModel.const_defined?(:Access, false) ? ::ActiveModel::Access : ::Solid::Model::Access
 
     include ::ActiveModel::Attributes
+
+    if ::ActiveModel::Attributes.const_defined?(:Normalization, false)
+      include ::ActiveModel::Attributes::Normalization
+    end
+
     include ::ActiveModel::Dirty
     include ::ActiveModel::Validations::Callbacks
 

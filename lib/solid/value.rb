@@ -17,6 +17,10 @@ module Solid::Value
     def validates(...)
       super(:value, ...)
     end
+
+    def normalizes(...)
+      super(:value, ...)
+    end
   end
 
   def self.included(subclass)
