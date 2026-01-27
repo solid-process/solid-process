@@ -2,8 +2,8 @@
   <h1 align="center" id="-solidprocess">⚛️ Solid::Process</h1>
   <p align="center"><i>Write business logic for Ruby/Rails that scales.</i></p>
   <p align="center">
-    <a href="https://codeclimate.com/github/solid-process/solid-process/maintainability"><img src="https://api.codeclimate.com/v1/badges/643a53e99bb591321c9f/maintainability" /></a>
-    <a href="https://codeclimate.com/github/solid-process/solid-process/test_coverage"><img src="https://api.codeclimate.com/v1/badges/643a53e99bb591321c9f/test_coverage" /></a>
+    <a href="https://qlty.sh/gh/solid-process/projects/solid-process"><img src="https://qlty.sh/gh/solid-process/projects/solid-process/maintainability.svg" alt="Maintainability" /></a>
+    <a href="https://qlty.sh/gh/solid-process/projects/solid-process"><img src="https://qlty.sh/gh/solid-process/projects/solid-process/coverage.svg" alt="Code Coverage" /></a>
     <img src="https://img.shields.io/badge/Ruby%20%3E%3D%202.7%2C%20%3C%3D%20Head-ruby.svg?colorA=444&colorB=333" alt="Ruby">
     <img src="https://img.shields.io/badge/Rails%20%3E%3D%206.0%2C%20%3C%3D%20Edge-rails.svg?colorA=444&colorB=333" alt="Rails">
   </p>
