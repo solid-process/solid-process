@@ -210,6 +210,7 @@ bundle exec appraisal rails-8-1 ruby -Ilib:test test/solid/process/result_test.r
 bin/rake standard
 
 # Clean install + full test suite (useful when switching Ruby versions)
+# asdf set ruby <version>
 bin/matrix
 ```
 
