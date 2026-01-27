@@ -11,6 +11,6 @@ bundle install
 
 bundle exec appraisal update
 
-bundle exec rake dev
+bundle exec rake matrix
 
 ruby -v
