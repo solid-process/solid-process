@@ -40,7 +40,7 @@ jobs:
       if: ${{ matrix.ruby <= 3.3 }}
     - name: Run tests for Rails 7.2
       run: bundle exec appraisal rails-7-2 rake test
-      if: ${{ matrix.ruby >= 3.1 && matrix.ruby <= 4.0 }}
+      if: ${{ matrix.ruby >= 3.1 && matrix.ruby < 4.0 }}
     - name: Run tests for Rails 8.0
       if: ${{ matrix.ruby >= 3.2 }}
       run: bundle exec appraisal rails-8-0 rake test
