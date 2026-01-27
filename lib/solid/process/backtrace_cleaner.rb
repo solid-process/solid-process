@@ -9,7 +9,7 @@ class Solid::Process::BacktraceCleaner < ActiveSupport::BacktraceCleaner
 
   private
 
-  BLOCKS_PATTERN = /in [`']block in|in `then'|internal:kernel|block \(\d+ levels?\) in/.freeze
+  BLOCKS_PATTERN = /in [`']block in|in [`'](?:Kernel#)?then'|internal:kernel|block \(\d+ levels?\) in/.freeze
 
   def add_blocks_silencer
     add_silencer { |line| line.match?(BLOCKS_PATTERN) }

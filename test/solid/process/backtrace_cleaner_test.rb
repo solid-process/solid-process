@@ -7,7 +7,7 @@ class Solid::Process::BacktraceCleanerTest < ActiveSupport::TestCase
     @backtrace_cleaner = Solid::Process::BacktraceCleaner.new
 
     # This silencer is unnecessary in an application as solid-process will be a gem.
-    @backtrace_cleaner.add_silencer { |line| line.match?(/lib\/solid\/process/) }
+    @backtrace_cleaner.add_silencer { |line| line.include?("lib/solid/process") }
   end
 
   teardown do
