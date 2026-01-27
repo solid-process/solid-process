@@ -1,4 +1,4 @@
-if RUBY_VERSION < "3.1"
+if RUBY_VERSION <= "3.0"
   appraise "rails-6-0" do
     group :test do
       gem "logger", "~> 1.6", ">= 1.6.6"
@@ -22,7 +22,7 @@ if RUBY_VERSION < "3.1"
   end
 end
 
-if RUBY_VERSION >= "3.0" && RUBY_VERSION < "3.4.0"
+if RUBY_VERSION >= "2.7" && RUBY_VERSION < "3.4"
   appraise "rails-7-0" do
     group :test do
       gem "logger", "~> 1.6", ">= 1.6.6"
@@ -48,7 +48,7 @@ if RUBY_VERSION >= "3.0" && RUBY_VERSION < "3.4.0"
   end
 end
 
-if RUBY_VERSION >= "3.1.0" && RUBY_VERSION < "4.0.0"
+if RUBY_VERSION >= "3.1" && RUBY_VERSION < "4.0"
   appraise "rails-7-2" do
     group :test do
       gem "sqlite3", "~> 2.8", ">= 2.8.1"
@@ -58,7 +58,7 @@ if RUBY_VERSION >= "3.1.0" && RUBY_VERSION < "4.0.0"
   end
 end
 
-if RUBY_VERSION >= "3.2.0" && RUBY_VERSION < "4.0.0"
+if RUBY_VERSION >= "3.2" && RUBY_VERSION < "4.0"
   appraise "rails-8-0" do
     group :test do
       gem "sqlite3", "~> 2.9"
