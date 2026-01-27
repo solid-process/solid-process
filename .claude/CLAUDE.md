@@ -30,6 +30,8 @@ bin/console
 
 ## Lint
 
+**Ensure lint is green before committing.**
+
 ```bash
 # Check for style violations (Ruby 3.4+)
 bin/rake standard
@@ -38,12 +40,11 @@ bin/rake standard
 bin/rake standard:fix
 ```
 
-### Documentation Checklist
+### Release Checklist
 
-When making significant changes, ensure these files are updated:
-- `README.md` - Ruby/Rails compatibility matrix, usage examples
-- `CHANGELOG.md` - Add entry under `[Unreleased]`
-- `lib/solid/process/version.rb` - Bump version for releases
+When `lib/solid/process/version.rb` is changed:
+1. Verify `CHANGELOG.md` has a matching version entry (e.g., `## [0.5.0] - YYYY-MM-DD`)
+2. Verify `README.md` compatibility matrix is up-to-date if Ruby/Rails support changed
 
 ## Switching Ruby Versions
 
