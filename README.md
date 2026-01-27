@@ -26,14 +26,15 @@
 
 This library is tested (100% coverage) against:
 
-| Ruby / Rails | 6.0 | 6.1 | 7.0 | 7.1 | Edge |
-|--------------|-----|-----|-----|-----|------|
-| 2.7          | ✅  | ✅  | ✅  | ✅   |      |
-| 3.0          | ✅  | ✅  | ✅  | ✅   |      |
-| 3.1          | ✅  | ✅  | ✅  | ✅   | ✅   |
-| 3.2          | ✅  | ✅  | ✅  | ✅   | ✅   |
-| 3.3          | ✅  | ✅  | ✅  | ✅   | ✅   |
-| Head         |    |     |     | ✅   | ✅   |
+| Ruby / Rails | 6.0 | 6.1 | 7.0 | 7.1 | 7.2 | 8.0 | 8.1 | Edge |
+|--------------|-----|-----|-----|-----|-----|-----|-----|------|
+| 2.7          | ✅  | ✅  | ✅  | ✅  |     |     |     |      |
+| 3.0          | ✅  | ✅  | ✅  | ✅  |     |     |     |      |
+| 3.1          |     |     | ✅  | ✅  | ✅  |     |     |      |
+| 3.2          |     |     | ✅  | ✅  | ✅  | ✅  |     |      |
+| 3.3          |     |     | ✅  | ✅  | ✅  | ✅  | ✅  | ✅   |
+| 3.4          |     |     |     |     | ✅  | ✅  | ✅  | ✅   |
+| 4.x          |     |     |     |     |     |     | ✅  | ✅   |
 
 ## Introduction
 
@@ -193,7 +194,25 @@ process.call(input)
 
 ## Development
 
-After checking out the repo, run `bin/setup` to install dependencies. Then, run `bundle exec rake dev` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
+After checking out the repo, run `bin/setup` to install dependencies. Then, run `bundle exec rake matrix` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
+
+```bash
+# Run full test suite for current Ruby version
+bin/rake matrix
+
+# Run tests for a specific Rails version
+bundle exec appraisal rails-8-1 rake test
+
+# Run a single test file
+bundle exec appraisal rails-8-1 ruby -Ilib:test test/solid/process/result_test.rb
+
+# Lint (Ruby 3.4+)
+bin/rake standard
+
+# Clean install + full test suite (useful when switching Ruby versions)
+# asdf set ruby <version>
+bin/matrix
+```
 
 To install this gem onto your local machine, run `bundle exec rake install`. To release a new version, update the version number in `version.rb`, and then run `bundle exec rake release`, which will create a git tag for the version, push git commits and the created tag, and push the `.gem` file to [rubygems.org](https://rubygems.org).
 

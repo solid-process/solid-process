@@ -3,15 +3,14 @@
 source "https://rubygems.org"
 
 gem "rake", "~> 13.3", ">= 13.3.1"
+gem "standard", "~> 1.53"
 
 group :test do
   gem "bcrypt", "~> 3.1", ">= 3.1.21"
   gem "simplecov", "~> 0.22.0", require: false
-  gem "logger", "~> 1.6", ">= 1.6.6"
-  gem "stringio", "~> 3.2"
-  gem "sqlite3", "~> 1.7"
-  gem "minitest", "5.26.1"
-  gem "activerecord", "~> 6.0.0"
+  gem "sqlite3", "~> 2.8", ">= 2.8.1"
+  gem "minitest", "~> 5.27"
+  gem "activerecord", "~> 7.2.0"
 end
 
 gemspec path: "../"
