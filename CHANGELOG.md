@@ -1,5 +1,11 @@
 ## [Unreleased]
 
+### Added
+
+- Add conditional `normalizes` support to `Solid::Model` (requires Rails 8.1+ with `ActiveModel::Attributes::Normalization`).
+
+- Add `normalizes` to `Solid::Value`, automatically prepending `:value` as the attribute name.
+
 ## [0.5.0] - 2025-01-27
 
 ### Added
