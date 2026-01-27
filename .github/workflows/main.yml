@@ -54,7 +54,7 @@ jobs:
       if: ${{ matrix.ruby >= 3.3 || matrix.ruby == 'head' }}
       run: bundle exec appraisal rails-edge rake test
     - uses: paambaati/codeclimate-action@v5
-      if: ${{ matrix.ruby == 3.2 && !github.base_ref }}
+      if: ${{ matrix.ruby == 3.4 && !github.base_ref }}
 
   standard:
     name: Run standard
@@ -63,7 +63,7 @@ jobs:
       - uses: actions/checkout@v4
       - uses: ruby/setup-ruby@v1
         with:
-          ruby-version: "3.2"
+          ruby-version: "3.4"
       - name: Setup project
         run: bundle install
       - name: Rake standard
