@@ -33,7 +33,11 @@ end
 class Account::Member < ActiveRecord::Base
   self.table_name = "account_members"
 
-  enum role: {owner: 0, admin: 1, contributor: 2}
+  if ActiveRecord.version.to_s >= "8.0"
+    enum :role, owner: 0, admin: 1, contributor: 2
+  else
+    enum role: {owner: 0, admin: 1, contributor: 2}
+  end
 
   belongs_to :user, inverse_of: :memberships
   belongs_to :account, inverse_of: :memberships
