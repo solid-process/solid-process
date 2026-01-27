@@ -28,7 +28,7 @@ jobs:
     - name: Bundle install
       run: bundle install
     - name: Setup project
-      run: bundle exec rake appraisal:install
+      run: bundle exec appraisal install
     - name: Run tests for Rails 6.0
       run: bundle exec appraisal rails-6-0 rake test
       if: ${{ matrix.ruby < 3.1 }}
