@@ -1,3 +1,5 @@
+.DS_Store
+
 /.bundle/
 /.yardoc
 /_yardoc/
@@ -7,9 +9,12 @@
 /spec/reports/
 /tmp/
 
-.ruby-version
-
 Gemfile.lock
 
 gemfiles/*.lock
 gemfiles/.bundle/
+
+.ruby-version
+.tool-versions
+
+/.claude/settings.local.json
