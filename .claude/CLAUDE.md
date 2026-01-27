@@ -24,12 +24,26 @@ bundle exec appraisal rails-8-1 ruby -Ilib:test test/solid/process/result_test.r
 # Run a specific test by name
 bundle exec appraisal rails-8-1 ruby -Ilib:test test/solid/process/result_test.rb -n test_method_name
 
-# Lint (Ruby 3.4+)
-bin/rake standard
-
 # Interactive console
 bin/console
 ```
+
+## Lint
+
+```bash
+# Check for style violations (Ruby 3.4+)
+bin/rake standard
+
+# Auto-fix style violations
+bin/rake standard:fix
+```
+
+### Documentation Checklist
+
+When making significant changes, ensure these files are updated:
+- `README.md` - Ruby/Rails compatibility matrix, usage examples
+- `CHANGELOG.md` - Add entry under `[Unreleased]`
+- `lib/solid/process/version.rb` - Bump version for releases
 
 ## Switching Ruby Versions
 
