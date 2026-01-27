@@ -1,4 +1,4 @@
-if RUBY_VERSION <= "3.0"
+if RUBY_VERSION < "3.1"
   appraise "rails-6-0" do
     group :test do
       gem "logger", "~> 1.6", ">= 1.6.6"

@@ -17,7 +17,7 @@ require "standard/rake" if RUBY_VERSION >= "3.4"
 
 desc "Run the full test suite in all supported Rails versions"
 task :matrix do
-  if RUBY_VERSION <= "3.0"
+  if RUBY_VERSION < "3.1"
     system "bundle exec appraisal rails-6-0 rake test"
     system "bundle exec appraisal rails-6-1 rake test"
   end

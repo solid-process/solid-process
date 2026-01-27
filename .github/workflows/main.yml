@@ -31,10 +31,10 @@ jobs:
       run: bundle exec rake appraisal:install
     - name: Run tests for Rails 6.0
       run: bundle exec appraisal rails-6-0 rake test
-      if: ${{ matrix.ruby <= 3.0 }}
+      if: ${{ matrix.ruby < 3.1 }}
     - name: Run tests for Rails 6.1
       run: bundle exec appraisal rails-6-1 rake test
-      if: ${{ matrix.ruby <= 3.0 }}
+      if: ${{ matrix.ruby < 3.1 }}
     - name: Run tests for Rails 7.0
       run: bundle exec appraisal rails-7-0 rake test
       if: ${{ matrix.ruby >= 2.7 && matrix.ruby < 3.4 }}
