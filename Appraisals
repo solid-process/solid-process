@@ -54,6 +54,7 @@ if RUBY_VERSION >= "3.3.0"
   appraise "rails-edge" do
     group :test do
       gem "activerecord", github: "rails/rails", branch: "main"
+      gem "sqlite3", "~> 2.9"
     end
   end
 end
