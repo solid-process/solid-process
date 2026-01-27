@@ -1,10 +1,9 @@
 # frozen_string_literal: true
 
 class Solid::Process::EventLogs::BasicLoggerListener
-  include ActiveSupport::Configurable
   include Solid::Result::EventLogs::Listener
 
-  config_accessor(:logger, :backtrace_cleaner)
+  class_attribute :logger, :backtrace_cleaner
 
   self.logger = ActiveSupport::Logger.new($stdout)
   self.backtrace_cleaner = Solid::Process::BacktraceCleaner.new
