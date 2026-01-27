@@ -27,7 +27,7 @@ if RUBY_VERSION >= "3.0" && RUBY_VERSION < "3.4.0"
     group :test do
       gem "logger", "~> 1.6", ">= 1.6.6"
       gem "stringio", "~> 3.2"
-      gem 'securerandom', '~> 0.3.2'
+      gem "securerandom", "~> 0.3.2"
 
       gem "sqlite3", "~> 1.7"
       gem "minitest", "5.26.1"
@@ -39,7 +39,7 @@ if RUBY_VERSION >= "3.0" && RUBY_VERSION < "3.4.0"
     group :test do
       gem "logger", "~> 1.6", ">= 1.6.6"
       gem "stringio", "~> 3.2"
-      gem 'securerandom', '~> 0.3.2'
+      gem "securerandom", "~> 0.3.2"
 
       gem "sqlite3", "~> 2.0", ">= 2.0.4"
       gem "minitest", "5.26.1"
