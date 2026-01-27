@@ -39,6 +39,7 @@ if RUBY_VERSION >= "3.2.0"
     group :test do
       gem "activerecord", "~> 8.0.0"
       gem "sqlite3", "~> 2.9"
+      gem "ostruct", "~> 0.6.3"
     end
   end
 end
@@ -48,6 +49,7 @@ if RUBY_VERSION >= "3.3.0"
     group :test do
       gem "activerecord", "~> 8.1.0"
       gem "sqlite3", "~> 2.9"
+      gem "ostruct", "~> 0.6.3"
     end
   end
 
@@ -55,6 +57,7 @@ if RUBY_VERSION >= "3.3.0"
     group :test do
       gem "activerecord", github: "rails/rails", branch: "main"
       gem "sqlite3", "~> 2.9"
+      gem "ostruct", "~> 0.6.3"
     end
   end
 end
