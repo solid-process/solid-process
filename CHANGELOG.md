@@ -1,5 +1,17 @@
 ## [Unreleased]
 
+## [0.5.0] - 2025-01-27
+
+### Added
+
+- Add support for Ruby 3.4 and 4.x.
+
+- Add support for Rails 7.2, 8.0, and 8.1.
+
+### Fixed
+
+- Fix `BacktraceCleaner::BLOCKS_PATTERN` to handle Ruby 4.x backtrace format (`'Kernel#then'` instead of `` `then' ``).
+
 ## [0.4.0] - 2024-06-23
 
 ### Added
