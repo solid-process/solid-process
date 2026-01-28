@@ -58,4 +58,22 @@ class Solid::ValueClassTest < ActiveSupport::TestCase
 
     assert_predicate uuid4, :valid?
   end
+
+  if ActiveModel::Attributes.const_defined?(:Normalization, false)
+    class ValueWithNormalizes
+      include Solid::Value
+
+      attribute :string
+
+      normalizes with: -> { _1.strip.downcase }
+    end
+
+    test "value with normalizes" do
+      uuid_str = SecureRandom.uuid
+
+      uuid = ValueWithNormalizes.new(" #{uuid_str.upcase}  ")
+
+      assert_equal uuid_str, uuid.value
+    end
+  end
 end
