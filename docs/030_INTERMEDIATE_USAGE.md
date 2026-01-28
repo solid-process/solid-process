@@ -6,69 +6,53 @@
 
 # Intermediate Usage
 
-**Status:** 🟡 `in-progress`
+The Steps DSL provides `Given`, `and_then`, `Continue`, and `and_expose` for expressing complex workflows clearly.
 
-In this section, we will learn how to use steps to express the process in a more structured way.
+## Quick Example
 
 ```ruby
-class User::Registration < Solid::Process
+class User::Creation < Solid::Process
   input do
     attribute :email, :string
-    attribute :password, :string
-    attribute :password_confirmation, :string
+    attribute :name, :string
   end
 
   def call(attributes)
     rollback_on_failure {
       Given(attributes)
+        .and_then(:validate_email)
         .and_then(:create_user)
-        .and_then(:create_user_account)
-        .and_then(:create_user_inbox)
-        .and_then(:create_user_token)
-    }
-      .and_then(:send_email_confirmation)
-      .and_expose(:user_registered, [:user])
+    }.and_expose(:user_created, [:user])
   end
 
   private
 
-  def create_user(email:, password:, password_confirmation:, **)
-    user = User.create(email:, password:, password_confirmation:)
-
-    return Continue(user:) if user.persisted?
-
-    input.errors.merge!(user.errors)
-
-    Failure(:invalid_input, input:)
-  end
-
-  def create_user_account(user:, **)
-    account = Account.create!(uuid: SecureRandom.uuid)
-
-    account.memberships.create!(user:, role: :owner)
-
-    Continue(account:)
-  end
-
-  def create_user_inbox(account:, **)
-    account.task_lists.inbox.create!
+  def validate_email(email:, **)
+    return Failure(:email_taken) if User.exists?(email: email)
 
     Continue()
   end
 
-  def create_user_token(user:, **)
-    user.create_token!
+  def create_user(email:, name:, **)
+    user = User.create!(email: email, name: name)
 
-    Continue()
-  end
-
-  def send_email_confirmation(user:, **)
-    UserMailer.with(
-      user:,
-      token: user.generate_token_for(:email_confirmation)
-    ).email_confirmation.deliver_later
-
-    Continue()
+    Continue(user: user)
   end
 end
 ```
+
+## Key Points
+
+- `Given(attributes)` — starts the step chain with initial data
+- `and_then(:method)` — calls a method; short-circuits on Failure
+- `Continue(hash)` — merges data and proceeds to next step
+- `and_expose(:type, [:keys])` — ends chain with Success containing only specified keys
+- `rollback_on_failure { }` — wraps steps in a database transaction
+- Always use `**` in step method signatures to ignore extra keys
+
+## Learn More
+
+For detailed explanations, examples, and advanced patterns, see:
+
+- [Steps DSL](./000_GETTING_STARTED.md#7-steps-dsl) — complete DSL reference
+- [Transactions](./000_GETTING_STARTED.md#8-transactions) — rollback strategies

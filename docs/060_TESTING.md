@@ -1,3 +1,62 @@
+<small>
+
+`Previous` [Error Handling](./050_ERROR_HANDLING.md) | `Next` [Instrumentation](./070_INSTRUMENTATION.md)
+
+</small>
+
 # Testing
 
-**Status:** 🔴 `to-do`
+Test processes by asserting on outcomes and using dependency injection to isolate units.
+
+## Quick Example
+
+```ruby
+class UserCreationTest < ActiveSupport::TestCase
+  test "creates user with valid input" do
+    result = User::Creation.call(
+      name: "Alice",
+      email: "alice@example.com",
+      password: "securepassword"
+    )
+
+    assert result.success?
+    assert result.is?(:user_created)
+    assert_equal "Alice", result[:user].name
+  end
+
+  test "fails with invalid email" do
+    result = User::Creation.call(name: "Alice", email: "bad", password: "pass")
+
+    assert result.failure?
+    assert result.is?(:invalid_input)
+  end
+
+  test "uses injected dependencies" do
+    mock_mailer = Minitest::Mock.new
+    mock_mailer.expect(:welcome, OpenStruct.new(deliver_later: true), [User])
+
+    result = User::Creation.new(mailer: mock_mailer).call(
+      name: "Alice",
+      email: "alice@example.com",
+      password: "securepassword"
+    )
+
+    assert result.success?
+    mock_mailer.verify
+  end
+end
+```
+
+## Key Points
+
+- Test the public interface: inputs and outputs
+- Use `result.success?`, `result.failure?`, and `result.is?(:type)` for assertions
+- Inject mock dependencies via `.new(dep: mock)` to test in isolation
+- Test input validation separately on `MyProcess.input.new(...)`
+- Fake nested processes to test outer processes independently
+
+## Learn More
+
+For detailed explanations, examples, and advanced patterns, see:
+
+- [Testing](./000_GETTING_STARTED.md#16-testing) — comprehensive testing patterns
