@@ -1,3 +1,11 @@
+<small>
+
+`Previous` [README](../README.md#-table-of-contents-) | `Next` [Quick Overview](overview/010_KEY_CONCEPTS.md)
+
+</small>
+
+---
+
 # Solid::Process — Reference Guide
 
 This guide teaches everything you need to know about Solid::Process, from basic concepts to advanced patterns. Work through it progressively, or jump to the section you need.
@@ -1881,3 +1889,11 @@ For real-world examples, check:
 For questions or issues, visit the [GitHub repository](https://github.com/solid-process/solid-process).
 
 <p align="right"><a href="#table-of-contents">⬆️ &nbsp;back to top</a></p>
+
+---
+
+<small>
+
+`Previous` [README](../README.md#-table-of-contents-) | `Next` [Quick Overview](overview/010_KEY_CONCEPTS.md)
+
+</small>

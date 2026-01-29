@@ -16,9 +16,9 @@
 ## 📚 Table of Contents <!-- omit from toc -->
 
 - [💡 Introduction](#-introduction)
-- [🚀 Getting Started](#-getting-started)
 - [📦 Installation](#-installation)
 - [🏗️ The Basic Structure](#️-the-basic-structure)
+- [🚀 Getting Started](#-getting-started)
 - [🗂️ Documentation](#️-documentation)
 - [🛠️ Development](#️-development)
 - [🤝 Contributing](#-contributing)
@@ -81,21 +81,6 @@ You can also check the [examples](examples) directory for more simple examples o
 
 <p align="right"><a href="#-table-of-contents-">⬆️ &nbsp;back to top</a></p>
 
-## 🚀 Getting Started
-
-**New to Solid::Process?** The comprehensive [Reference Guide](docs/REFERENCE.md) covers everything you need to know:
-
-- ✅ Step-by-step tutorial from basics to advanced
-- ✅ Real-world examples (User Registration system)
-- ✅ All features explained with working code
-- ✅ Perfect for developers AND AI coding agents
-
-> **🤖 AI Agents:** Point your coding assistant to [`docs/REFERENCE.md`](docs/REFERENCE.md) for complete API knowledge and patterns, or explore the [AI-Powered Wiki](https://deepwiki.com/solid-process/solid-process) for visual diagrams and interactive Q&A.
-
-**Start Learning →** [Reference Guide](docs/REFERENCE.md) | [Quick Overview](docs/overview/010_KEY_CONCEPTS.md)
-
-<p align="right"><a href="#-table-of-contents-">⬆️ &nbsp;back to top</a></p>
-
 ## 📦 Installation
 
 Install the gem and add to the application's Gemfile by executing:
@@ -144,7 +129,16 @@ result[:user]       # => #<User id: 1, ...>
 
 > **Note:** For validation including password confirmation, see the [Reference Guide](docs/REFERENCE.md).
 
-See the [Reference Guide](docs/REFERENCE.md) for detailed explanations, validations, steps DSL, dependencies, and more.
+<p align="right"><a href="#-table-of-contents-">⬆️ &nbsp;back to top</a></p>
+
+## 🚀 Getting Started
+
+**New to Solid::Process?** The comprehensive [Reference Guide](docs/REFERENCE.md) covers everything you need to know:
+
+- ✅ Step-by-step tutorial from basics to advanced
+- ✅ Real-world examples (User Registration system)
+- ✅ All features explained with working code
+- ✅ Perfect for developers AND AI coding agents
 
 <p align="right"><a href="#-table-of-contents-">⬆️ &nbsp;back to top</a></p>
 

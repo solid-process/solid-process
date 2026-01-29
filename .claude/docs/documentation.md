@@ -7,7 +7,15 @@ Both `README.md` and `docs/REFERENCE.md` use back-to-top navigation after each m
 1. Add `<p align="right"><a href="#table-of-contents">⬆️ &nbsp;back to top</a></p>` before the `---` that closes the section
 2. Update the Table of Contents with the new entry
 
-## Overview File Structure
+## Breadcrumb Navigation
+
+Both `docs/REFERENCE.md` and all `docs/overview/` files use header and footer nav blocks with `Previous`/`Next` links wrapped in `<small>` tags.
+
+### REFERENCE.md
+
+Uses the same layout as overview files (header nav → `---` → content → `---` → footer nav). Its `Previous` links to `../README.md#-table-of-contents-` and `Next` links to `overview/010_KEY_CONCEPTS.md`.
+
+### Overview Files
 
 Each file in `docs/overview/` follows this layout:
 
@@ -17,7 +25,7 @@ Each file in `docs/overview/` follows this layout:
 4. **`---`** separator
 5. **Footer nav** — `<small>` block with the same `` `Previous` ``/`` `Next` `` links as the header
 
-Navigation chain: `010_KEY_CONCEPTS` → `020_BASIC_USAGE` → … → `100_PORTS_AND_ADAPTERS`. The first file's `Previous` links to `../README.md#further-reading`; the last file's `Next` links to `../REFERENCE.md`.
+Navigation chain: `010_KEY_CONCEPTS` → `020_BASIC_USAGE` → … → `100_PORTS_AND_ADAPTERS`. The first file's `Previous` links to `../../README.md#-table-of-contents-`; the last file's `Next` links to `../REFERENCE.md`.
 
 When adding a new overview file:
 
