@@ -1,5 +1,7 @@
 ## [Unreleased]
 
+## [0.6.0] - 2026-01-28
+
 ### Added
 
 - Add conditional `normalizes` support to `Solid::Model` (requires Rails 8.1+ with `ActiveModel::Attributes::Normalization`).
