@@ -168,8 +168,6 @@ See the [Reference Guide](docs/REFERENCE.md) for detailed explanations, validati
 | 9 | [Internal Libraries](docs/overview/090_INTERNAL_LIBRARIES.md) — Solid::Model, Value, Input |
 | 10 | [Ports and Adapters](docs/overview/100_PORTS_AND_ADAPTERS.md) — Hexagonal architecture |
 
-> **🤖 AI Agents:** Point your coding assistant to [`docs/REFERENCE.md`](docs/REFERENCE.md) for complete API knowledge and patterns, or explore the [AI-Powered Wiki](https://deepwiki.com/solid-process/solid-process) for visual diagrams and interactive Q&A.
-
 <p align="right"><a href="#-table-of-contents-">⬆️ &nbsp;back to top</a></p>
 
 ## 🛠️ Development
