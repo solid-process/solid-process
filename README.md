@@ -2,11 +2,12 @@
   <h1 align="center" id="-solidprocess">⚛️ Solid::Process</h1>
   <p align="center"><i>Write business logic for Ruby/Rails that scales.</i></p>
   <p align="center">
+    <a href="https://badge.fury.io/rb/solid-process"><img src="https://badge.fury.io/rb/solid-process.svg" alt="Gem Version" height="18"></a>
     <a href="https://deepwiki.com/solid-process/solid-process"><img src="https://deepwiki.com/badge.svg" alt="Ask DeepWiki"></a>
+    <br/>
     <a href="https://qlty.sh/gh/solid-process/projects/solid-process"><img src="https://qlty.sh/gh/solid-process/projects/solid-process/maintainability.svg" alt="Maintainability" /></a>
     <a href="https://qlty.sh/gh/solid-process/projects/solid-process"><img src="https://qlty.sh/gh/solid-process/projects/solid-process/coverage.svg" alt="Code Coverage" /></a>
     <br/>
-    <a href="https://badge.fury.io/rb/solid-process"><img src="https://badge.fury.io/rb/solid-process.svg" alt="Gem Version" height="18"></a>
     <img src="https://img.shields.io/badge/Ruby%20%3E%3D%202.7%2C%20%3C%3D%20Head-ruby.svg?colorA=444&colorB=333" alt="Ruby">
     <img src="https://img.shields.io/badge/Rails%20%3E%3D%206.0%2C%20%3C%3D%20Edge-rails.svg?colorA=444&colorB=333" alt="Rails">
   </p>
@@ -44,7 +45,7 @@ This library is tested (100% coverage) against:
 
 `solid-process` is a Ruby/Rails library designed to encapsulate business logic into manageable processes. It simplifies writing, testing, maintaining, and evolving your code, ensuring it remains clear and approachable as your application scales.
 
-**Features:** (_touch to expand_)
+**Features:** (_touch to hide/expand_)
 
 <details open><summary>1️⃣ <strong>Seamless Rails integration</strong></summary>
 
