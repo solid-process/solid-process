@@ -1,8 +1,10 @@
 <small>
 
-`Previous` [Internal Libraries](./090_INTERNAL_LIBRARIES.md) | `Next` [Table of Contents](../README.md#further-reading)
+`Previous` [Internal Libraries](./090_INTERNAL_LIBRARIES.md) | `Next` [Reference Guide](../REFERENCE.md)
 
 </small>
+
+---
 
 # Ports and Adapters
 
@@ -80,3 +82,11 @@ For detailed explanations, examples, and advanced patterns, see:
 - [Dependencies](../REFERENCE.md#9-dependencies) — defining and injecting dependencies
 - [Process Composition](../REFERENCE.md#10-process-composition) — composing processes
 - [Validators Reference](../REFERENCE.md#14-validators-reference) — all built-in validators
+
+---
+
+<small>
+
+`Previous` [Internal Libraries](./090_INTERNAL_LIBRARIES.md) | `Next` [Reference Guide](../REFERENCE.md)
+
+</small>

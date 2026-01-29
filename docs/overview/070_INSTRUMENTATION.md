@@ -4,6 +4,8 @@
 
 </small>
 
+---
+
 # Instrumentation
 
 Enable the BasicLoggerListener to observe process execution, invaluable for debugging complex flows.
@@ -61,3 +63,11 @@ Backtrace:
 For detailed explanations, examples, and advanced patterns, see:
 
 - [Instrumentation](../REFERENCE.md#13-instrumentation) — complete logging guide
+
+---
+
+<small>
+
+`Previous` [Testing](./060_TESTING.md) | `Next` [Rails Integration](./080_RAILS_INTEGRATION.md)
+
+</small>

@@ -4,6 +4,8 @@
 
 </small>
 
+---
+
 # Internal Libraries
 
 Solid::Process includes three internal libraries you can use independently: Model, Value, and Input.
@@ -95,3 +97,11 @@ end
 For detailed explanations, examples, and advanced patterns, see:
 
 - [Internal Libraries](../REFERENCE.md#15-internal-libraries) — complete reference
+
+---
+
+<small>
+
+`Previous` [Rails Integration](./080_RAILS_INTEGRATION.md) | `Next` [Ports and Adapters](./100_PORTS_AND_ADAPTERS.md)
+
+</small>

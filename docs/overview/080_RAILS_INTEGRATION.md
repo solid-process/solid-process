@@ -4,6 +4,8 @@
 
 </small>
 
+---
+
 # Rails Integration
 
 Solid::Process integrates naturally with Rails controllers, views, and the ActiveModel ecosystem.
@@ -86,3 +88,11 @@ For detailed explanations, examples, and advanced patterns, see:
 
 - [Introduction](../REFERENCE.md#1-introduction) — installation and setup
 - [Pattern Matching](../REFERENCE.md#6-pattern-matching) — elegant result handling
+
+---
+
+<small>
+
+`Previous` [Instrumentation](./070_INSTRUMENTATION.md) | `Next` [Internal Libraries](./090_INTERNAL_LIBRARIES.md)
+
+</small>

@@ -4,6 +4,8 @@
 
 </small>
 
+---
+
 # Testing
 
 Test processes by asserting on outcomes and using dependency injection to isolate units.
@@ -92,3 +94,11 @@ end
 For detailed explanations, examples, and advanced patterns, see:
 
 - [Testing](../REFERENCE.md#16-testing) — comprehensive testing patterns
+
+---
+
+<small>
+
+`Previous` [Error Handling](./050_ERROR_HANDLING.md) | `Next` [Instrumentation](./070_INSTRUMENTATION.md)
+
+</small>

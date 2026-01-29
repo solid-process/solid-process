@@ -4,6 +4,8 @@
 
 </small>
 
+---
+
 # The Key Concepts
 
 ### What is a process?
@@ -42,3 +44,11 @@ For this reason, this abstraction embraces emerging design, allowing developers 
 Using the emerging design concept, I invite you to embrace this development cycle, write the minimum necessary to implement processes and add more solid-process features based on actual needs.
 
 <p align="right"><a href="#the-key-concepts">⬆️ &nbsp;back to top</a></p>
+
+---
+
+<small>
+
+`Previous` [Table of Contents](../README.md#further-reading) | `Next` [Basic Usage](./020_BASIC_USAGE.md)
+
+</small>

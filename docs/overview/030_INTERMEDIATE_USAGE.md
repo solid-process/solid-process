@@ -4,6 +4,8 @@
 
 </small>
 
+---
+
 # Intermediate Usage
 
 The Steps DSL provides `Given`, `and_then`, `Continue`, and `and_expose` for expressing complex workflows clearly.
@@ -58,3 +60,11 @@ For detailed explanations, examples, and advanced patterns, see:
 
 - [Steps DSL](../REFERENCE.md#7-steps-dsl) — complete DSL reference
 - [Transactions](../REFERENCE.md#8-transactions) — rollback strategies
+
+---
+
+<small>
+
+`Previous` [Basic Usage](./020_BASIC_USAGE.md) | `Next` [Advanced Usage](./040_ADVANCED_USAGE.md)
+
+</small>
