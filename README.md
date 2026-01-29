@@ -5,6 +5,8 @@
     <a href="https://deepwiki.com/solid-process/solid-process"><img src="https://deepwiki.com/badge.svg" alt="Ask DeepWiki"></a>
     <a href="https://qlty.sh/gh/solid-process/projects/solid-process"><img src="https://qlty.sh/gh/solid-process/projects/solid-process/maintainability.svg" alt="Maintainability" /></a>
     <a href="https://qlty.sh/gh/solid-process/projects/solid-process"><img src="https://qlty.sh/gh/solid-process/projects/solid-process/coverage.svg" alt="Code Coverage" /></a>
+    <br/>
+    <a href="https://badge.fury.io/rb/solid-process"><img src="https://badge.fury.io/rb/solid-process.svg" alt="Gem Version" height="18"></a>
     <img src="https://img.shields.io/badge/Ruby%20%3E%3D%202.7%2C%20%3C%3D%20Head-ruby.svg?colorA=444&colorB=333" alt="Ruby">
     <img src="https://img.shields.io/badge/Rails%20%3E%3D%206.0%2C%20%3C%3D%20Edge-rails.svg?colorA=444&colorB=333" alt="Rails">
   </p>
@@ -87,7 +89,7 @@ You can also check the [examples](examples) directory for more simple examples o
 - ✅ All features explained with working code
 - ✅ Perfect for developers AND AI coding agents
 
-> **🤖 AI Agents:** Point your coding assistant to [`docs/REFERENCE.md`](docs/REFERENCE.md) for complete API knowledge and patterns.
+> **🤖 AI Agents:** Point your coding assistant to [`docs/REFERENCE.md`](docs/REFERENCE.md) for complete API knowledge and patterns, or explore the [AI-Powered Wiki](https://deepwiki.com/solid-process/solid-process) for visual diagrams and interactive Q&A.
 
 [**Start Learning →**](docs/REFERENCE.md)
 
@@ -150,7 +152,7 @@ See the [Reference Guide](docs/REFERENCE.md) for detailed explanations, validati
 > [!TIP]
 > **[Full Reference →](docs/REFERENCE.md)** — Complete guide covering every feature with detailed examples.
 >
-> _**Perfect for developers and AI coding agents**._
+> **[AI-Powered Wiki →](https://deepwiki.com/solid-process/solid-process)** — Visual diagrams, architecture flows, and interactive Q&A beyond the official docs.
 
 **Quick Overview** — Bite-sized guides for each topic:
 

@@ -18,3 +18,4 @@ gemfiles/.bundle/
 .tool-versions
 
 /.claude/settings.local.json
+/docs/plans/

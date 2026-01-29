@@ -1,4 +1,4 @@
-# Getting Started with Solid::Process
+# Solid::Process — Reference Guide
 
 This guide teaches everything you need to know about Solid::Process, from basic concepts to advanced patterns. Work through it progressively, or jump to the section you need.
 
