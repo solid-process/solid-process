@@ -45,7 +45,7 @@ This library is tested (100% coverage) against:
 
 `solid-process` is a Ruby/Rails library designed to encapsulate business logic into manageable processes. It simplifies writing, testing, maintaining, and evolving your code, ensuring it remains clear and approachable as your application scales.
 
-**Features:** (_touch to expand_)
+**Features:** (_touch to hide/expand_)
 
 <details open><summary>1️⃣ <strong>Seamless Rails integration</strong></summary>
 
