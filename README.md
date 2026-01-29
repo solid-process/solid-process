@@ -23,7 +23,7 @@
 - [🙏 Acknowledgments](#-acknowledgments)
 - [👤 About](#-about)
 
-## Supported Ruby and Rails <!-- omit from toc -->
+## 💎 Supported Ruby and Rails <!-- omit from toc -->
 
 This library is tested (100% coverage) against:
 
