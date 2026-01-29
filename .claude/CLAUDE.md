@@ -21,11 +21,11 @@ bundle exec appraisal rails-8-1 ruby -Ilib:test test/solid/process/result_test.r
 
 ## References
 
-- **[docs/REFERENCE.md](docs/REFERENCE.md)** — Full feature guide with detailed examples
-- **[docs/overview/](docs/overview/)** — Quick overview guides (010–100)
+- **[docs/REFERENCE.md](../docs/REFERENCE.md)** — Full feature guide with detailed examples
+- **[docs/overview/](../docs/overview/)** — Quick overview guides (010–100)
 
 ## Conventions
 
-- **[Testing](.claude/docs/testing.md)** — Test fixtures, multi-version testing, Rails version matrix
-- **[Documentation](.claude/docs/documentation.md)** — Back-to-top anchors, overview file structure
-- **[Release & Versioning](.claude/docs/release-and-versioning.md)** — Release checklist, Ruby/Rails version alignment
+- **[Testing](docs/testing.md)** — Test fixtures, multi-version testing, Rails version matrix
+- **[Documentation](docs/documentation.md)** — Back-to-top anchors, overview file structure
+- **[Release & Versioning](docs/release-and-versioning.md)** — Release checklist, Ruby/Rails version alignment
