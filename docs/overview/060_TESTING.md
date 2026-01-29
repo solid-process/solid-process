@@ -91,4 +91,4 @@ end
 
 For detailed explanations, examples, and advanced patterns, see:
 
-- [Testing](./000_GETTING_STARTED.md#16-testing) — comprehensive testing patterns
+- [Testing](../REFERENCE.md#16-testing) — comprehensive testing patterns

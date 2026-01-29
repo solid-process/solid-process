@@ -57,6 +57,6 @@ bad_result[:errors]   # => #<ActiveModel::Errors ...>
 
 For detailed explanations, examples, and advanced patterns, see:
 
-- [Your First Process](./000_GETTING_STARTED.md#2-your-first-process) — step-by-step walkthrough
-- [Input Definition & Validation](./000_GETTING_STARTED.md#3-input-definition--validation) — types, validations, and more
-- [Working with Results](./000_GETTING_STARTED.md#5-working-with-results) — accessing values and checking status
+- [Your First Process](../REFERENCE.md#2-your-first-process) — step-by-step walkthrough
+- [Input Definition & Validation](../REFERENCE.md#3-input-definition--validation) — types, validations, and more
+- [Working with Results](../REFERENCE.md#5-working-with-results) — accessing values and checking status

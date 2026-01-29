@@ -15,7 +15,7 @@
 - [🚀 Getting Started](#-getting-started)
 - [📦 Installation](#-installation)
 - [🏗️ The Basic Structure](#️-the-basic-structure)
-- [📚 Further Reading](#-further-reading)
+- [📚 Documentation](#-documentation)
 - [🛠️ Development](#️-development)
 - [🤝 Contributing](#-contributing)
 - [⚖️ License](#️-license)
@@ -79,16 +79,16 @@ You can also check the [examples](examples) directory for more simple examples o
 
 ## 🚀 Getting Started
 
-**New to Solid::Process?** The comprehensive [Getting Started Guide](docs/000_GETTING_STARTED.md) covers everything you need to know:
+**New to Solid::Process?** The comprehensive [Reference Guide](docs/REFERENCE.md) covers everything you need to know:
 
 - ✅ Step-by-step tutorial from basics to advanced
 - ✅ Real-world examples (User Registration system)
 - ✅ All features explained with working code
 - ✅ Perfect for developers AND AI coding agents
 
-> **🤖 AI Agents:** Point your coding assistant to [`docs/000_GETTING_STARTED.md`](docs/000_GETTING_STARTED.md) for complete API knowledge and patterns.
+> **🤖 AI Agents:** Point your coding assistant to [`docs/REFERENCE.md`](docs/REFERENCE.md) for complete API knowledge and patterns.
 
-[**Start Learning →**](docs/000_GETTING_STARTED.md)
+[**Start Learning →**](docs/REFERENCE.md)
 
 <p align="right"><a href="#-table-of-contents-">⬆️ &nbsp;back to top</a></p>
 
@@ -138,28 +138,30 @@ result.type         # => :user_created
 result[:user]       # => #<User id: 1, ...>
 ```
 
-> **Note:** For validation including password confirmation, see the [Getting Started Guide](docs/000_GETTING_STARTED.md).
+> **Note:** For validation including password confirmation, see the [Reference Guide](docs/REFERENCE.md).
 
-See the [Getting Started Guide](docs/000_GETTING_STARTED.md) for detailed explanations, validations, steps DSL, dependencies, and more.
+See the [Reference Guide](docs/REFERENCE.md) for detailed explanations, validations, steps DSL, dependencies, and more.
 
 <p align="right"><a href="#-table-of-contents-">⬆️ &nbsp;back to top</a></p>
 
-## 📚 Further Reading
+## 📚 Documentation
 
-Start with the **[Getting Started Guide](docs/000_GETTING_STARTED.md)** for a complete tutorial.
+📖 **[Full Reference](docs/REFERENCE.md)** — Complete guide covering every feature with detailed examples
 
-Quick reference cards:
+**Quick Overview** — Bite-sized guides for each topic:
 
-1. [Key Concepts](docs/010_KEY_CONCEPTS.md) — Philosophy and principles
-2. [Basic Usage](docs/020_BASIC_USAGE.md) — Input, call, Success/Failure
-3. [Intermediate Usage](docs/030_INTERMEDIATE_USAGE.md) — Steps DSL
-4. [Advanced Usage](docs/040_ADVANCED_USAGE.md) — Dependencies, composition
-5. [Error Handling](docs/050_ERROR_HANDLING.md) — rescue_from and inline rescue
-6. [Testing](docs/060_TESTING.md) — Testing with dependency injection
-7. [Instrumentation](docs/070_INSTRUMENTATION.md) — Logging and observability
-8. [Rails Integration](docs/080_RAILS_INTEGRATION.md) — Rails-specific tips
-9. [Internal Libraries](docs/090_INTERNAL_LIBRARIES.md) — Solid::Model, Value, Input
-10. [Ports and Adapters](docs/100_PORTS_AND_ADAPTERS.md) — Hexagonal architecture
+| # | Topic |
+|---|-------|
+| 1 | [Key Concepts](docs/overview/010_KEY_CONCEPTS.md) — Philosophy and principles |
+| 2 | [Basic Usage](docs/overview/020_BASIC_USAGE.md) — Input, call, Success/Failure |
+| 3 | [Intermediate Usage](docs/overview/030_INTERMEDIATE_USAGE.md) — Steps DSL |
+| 4 | [Advanced Usage](docs/overview/040_ADVANCED_USAGE.md) — Dependencies, composition |
+| 5 | [Error Handling](docs/overview/050_ERROR_HANDLING.md) — rescue_from and inline rescue |
+| 6 | [Testing](docs/overview/060_TESTING.md) — Testing with dependency injection |
+| 7 | [Instrumentation](docs/overview/070_INSTRUMENTATION.md) — Logging and observability |
+| 8 | [Rails Integration](docs/overview/080_RAILS_INTEGRATION.md) — Rails-specific tips |
+| 9 | [Internal Libraries](docs/overview/090_INTERNAL_LIBRARIES.md) — Solid::Model, Value, Input |
+| 10 | [Ports and Adapters](docs/overview/100_PORTS_AND_ADAPTERS.md) — Hexagonal architecture |
 
 <p align="right"><a href="#-table-of-contents-">⬆️ &nbsp;back to top</a></p>
 

@@ -68,7 +68,7 @@ Order::Creation.new(
 
 - **Ports** are defined via `deps` — abstract interfaces the process depends on
 - **Adapters** are the concrete implementations (repositories, gateways, notifiers)
-- Validate adapter contracts with `validates :dep, respond_to: :method` (see [Validators Reference](./000_GETTING_STARTED.md#14-validators-reference))
+- Validate adapter contracts with `validates :dep, respond_to: :method` (see [Validators Reference](../REFERENCE.md#14-validators-reference))
 - Swap adapters at instantiation: production, test, or alternative implementations
 - Business logic in processes stays pure and testable
 - External systems (databases, APIs, email) are accessed only through adapters
@@ -77,6 +77,6 @@ Order::Creation.new(
 
 For detailed explanations, examples, and advanced patterns, see:
 
-- [Dependencies](./000_GETTING_STARTED.md#9-dependencies) — defining and injecting dependencies
-- [Process Composition](./000_GETTING_STARTED.md#10-process-composition) — composing processes
-- [Validators Reference](./000_GETTING_STARTED.md#14-validators-reference) — all built-in validators
+- [Dependencies](../REFERENCE.md#9-dependencies) — defining and injecting dependencies
+- [Process Composition](../REFERENCE.md#10-process-composition) — composing processes
+- [Validators Reference](../REFERENCE.md#14-validators-reference) — all built-in validators

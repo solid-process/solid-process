@@ -60,4 +60,4 @@ Backtrace:
 
 For detailed explanations, examples, and advanced patterns, see:
 
-- [Instrumentation](./000_GETTING_STARTED.md#13-instrumentation) — complete logging guide
+- [Instrumentation](../REFERENCE.md#13-instrumentation) — complete logging guide

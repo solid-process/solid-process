@@ -84,5 +84,5 @@ end
 
 For detailed explanations, examples, and advanced patterns, see:
 
-- [Introduction](./000_GETTING_STARTED.md#1-introduction) — installation and setup
-- [Pattern Matching](./000_GETTING_STARTED.md#6-pattern-matching) — elegant result handling
+- [Introduction](../REFERENCE.md#1-introduction) — installation and setup
+- [Pattern Matching](../REFERENCE.md#6-pattern-matching) — elegant result handling

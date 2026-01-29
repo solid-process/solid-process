@@ -86,4 +86,4 @@ end
 
 For detailed explanations, examples, and advanced patterns, see:
 
-- [Error Handling](./000_GETTING_STARTED.md#12-error-handling) — complete error handling guide
+- [Error Handling](../REFERENCE.md#12-error-handling) — complete error handling guide

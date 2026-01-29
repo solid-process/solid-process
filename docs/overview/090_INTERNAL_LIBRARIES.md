@@ -94,4 +94,4 @@ end
 
 For detailed explanations, examples, and advanced patterns, see:
 
-- [Internal Libraries](./000_GETTING_STARTED.md#15-internal-libraries) — complete reference
+- [Internal Libraries](../REFERENCE.md#15-internal-libraries) — complete reference

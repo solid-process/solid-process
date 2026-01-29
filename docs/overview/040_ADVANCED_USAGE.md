@@ -82,7 +82,7 @@ User::Registration.new(mailer: FakeMailer, token_creation: FakeTokenCreation)
 
 For detailed explanations, examples, and advanced patterns, see:
 
-- [Input Normalization](./000_GETTING_STARTED.md#4-input-normalization) — normalization techniques
-- [Dependencies](./000_GETTING_STARTED.md#9-dependencies) — injection patterns
-- [Process Composition](./000_GETTING_STARTED.md#10-process-composition) — nesting processes
-- [Transactions](./000_GETTING_STARTED.md#8-transactions) — rollback behavior
+- [Input Normalization](../REFERENCE.md#4-input-normalization) — normalization techniques
+- [Dependencies](../REFERENCE.md#9-dependencies) — injection patterns
+- [Process Composition](../REFERENCE.md#10-process-composition) — nesting processes
+- [Transactions](../REFERENCE.md#8-transactions) — rollback behavior

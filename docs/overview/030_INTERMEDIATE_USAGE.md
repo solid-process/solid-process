@@ -56,5 +56,5 @@ end
 
 For detailed explanations, examples, and advanced patterns, see:
 
-- [Steps DSL](./000_GETTING_STARTED.md#7-steps-dsl) — complete DSL reference
-- [Transactions](./000_GETTING_STARTED.md#8-transactions) — rollback strategies
+- [Steps DSL](../REFERENCE.md#7-steps-dsl) — complete DSL reference
+- [Transactions](../REFERENCE.md#8-transactions) — rollback strategies
