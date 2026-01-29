@@ -1,3 +1,0 @@
-# Testing
-
-**Status:** 🔴 `to-do`

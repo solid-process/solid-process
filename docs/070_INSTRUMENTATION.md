@@ -1,3 +1,0 @@
-# Instrumentation
-
-**Status:** 🔴 `to-do`

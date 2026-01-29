@@ -11,18 +11,19 @@
 
 ## 📚 Table of Contents <!-- omit from toc -->
 
-- [Introduction](#introduction)
-- [Installation](#installation)
-- [The Basic Structure](#the-basic-structure)
-- [Further Reading](#further-reading)
-- [Development](#development)
-- [Contributing](#contributing)
-- [License](#license)
-- [Code of Conduct](#code-of-conduct)
-- [Acknowledgments](#acknowledgments)
-- [About](#about)
+- [💡 Introduction](#-introduction)
+- [🚀 Getting Started](#-getting-started)
+- [📦 Installation](#-installation)
+- [🏗️ The Basic Structure](#️-the-basic-structure)
+- [🗂️ Documentation](#️-documentation)
+- [🛠️ Development](#️-development)
+- [🤝 Contributing](#-contributing)
+- [⚖️ License](#️-license)
+- [💜 Code of Conduct](#-code-of-conduct)
+- [🙏 Acknowledgments](#-acknowledgments)
+- [👤 About](#-about)
 
-## Supported Ruby and Rails <!-- omit from toc -->
+## 💎 Supported Ruby and Rails <!-- omit from toc -->
 
 This library is tested (100% coverage) against:
 
@@ -36,31 +37,31 @@ This library is tested (100% coverage) against:
 | 3.4          |     |     |     |     | ✅  | ✅  | ✅  | ✅   |
 | 4.x          |     |     |     |     |     |     | ✅  | ✅   |
 
-## Introduction
+## 💡 Introduction
 
 `solid-process` is a Ruby/Rails library designed to encapsulate business logic into manageable processes. It simplifies writing, testing, maintaining, and evolving your code, ensuring it remains clear and approachable as your application scales.
 
 **Features:** (_touch to expand_)
 
-<details><summary>1️⃣ <strong>Seamless Rails integration</strong></summary>
+<details open><summary>1️⃣ <strong>Seamless Rails integration</strong></summary>
 
   > Designed to complement Ruby on Rails, this library integrates smoothly without conflicting with existing framework conventions and features.
 
 </details>
 
-<details><summary>2️⃣ <strong>Support progressive mastery</strong></summary>
+<details open><summary>2️⃣ <strong>Support progressive mastery</strong></summary>
 
   > Offers an intuitive entry point for novices while providing robust, advanced features that cater to experienced developers.
 
 </details>
 
-<details><summary>3️⃣ <strong>Promote conceptual integrity and rapid onboarding</strong></summary>
+<details open><summary>3️⃣ <strong>Promote conceptual integrity and rapid onboarding</strong></summary>
 
   > By maintaining a consistent design philosophy, `solid-process` reduces the learning curve for new developers, allowing them to contribute more effectively and quickly to a codebase.
 
 </details>
 
-<details><summary>4️⃣ <strong>Enhanced observability</strong></summary>
+<details open><summary>4️⃣ <strong>Enhanced observability</strong></summary>
 
   > Equipped with sophisticated instrumentation mechanisms, the library enables detailed logging and tracing without compromising code readability, even when processes are nested.
 
@@ -76,7 +77,22 @@ You can also check the [examples](examples) directory for more simple examples o
 
 <p align="right"><a href="#-table-of-contents-">⬆️ &nbsp;back to top</a></p>
 
-## Installation
+## 🚀 Getting Started
+
+**New to Solid::Process?** The comprehensive [Reference Guide](docs/REFERENCE.md) covers everything you need to know:
+
+- ✅ Step-by-step tutorial from basics to advanced
+- ✅ Real-world examples (User Registration system)
+- ✅ All features explained with working code
+- ✅ Perfect for developers AND AI coding agents
+
+> **🤖 AI Agents:** Point your coding assistant to [`docs/REFERENCE.md`](docs/REFERENCE.md) for complete API knowledge and patterns.
+
+[**Start Learning →**](docs/REFERENCE.md)
+
+<p align="right"><a href="#-table-of-contents-">⬆️ &nbsp;back to top</a></p>
+
+## 📦 Installation
 
 Install the gem and add to the application's Gemfile by executing:
 
@@ -92,35 +108,15 @@ And require it in your code:
 
 <p align="right"><a href="#-table-of-contents-">⬆️ &nbsp;back to top</a></p>
 
-## The Basic Structure
+## 🏗️ The Basic Structure
 
-All `Solid::Process` requires at least two things: an `input` and a `call` method.
-
-1. The `input` is a set of attributes needed to perform the work.
-2. The `#call` method is the entry point and where the work is done.
-  - It receives the attributes Hash (symbolized keys), defined by the `input`.
-  - It returns a `Success` or `Failure` as the output.
-
-```ruby
-class User::Creation < Solid::Process
-  input do
-    # Define the attributes needed to perform the work
-  end
-
-  def call(attributes)
-    # Perform the work and return a Success or Failure as the output
-  end
-end
-```
-
-#### Example <!-- omit in toc -->
+Every `Solid::Process` requires an `input` block (defining attributes) and a `call` method (returning Success or Failure):
 
 ```ruby
 class User::Creation < Solid::Process
   input do
     attribute :email
     attribute :password
-    attribute :password_confirmation
   end
 
   def call(attributes)
@@ -133,66 +129,46 @@ class User::Creation < Solid::Process
     end
   end
 end
+
+# Call the process
+result = User::Creation.call(email: 'alice@example.com', password: 'password')
+
+result.success?     # => true
+result.type         # => :user_created
+result[:user]       # => #<User id: 1, ...>
 ```
+
+> **Note:** For validation including password confirmation, see the [Reference Guide](docs/REFERENCE.md).
+
+See the [Reference Guide](docs/REFERENCE.md) for detailed explanations, validations, steps DSL, dependencies, and more.
 
 <p align="right"><a href="#-table-of-contents-">⬆️ &nbsp;back to top</a></p>
 
-### Calling a Process <!-- omit from toc -->
+## 🗂️ Documentation
 
-To call a process, you can use the `call` method directly, or instantiate the class and call the `#call` method.
+> [!TIP]
+> **[Full Reference →](docs/REFERENCE.md)** — Complete guide covering every feature with detailed examples.
+>
+> _**Perfect for developers and AI coding agents**._
 
-```ruby
-###############
-# Direct call #
-###############
+**Quick Overview** — Bite-sized guides for each topic:
 
-User::Creation.call(email: 'john.doe@email.com', password: 'password', password_confirmation: 'password')
-# => #<Solid::Output::Success type=:user_created value={:user=>#<User id: 1, ...>}>
-
-########################
-# Instantiate and call #
-########################
-
-process = User::Creation.new
-
-process.call(email: 'john.doe@email.com', password: 'password', password_confirmation: 'password')
-```
-
-For now, it's essential to know that a process instance is stateful, and because of this, you can call it only once.
-
-```ruby
-process = User::Creation.new
-
-input = {email: 'john.doe@email.com', password: 'password', password_confirmation: 'password'}
-
-process.call(input)
-
-process.call(input)
-# The `User::Creation#output` is already set. Use `.output` to access the result or create a new instance to call again. (Solid::Process::Error)
-```
+| # | Topic |
+|---|-------|
+| 1 | [Key Concepts](docs/overview/010_KEY_CONCEPTS.md) — Philosophy and principles |
+| 2 | [Basic Usage](docs/overview/020_BASIC_USAGE.md) — Input, call, Success/Failure |
+| 3 | [Intermediate Usage](docs/overview/030_INTERMEDIATE_USAGE.md) — Steps DSL |
+| 4 | [Advanced Usage](docs/overview/040_ADVANCED_USAGE.md) — Dependencies, composition |
+| 5 | [Error Handling](docs/overview/050_ERROR_HANDLING.md) — rescue_from and inline rescue |
+| 6 | [Testing](docs/overview/060_TESTING.md) — Testing with dependency injection |
+| 7 | [Instrumentation](docs/overview/070_INSTRUMENTATION.md) — Logging and observability |
+| 8 | [Rails Integration](docs/overview/080_RAILS_INTEGRATION.md) — Rails-specific tips |
+| 9 | [Internal Libraries](docs/overview/090_INTERNAL_LIBRARIES.md) — Solid::Model, Value, Input |
+| 10 | [Ports and Adapters](docs/overview/100_PORTS_AND_ADAPTERS.md) — Hexagonal architecture |
 
 <p align="right"><a href="#-table-of-contents-">⬆️ &nbsp;back to top</a></p>
 
-## Further Reading
-
-1. [Key Concepts](docs/010_KEY_CONCEPTS.md)
-2. [Basic Usage](docs/020_BASIC_USAGE.md)
-3. [Intermediate Usage](docs/030_INTERMEDIATE_USAGE.md)
-4. [Advanced Usage](docs/040_ADVANCED_USAGE.md)
-5. [Error Handling](docs/050_ERROR_HANDLING.md)
-6. [Testing](docs/060_TESTING.md)
-7. [Instrumentation / Observability](docs/070_INSTRUMENTATION.md)
-8. [Rails Integration](docs/080_RAILS_INTEGRATION.md)
-9. [Internal libraries](docs/090_INTERNAL_LIBRARIES.md)
-  - Solid::Input
-  - Solid::Model
-  - Solid::Value
-  - ActiveModel validations
-10. [Ports and Adapters (Hexagonal Architecture)](docs/100_PORTS_AND_ADAPTERS.md)
-
-<p align="right"><a href="#-table-of-contents-">⬆️ &nbsp;back to top</a></p>
-
-## Development
+## 🛠️ Development
 
 After checking out the repo, run `bin/setup` to install dependencies. Then, run `bundle exec rake matrix` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
 
@@ -218,32 +194,32 @@ To install this gem onto your local machine, run `bundle exec rake install`. To 
 
 <p align="right"><a href="#-table-of-contents-">⬆️ &nbsp;back to top</a></p>
 
-## Contributing
+## 🤝 Contributing
 
 Bug reports and pull requests are welcome on GitHub at https://github.com/solid-process/solid-process. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [code of conduct](https://github.com/solid-process/solid-process/blob/main/CODE_OF_CONDUCT.md).
 
 <p align="right"><a href="#-table-of-contents-">⬆️ &nbsp;back to top</a></p>
 
-## License
+## ⚖️ License
 
 The gem is available as open source under the terms of the [MIT License](https://opensource.org/licenses/MIT).
 
 <p align="right"><a href="#-table-of-contents-">⬆️ &nbsp;back to top</a></p>
 
-## Code of Conduct
+## 💜 Code of Conduct
 
 Everyone interacting in the Solid::Process project's codebases, issue trackers, chat rooms and mailing lists is expected to follow the [code of conduct](https://github.com/solid-process/solid-process/blob/main/CODE_OF_CONDUCT.md).
 
 <p align="right"><a href="#-table-of-contents-">⬆️ &nbsp;back to top</a></p>
 
-## Acknowledgments
+## 🙏 Acknowledgments
 
 I want to thank some people who helped me by testing and giving feedback as this project took shape, they are:
 
 - [Diego Linhares](https://github.com/diegolinhares) and [Ralf Schmitz Bongiolo](https://github.com/mrbongiolo) they were the brave ones who worked for a few months with the first versions of the ecosystem (it was called B/CDD). Their feedback was essential for improving DX and helped me to pivot some core decisions.
 - [Vitor Avelino](https://github.com/vitoravelino), [Tomás Coêlho](https://github.com/tomascco), [Haroldo Furtado](https://github.com/haroldofurtado) (I could repeat Ralf and Diego again) for the various feedbacks, documentation, API, support and words of encouragement.
 
-## About
+## 👤 About
 
 [Rodrigo Serradura](https://rodrigoserradura.com) created this project. He is the Solid Process creator and has already made similar gems like the [u-case](https://github.com/serradura/u-case) and [kind](https://github.com/serradura/kind). This gem can be used independently, but it also contains essential features that facilitate the adoption of Solid Process (the method) in code.
 

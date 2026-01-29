@@ -6,6 +6,11 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 `solid-process` is a Ruby gem for encapsulating business logic into manageable processes. It integrates with Rails and provides input validation, dependency injection, and observability features.
 
+## Documentation
+
+- **[docs/REFERENCE.md](docs/REFERENCE.md)** — Comprehensive guide covering every feature with detailed examples. Point AI coding agents here.
+- **[docs/overview/](docs/overview/)** — Quick overview guides (010–100) for each topic.
+
 ## Common Commands
 
 ```bash
