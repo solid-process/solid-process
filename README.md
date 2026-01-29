@@ -129,8 +129,6 @@ result[:user]       # => #<User id: 1, ...>
 
 > **Note:** For validation including password confirmation, see the [Reference Guide](docs/REFERENCE.md).
 
-See the [Reference Guide](docs/REFERENCE.md) for detailed explanations, validations, steps DSL, dependencies, and more.
-
 <p align="right"><a href="#-table-of-contents-">⬆️ &nbsp;back to top</a></p>
 
 ## 🚀 Getting Started
