@@ -22,8 +22,10 @@ class Person
   validates :name, :email, presence: true
 end
 
-person = Person.new(name: "Alice", email: "alice@example.com")
-person.valid?  # => true
+person = Person.new(name: 'Alice', email: 'alice@example.com')
+person.valid?      # => true
+person[:email]     # => 'alice@example.com' (hash-style access)
+person.slice(:name, :email)  # => {'name'=>'Alice', 'email'=>'alice@example.com'}
 ```
 
 ## Solid::Value
@@ -38,9 +40,30 @@ class Email
   validates presence: true, format: { with: URI::MailTo::EMAIL_REGEXP }
 end
 
-email = Email["  ALICE@EXAMPLE.COM  "]
-email.value   # => "alice@example.com"
+email = Email['  ALICE@EXAMPLE.COM  ']
+email.value   # => 'alice@example.com'
 email.valid?  # => true
+
+# Value-based equality
+Email['a@b.com'] == Email['a@b.com']  # => true (same value = equal)
+
+# Works as hash keys
+cache = {}
+cache[Email['a@b.com']] = 'data'
+cache[Email['a@b.com']]  # => 'data'
+```
+
+### Multi-attribute Values
+
+```ruby
+class Money
+  include Solid::Value
+  attribute :amount, :decimal
+  attribute :currency, :string
+end
+
+Money.new(amount: 100, currency: 'USD') == Money.new(amount: 100, currency: 'USD')
+# => true
 ```
 
 ## Solid::Input
@@ -61,9 +84,10 @@ end
 
 ## Key Points
 
-- **Solid::Model** — multiple named attributes, full ActiveModel support
-- **Solid::Value** — single `value` attribute, instantiate with `Value[val]`
-- **Solid::Input** — Model variant for process inputs, auto-created by `input` block
+- **Solid::Model** — multiple named attributes, full ActiveModel support, hash-style access
+- **Solid::Value** — single `value` attribute, value-based equality, works as hash keys
+- **Solid::Input** — Model variant for process inputs, used with `self.input = ClassName`
+- All support bracket syntax: `Person[name: 'Alice']`, `Email['a@b.com']`
 - All support typed attributes, validations, and callbacks
 
 ## Learn More

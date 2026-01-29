@@ -13,8 +13,8 @@ Use dependencies for testability, input validation for data integrity, and proce
 ```ruby
 class User::Registration < Solid::Process
   deps do
-    attribute :mailer, default: UserMailer
     attribute :token_creation, default: User::Token::Creation
+    attribute :mailer, default: UserMailer
   end
 
   input do
@@ -25,35 +25,58 @@ class User::Registration < Solid::Process
       self.email = email&.strip&.downcase
     end
 
-    validates :email, presence: true, format: { with: URI::MailTo::EMAIL_REGEXP }
-    validates :password, presence: true, length: { minimum: 8 }
+    with_options presence: true do
+      validates :email, format: { with: URI::MailTo::EMAIL_REGEXP }
+      validates :password, length: { minimum: 8 }
+    end
   end
 
   def call(attributes)
-    user = User.create!(attributes)
+    rollback_on_failure {
+      Given(attributes)
+        .and_then(:create_user)
+        .and_then(:create_token)
+        .and_then(:send_welcome_email)
+    }.and_expose(:registered, [:user, :token])
+  end
 
-    case deps.token_creation.call(user: user)
+  private
+
+  def create_user(email:, password:, **)
+    user = User.create!(email:, password:)
+    Continue(user:)
+  end
+
+  def create_token(user:, **)
+    case deps.token_creation.call(user:)
     in Solid::Success(token:)
-      deps.mailer.welcome(user).deliver_later
-      Success(:registered, user: user, token: token)
+      Continue(token:)
     in Solid::Failure => failure
       Failure(:token_failed, original: failure)
     end
   end
+
+  def send_welcome_email(user:, **)
+    deps.mailer.welcome(user).deliver_later
+    Continue()
+  end
 end
 
 # Override dependencies for testing
-User::Registration.new(mailer: FakeMailer).call(email: "test@example.com", password: "password123")
+User::Registration.new(mailer: FakeMailer, token_creation: FakeTokenCreation)
+  .call(email: 'test@example.com', password: 'password123')
 ```
 
 ## Key Points
 
 - `deps do ... end` — defines injectable dependencies with defaults
 - `deps.name` — accesses dependencies inside the process
+- `rollback_on_failure { ... }` — wraps operations in a database transaction; if any step returns Failure, the transaction is rolled back
 - `before_validation` — normalizes input before validation (all Rails versions)
 - `normalizes :attr, with: -> { }` — declarative normalization (Rails 8.1+)
 - Dependencies can be swapped at instantiation for testing
 - Compose processes by calling one from another via `deps`
+- Pattern match on nested process results to handle success/failure
 
 ## Learn More
 
@@ -62,3 +85,4 @@ For detailed explanations, examples, and advanced patterns, see:
 - [Input Normalization](./000_GETTING_STARTED.md#4-input-normalization) — normalization techniques
 - [Dependencies](./000_GETTING_STARTED.md#9-dependencies) — injection patterns
 - [Process Composition](./000_GETTING_STARTED.md#10-process-composition) — nesting processes
+- [Transactions](./000_GETTING_STARTED.md#8-transactions) — rollback behavior

@@ -138,6 +138,8 @@ result.type         # => :user_created
 result[:user]       # => #<User id: 1, ...>
 ```
 
+> **Note:** For validation including password confirmation, see the [Getting Started Guide](docs/000_GETTING_STARTED.md).
+
 See the [Getting Started Guide](docs/000_GETTING_STARTED.md) for detailed explanations, validations, steps DSL, dependencies, and more.
 
 <p align="right"><a href="#-table-of-contents-">⬆️ &nbsp;back to top</a></p>

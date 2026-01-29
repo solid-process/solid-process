@@ -15,25 +15,33 @@ class User::Registration < Solid::Process
   input do
     attribute :email, :string
     attribute :password, :string
+    # validates :email, :password, presence: true  # See Input Validation section
   end
 
   def call(attributes)
     user = User.create(attributes)
 
     if user.persisted?
-      Success(:user_registered, user: user)
+      Success(:user_registered, user:)
     else
       Failure(:invalid_user, errors: user.errors)
     end
   end
 end
 
-# Usage
-result = User::Registration.call(email: "alice@example.com", password: "secret123")
+# Success case
+result = User::Registration.call(email: 'alice@example.com', password: 'secret123')
 
 result.success?       # => true
 result.type           # => :user_registered
-result.value[:user]   # => #<User id: 1, email: "alice@example.com">
+result[:user]         # => #<User id: 1, email: "alice@example.com">
+
+# Failure case
+bad_result = User::Registration.call(email: '', password: '')
+
+bad_result.failure?   # => true
+bad_result.type       # => :invalid_user
+bad_result[:errors]   # => #<ActiveModel::Errors ...>
 ```
 
 ## Key Points
@@ -42,6 +50,7 @@ result.value[:user]   # => #<User id: 1, email: "alice@example.com">
 - `def call(attributes)` receives validated attributes as a hash
 - `Success(:type, key: value)` returns a successful result
 - `Failure(:type, key: value)` returns a failure result
+- Access result data via `result[:key]` (shorthand) or `result.value[:key]`
 - Processes are **single-use** — each instance can only be called once
 
 ## Learn More

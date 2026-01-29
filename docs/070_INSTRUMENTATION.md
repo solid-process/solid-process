@@ -24,12 +24,27 @@ Solid::Process::EventLogs::BasicLoggerListener.logger = Logger.new($stdout)
 #0 Account::OwnerCreation
  * Given(uuid:, owner:)
    #1 User::Creation
-    * Given(uuid:, name:, email:)
+    * Given(name:, email:, password:)
     * Continue() from method: validate_email
     * Continue(user:) from method: create_user
-    * Success(:user_created, user:)
- * Continue(user:) from method: create_owner
- * Success(:account_created, user:, account:)
+      #2 User::Token::Creation
+       * Given(user:)
+       * Continue(token:) from method: create_token
+       * Success(:token_created, token:)
+    * Success(:user_created, user:, token:)
+ * Success(:account_owner_created, user:, account:)
+```
+
+## Exception Output
+
+When an exception occurs, the logger captures it with a cleaned backtrace:
+
+```
+Exception:
+  Token creation failed (RuntimeError)
+
+Backtrace:
+  user_token_creation.rb:28:in `create_token'
 ```
 
 ## Key Points
@@ -39,6 +54,7 @@ Solid::Process::EventLogs::BasicLoggerListener.logger = Logger.new($stdout)
 - `Continue(...)` shows intermediate step results with source method
 - `Success/Failure(...)` shows final results
 - Exceptions are logged with cleaned backtraces
+- Customize backtrace filtering via `BasicLoggerListener.backtrace_cleaner`
 
 ## Learn More
 

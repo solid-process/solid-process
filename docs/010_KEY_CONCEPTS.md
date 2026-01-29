@@ -14,6 +14,19 @@ A sequence of steps or actions to achieve a specific end. In other words, it is 
 
 It is a class that encapsulates reusable business logic. Its main goal is to **ACT AS AN ORCHESTRATOR** who knows the order, what to use, and the steps necessary to produce an expected result.
 
+### Core Concepts at a Glance
+
+| Concept | Description |
+|---------|-------------|
+| **Input** | Defines what data the process needs |
+| **Output** | The result (`Success` or `Failure`) |
+| **Steps** | Named methods that can be chained |
+| **Dependencies** | Collaborators that can be injected |
+
+### Why not just use...?
+
+Unlike plain service objects, `Solid::Process` provides built-in input validation, result typing, and observability. Unlike Interactors, it offers a Steps DSL for explicit flow control. Unlike Dry::Transaction, it integrates seamlessly with Rails conventions.
+
 ### Emergent Design
 
 The business rule is directly coupled with business needs. We are often unclear about these rules and how they will be implemented as code. Clarity tends to improve over time and after many maintenance cycles.

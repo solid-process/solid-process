@@ -8,6 +8,8 @@
 
 Solid::Process integrates naturally with Rails controllers, views, and the ActiveModel ecosystem.
 
+> **Requirements:** Ruby >= 2.7 and Rails >= 6.0
+
 ## Quick Example
 
 ```ruby
@@ -21,20 +23,27 @@ class User::Registration < Solid::Process
 
   def call(attributes)
     user = User.create(attributes)
-    user.persisted? ? Success(:registered, user: user) : Failure(:invalid, user: user)
+    user.persisted? ? Success(:registered, user:) : Failure(:invalid, user:)
   end
 end
 
 # app/controllers/registrations_controller.rb
 class RegistrationsController < ApplicationController
+  def new
+    @input = User::Registration.input.new
+  end
+
   def create
     case User::Registration.call(registration_params)
     in Solid::Success(user:)
-      redirect_to dashboard_path, notice: "Welcome!"
+      redirect_to dashboard_path, notice: 'Welcome!'
     in Solid::Failure[:invalid_input, {input:}]
-      render :new, locals: { errors: input.errors }
+      @input = input
+      render :new
     in Solid::Failure[:invalid, {user:}]
-      render :new, locals: { errors: user.errors }
+      @input = User::Registration.input.new(registration_params)
+      @input.errors.merge!(user.errors)
+      render :new
     end
   end
 
@@ -46,6 +55,22 @@ class RegistrationsController < ApplicationController
 end
 ```
 
+## View Integration
+
+```erb
+<!-- app/views/registrations/new.html.erb -->
+<%= form_with model: @input, url: registrations_path do |f| %>
+  <div>
+    <%= f.label :email %>
+    <%= f.email_field :email %>
+    <% if @input&.errors[:email]&.any? %>
+      <span class="error"><%= @input.errors[:email].first %></span>
+    <% end %>
+  </div>
+  <%= f.submit 'Register' %>
+<% end %>
+```
+
 ## Key Points
 
 - Place processes in `app/processes/` (auto-loaded by Rails)
@@ -53,6 +78,7 @@ end
 - Input uses ActiveModel — works with Rails form helpers and validations
 - `rollback_on_failure` uses `ActiveRecord::Base.transaction` automatically
 - Processes work with `deliver_later`, `ActiveJob`, and other Rails components
+- Requires Ruby >= 2.7 and Rails >= 6.0
 
 ## Learn More
 

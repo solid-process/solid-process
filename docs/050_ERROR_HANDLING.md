@@ -18,13 +18,13 @@ class Division < Solid::Process
   end
 
   rescue_from ZeroDivisionError do |error|
-    Failure!(:division_by_zero, error: error)
+    Failure!(:division_by_zero, error:)
   end
 
   def call(attributes)
     result = attributes[:numerator] / attributes[:denominator]
 
-    Success(:calculated, result: result)
+    Success(:calculated, result:)
   end
 end
 
@@ -32,14 +32,45 @@ Division.call(numerator: 10, denominator: 0)
 # => Failure(:division_by_zero)
 ```
 
+## Class-Level: `rescue_from` with Method Handler
+
+```ruby
+rescue_from PaymentError, with: :handle_payment_error
+
+private
+
+def handle_payment_error(error)
+  Failure!(:payment_failed, error:, code: error.code)
+end
+```
+
 ## Method-Level: Inline `rescue`
 
 ```ruby
+# Option A: Convert exception to Failure (hard failure)
 def create_user(email:, **)
-  user = User.create!(email: email)
-  Continue(user: user)
+  user = User.create!(email:)
+  Continue(user:)
 rescue ActiveRecord::RecordInvalid => e
   Failure(:creation_failed, errors: e.record.errors)
+end
+
+# Option B: Log and continue (soft failure for non-critical operations)
+def send_notification(user:, **)
+  NotificationService.notify(user)
+  Continue()
+rescue NotificationService::Error => e
+  Rails.logger.error "Notification failed: #{e.message}"
+  Continue()  # process continues despite error
+end
+```
+
+## Converting Exceptions to Success (Idempotency)
+
+```ruby
+rescue_from ActiveRecord::RecordNotUnique do |e|
+  existing = User.find_by(email: input.email)
+  Success!(:already_exists, user: existing)
 end
 ```
 

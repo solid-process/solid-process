@@ -36,6 +36,10 @@ Instead of scattering business logic across controllers, models, and service obj
 - Can be composed together
 - Are easy to test in isolation
 
+### Why not just use...?
+
+Unlike plain service objects, `Solid::Process` provides built-in input validation, result typing, and observability. Unlike Interactors, it offers a Steps DSL for explicit flow control. Unlike Dry::Transaction, it integrates seamlessly with Rails conventions.
+
 ### The Philosophy: Emergent Design
 
 Business rules are directly coupled with business needs, and clarity tends to improve over time. Solid::Process embraces this reality through **emergent design** — start simple and add sophistication as you learn what you actually need.

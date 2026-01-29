@@ -20,7 +20,7 @@ class User::Creation < Solid::Process
   def call(attributes)
     rollback_on_failure {
       Given(attributes)
-        .and_then(:validate_email)
+        .and_then(:validate_email)  # ← Stops here if Failure
         .and_then(:create_user)
     }.and_expose(:user_created, [:user])
   end
@@ -28,18 +28,20 @@ class User::Creation < Solid::Process
   private
 
   def validate_email(email:, **)
-    return Failure(:email_taken) if User.exists?(email: email)
+    return Failure(:email_taken) if User.exists?(email:)
 
     Continue()
   end
 
   def create_user(email:, name:, **)
-    user = User.create!(email: email, name: name)
+    user = User.create!(email:, name:)
 
-    Continue(user: user)
+    Continue(user:)
   end
 end
 ```
+
+> **Note:** Using `create!` inside `rollback_on_failure` lets exceptions trigger automatic rollback. For manual control, use `create` and check `.persisted?`.
 
 ## Key Points
 
