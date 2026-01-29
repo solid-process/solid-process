@@ -9,7 +9,7 @@
   </p>
 </p>
 
-## 📚 Table of Contents <!-- omit from toc -->
+## Table of Contents <!-- omit from toc -->
 
 - [💡 Introduction](#-introduction)
 - [🚀 Getting Started](#-getting-started)
@@ -67,7 +67,7 @@ This library is tested (100% coverage) against:
 
 </details>
 
-<p align="right"><a href="#-table-of-contents-">⬆️ &nbsp;back to top</a></p>
+<p align="right"><a href="#table-of-contents-">⬆️ &nbsp;back to top</a></p>
 
 ### Examples <!-- omit in toc -->
 
@@ -75,7 +75,7 @@ Check out [Solid Rails App](https://github.com/solid-process/solid-rails-app) fo
 
 You can also check the [examples](examples) directory for more simple examples of how to use the gem.
 
-<p align="right"><a href="#-table-of-contents-">⬆️ &nbsp;back to top</a></p>
+<p align="right"><a href="#table-of-contents-">⬆️ &nbsp;back to top</a></p>
 
 ## 🚀 Getting Started
 
@@ -90,7 +90,7 @@ You can also check the [examples](examples) directory for more simple examples o
 
 [**Start Learning →**](docs/REFERENCE.md)
 
-<p align="right"><a href="#-table-of-contents-">⬆️ &nbsp;back to top</a></p>
+<p align="right"><a href="#table-of-contents-">⬆️ &nbsp;back to top</a></p>
 
 ## 📦 Installation
 
@@ -106,7 +106,7 @@ And require it in your code:
 
     require 'solid/process'
 
-<p align="right"><a href="#-table-of-contents-">⬆️ &nbsp;back to top</a></p>
+<p align="right"><a href="#table-of-contents-">⬆️ &nbsp;back to top</a></p>
 
 ## 🏗️ The Basic Structure
 
@@ -142,7 +142,7 @@ result[:user]       # => #<User id: 1, ...>
 
 See the [Reference Guide](docs/REFERENCE.md) for detailed explanations, validations, steps DSL, dependencies, and more.
 
-<p align="right"><a href="#-table-of-contents-">⬆️ &nbsp;back to top</a></p>
+<p align="right"><a href="#table-of-contents-">⬆️ &nbsp;back to top</a></p>
 
 ## 📚 Documentation
 
@@ -163,7 +163,7 @@ See the [Reference Guide](docs/REFERENCE.md) for detailed explanations, validati
 | 9 | [Internal Libraries](docs/overview/090_INTERNAL_LIBRARIES.md) — Solid::Model, Value, Input |
 | 10 | [Ports and Adapters](docs/overview/100_PORTS_AND_ADAPTERS.md) — Hexagonal architecture |
 
-<p align="right"><a href="#-table-of-contents-">⬆️ &nbsp;back to top</a></p>
+<p align="right"><a href="#table-of-contents-">⬆️ &nbsp;back to top</a></p>
 
 ## 🛠️ Development
 
@@ -189,25 +189,25 @@ bin/matrix
 
 To install this gem onto your local machine, run `bundle exec rake install`. To release a new version, update the version number in `version.rb`, and then run `bundle exec rake release`, which will create a git tag for the version, push git commits and the created tag, and push the `.gem` file to [rubygems.org](https://rubygems.org).
 
-<p align="right"><a href="#-table-of-contents-">⬆️ &nbsp;back to top</a></p>
+<p align="right"><a href="#table-of-contents-">⬆️ &nbsp;back to top</a></p>
 
 ## 🤝 Contributing
 
 Bug reports and pull requests are welcome on GitHub at https://github.com/solid-process/solid-process. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [code of conduct](https://github.com/solid-process/solid-process/blob/main/CODE_OF_CONDUCT.md).
 
-<p align="right"><a href="#-table-of-contents-">⬆️ &nbsp;back to top</a></p>
+<p align="right"><a href="#table-of-contents-">⬆️ &nbsp;back to top</a></p>
 
 ## ⚖️ License
 
 The gem is available as open source under the terms of the [MIT License](https://opensource.org/licenses/MIT).
 
-<p align="right"><a href="#-table-of-contents-">⬆️ &nbsp;back to top</a></p>
+<p align="right"><a href="#table-of-contents-">⬆️ &nbsp;back to top</a></p>
 
 ## 💜 Code of Conduct
 
 Everyone interacting in the Solid::Process project's codebases, issue trackers, chat rooms and mailing lists is expected to follow the [code of conduct](https://github.com/solid-process/solid-process/blob/main/CODE_OF_CONDUCT.md).
 
-<p align="right"><a href="#-table-of-contents-">⬆️ &nbsp;back to top</a></p>
+<p align="right"><a href="#table-of-contents-">⬆️ &nbsp;back to top</a></p>
 
 ## 🙏 Acknowledgments
 
@@ -220,4 +220,4 @@ I want to thank some people who helped me by testing and giving feedback as this
 
 [Rodrigo Serradura](https://rodrigoserradura.com) created this project. He is the Solid Process creator and has already made similar gems like the [u-case](https://github.com/serradura/u-case) and [kind](https://github.com/serradura/kind). This gem can be used independently, but it also contains essential features that facilitate the adoption of Solid Process (the method) in code.
 
-<p align="right"><a href="#-table-of-contents-">⬆️ &nbsp;back to top</a></p>
+<p align="right"><a href="#table-of-contents-">⬆️ &nbsp;back to top</a></p>
