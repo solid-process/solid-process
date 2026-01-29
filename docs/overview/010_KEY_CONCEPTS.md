@@ -1,6 +1,6 @@
 <small>
 
-`Previous` [README](../README.md#-documentation) | `Next` [Basic Usage](./020_BASIC_USAGE.md)
+`Previous` [README](../../README.md#-documentation) | `Next` [Basic Usage](./020_BASIC_USAGE.md)
 
 </small>
 
@@ -49,6 +49,6 @@ Using the emerging design concept, I invite you to embrace this development cycl
 
 <small>
 
-`Previous` [README](../README.md#-documentation) | `Next` [Basic Usage](./020_BASIC_USAGE.md)
+`Previous` [README](../../README.md#-documentation) | `Next` [Basic Usage](./020_BASIC_USAGE.md)
 
 </small>
