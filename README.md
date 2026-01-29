@@ -43,25 +43,25 @@ This library is tested (100% coverage) against:
 
 **Features:** (_touch to expand_)
 
-<details><summary>1️⃣ <strong>Seamless Rails integration</strong></summary>
+<details open><summary>1️⃣ <strong>Seamless Rails integration</strong></summary>
 
   > Designed to complement Ruby on Rails, this library integrates smoothly without conflicting with existing framework conventions and features.
 
 </details>
 
-<details><summary>2️⃣ <strong>Support progressive mastery</strong></summary>
+<details open><summary>2️⃣ <strong>Support progressive mastery</strong></summary>
 
   > Offers an intuitive entry point for novices while providing robust, advanced features that cater to experienced developers.
 
 </details>
 
-<details><summary>3️⃣ <strong>Promote conceptual integrity and rapid onboarding</strong></summary>
+<details open><summary>3️⃣ <strong>Promote conceptual integrity and rapid onboarding</strong></summary>
 
   > By maintaining a consistent design philosophy, `solid-process` reduces the learning curve for new developers, allowing them to contribute more effectively and quickly to a codebase.
 
 </details>
 
-<details><summary>4️⃣ <strong>Enhanced observability</strong></summary>
+<details open><summary>4️⃣ <strong>Enhanced observability</strong></summary>
 
   > Equipped with sophisticated instrumentation mechanisms, the library enables detailed logging and tracing without compromising code readability, even when processes are nested.
 
