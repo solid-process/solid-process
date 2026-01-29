@@ -11,6 +11,13 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 - **[docs/REFERENCE.md](docs/REFERENCE.md)** — Comprehensive guide covering every feature with detailed examples. Point AI coding agents here.
 - **[docs/overview/](docs/overview/)** — Quick overview guides (010–100) for each topic.
 
+### Back-to-Top Anchors
+
+Both `README.md` and `docs/REFERENCE.md` use back-to-top navigation after each main section. When adding a new numbered section to `REFERENCE.md`:
+
+1. Add `<p align="right"><a href="#table-of-contents">⬆️ &nbsp;back to top</a></p>` before the `---` that closes the section
+2. Update the Table of Contents with the new entry
+
 ## Common Commands
 
 ```bash
