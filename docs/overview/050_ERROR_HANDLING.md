@@ -4,6 +4,8 @@
 
 </small>
 
+---
+
 # Error Handling
 
 Handle exceptions at the class level with `rescue_from` or at the method level with inline `rescue`.
@@ -87,3 +89,11 @@ end
 For detailed explanations, examples, and advanced patterns, see:
 
 - [Error Handling](../REFERENCE.md#12-error-handling) — complete error handling guide
+
+---
+
+<small>
+
+`Previous` [Advanced Usage](./040_ADVANCED_USAGE.md) | `Next` [Testing](./060_TESTING.md)
+
+</small>

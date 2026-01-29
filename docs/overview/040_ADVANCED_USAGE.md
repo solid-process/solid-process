@@ -4,6 +4,8 @@
 
 </small>
 
+---
+
 # Advanced Usage
 
 Use dependencies for testability, input validation for data integrity, and process composition for complex workflows.
@@ -86,3 +88,11 @@ For detailed explanations, examples, and advanced patterns, see:
 - [Dependencies](../REFERENCE.md#9-dependencies) — injection patterns
 - [Process Composition](../REFERENCE.md#10-process-composition) — nesting processes
 - [Transactions](../REFERENCE.md#8-transactions) — rollback behavior
+
+---
+
+<small>
+
+`Previous` [Intermediate Usage](./030_INTERMEDIATE_USAGE.md) | `Next` [Error Handling](./050_ERROR_HANDLING.md)
+
+</small>

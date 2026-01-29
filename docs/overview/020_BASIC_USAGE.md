@@ -4,6 +4,8 @@
 
 </small>
 
+---
+
 # Basic Usage
 
 Every process needs an `input` block (defining attributes) and a `call` method (returning Success or Failure).
@@ -60,3 +62,11 @@ For detailed explanations, examples, and advanced patterns, see:
 - [Your First Process](../REFERENCE.md#2-your-first-process) — step-by-step walkthrough
 - [Input Definition & Validation](../REFERENCE.md#3-input-definition--validation) — types, validations, and more
 - [Working with Results](../REFERENCE.md#5-working-with-results) — accessing values and checking status
+
+---
+
+<small>
+
+`Previous` [Key Concepts](./010_KEY_CONCEPTS.md) | `Next` [Intermediate Usage](./030_INTERMEDIATE_USAGE.md)
+
+</small>
