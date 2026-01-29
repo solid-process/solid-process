@@ -146,7 +146,10 @@ See the [Reference Guide](docs/REFERENCE.md) for detailed explanations, validati
 
 ## 📚 Documentation
 
-📖 **[Full Reference](docs/REFERENCE.md)** — Complete guide covering every feature with detailed examples
+> [!TIP]
+> **[Full Reference →](docs/REFERENCE.md)** — Complete guide covering every feature with detailed examples.
+>
+> _**Perfect for developers and AI coding agents**._
 
 **Quick Overview** — Bite-sized guides for each topic:
 
