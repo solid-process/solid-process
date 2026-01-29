@@ -76,6 +76,8 @@ require "solid/process"
 
 Solid::Process supports Ruby 2.7+ and Rails 6.0+. See the [README](../README.md) for the full compatibility matrix.
 
+<p align="right"><a href="#table-of-contents">⬆️ &nbsp;back to top</a></p>
+
 ---
 
 ## 2. Your First Process
@@ -164,6 +166,8 @@ result2 = Greeting.new.call(name: "Bob")
 result1 = Greeting.call(name: "Alice")
 result2 = Greeting.call(name: "Bob")
 ```
+
+<p align="right"><a href="#table-of-contents">⬆️ &nbsp;back to top</a></p>
 
 ---
 
@@ -292,6 +296,8 @@ class User::Registration < Solid::Process
 end
 ```
 
+<p align="right"><a href="#table-of-contents">⬆️ &nbsp;back to top</a></p>
+
 ---
 
 ## 4. Input Normalization
@@ -392,6 +398,8 @@ UserRegistration.input.normalize_value_for(:email, " FOO@BAR.COM\n")
 # => "foo@bar.com"
 ```
 
+<p align="right"><a href="#table-of-contents">⬆️ &nbsp;back to top</a></p>
+
 ---
 
 ## 5. Working with Results
@@ -489,6 +497,8 @@ end
 | `Solid::Success` | Successful results |
 | `Solid::Failure` | Failure results |
 | `Solid::Output` | Alias for `Solid::Result` |
+
+<p align="right"><a href="#table-of-contents">⬆️ &nbsp;back to top</a></p>
 
 ---
 
@@ -601,6 +611,8 @@ in Solid::Failure[:creation_failed, {errors:}]
   render :new, locals: { errors: errors }
 end
 ```
+
+<p align="right"><a href="#table-of-contents">⬆️ &nbsp;back to top</a></p>
 
 ---
 
@@ -717,6 +729,8 @@ Given(a: 1, b: 2, c: 3)
 
 This keeps your results clean, exposing only what callers need.
 
+<p align="right"><a href="#table-of-contents">⬆️ &nbsp;back to top</a></p>
+
 ---
 
 ## 8. Transactions
@@ -820,6 +834,8 @@ The `.then { |result| ... }` pattern lets you wrap only part of the chain in a t
 5. The `Failure` result is returned
 
 **Note:** `rollback_on_failure` requires ActiveRecord and an active database connection.
+
+<p align="right"><a href="#table-of-contents">⬆️ &nbsp;back to top</a></p>
 
 ---
 
@@ -927,6 +943,8 @@ end
 ```
 
 This allows you to swap `User::Creation` with a mock in tests.
+
+<p align="right"><a href="#table-of-contents">⬆️ &nbsp;back to top</a></p>
 
 ---
 
@@ -1036,6 +1054,8 @@ def create_user_token(user:, **)
   Continue(token: result[:token])
 end
 ```
+
+<p align="right"><a href="#table-of-contents">⬆️ &nbsp;back to top</a></p>
 
 ---
 
@@ -1186,6 +1206,8 @@ after_success { puts "3" }  # Runs first
 # Output: 3, 2, 1
 ```
 
+<p align="right"><a href="#table-of-contents">⬆️ &nbsp;back to top</a></p>
+
 ---
 
 ## 12. Error Handling
@@ -1302,6 +1324,8 @@ end
 # => Solid::Process::Error: "`Failure!()` cannot be called because the `MyProcess#output` is already set."
 ```
 
+<p align="right"><a href="#table-of-contents">⬆️ &nbsp;back to top</a></p>
+
 ---
 
 ## 13. Instrumentation
@@ -1398,6 +1422,8 @@ cleaner.add_silencer { |line| line.include?("/gems/") }
 - **Development** — Understand process flow and debug issues
 - **Production** — Audit process executions and investigate errors
 - **Performance** — See which steps execute and identify bottlenecks
+
+<p align="right"><a href="#table-of-contents">⬆️ &nbsp;back to top</a></p>
 
 ---
 
@@ -1507,6 +1533,8 @@ validates :email, email: true, allow_nil: true    # Skip if nil
 validates :email, email: true, allow_blank: true  # Skip if blank (nil or "")
 ```
 
+<p align="right"><a href="#table-of-contents">⬆️ &nbsp;back to top</a></p>
+
 ---
 
 ## 15. Internal Libraries
@@ -1609,6 +1637,8 @@ class User::Creation < Solid::Process
   # ...
 end
 ```
+
+<p align="right"><a href="#table-of-contents">⬆️ &nbsp;back to top</a></p>
 
 ---
 
@@ -1827,6 +1857,8 @@ RSpec.describe User::Creation do
 end
 ```
 
+<p align="right"><a href="#table-of-contents">⬆️ &nbsp;back to top</a></p>
+
 ---
 
 ## What's Next?
@@ -1847,3 +1879,5 @@ For real-world examples, check:
 - [Solid Rails App](https://github.com/solid-process/solid-rails-app) — Complete Rails application
 
 For questions or issues, visit the [GitHub repository](https://github.com/solid-process/solid-process).
+
+<p align="right"><a href="#table-of-contents">⬆️ &nbsp;back to top</a></p>
