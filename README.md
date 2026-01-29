@@ -89,7 +89,7 @@ You can also check the [examples](examples) directory for more simple examples o
 - ✅ All features explained with working code
 - ✅ Perfect for developers AND AI coding agents
 
-> **🤖 AI Agents:** Point your coding assistant to [`docs/REFERENCE.md`](docs/REFERENCE.md) for complete API knowledge and patterns.
+> **🤖 AI Agents:** Point your coding assistant to [`docs/REFERENCE.md`](docs/REFERENCE.md) for complete API knowledge and patterns, or explore the [AI-Powered Wiki](https://deepwiki.com/solid-process/solid-process) for visual diagrams and interactive Q&A.
 
 [**Start Learning →**](docs/REFERENCE.md)
 
